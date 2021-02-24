@@ -15,7 +15,7 @@ DEVICE_TYPE?=router
 # Default packages - the really basic set
 DEFAULT_PACKAGES:=base-files libc libgcc busybox dropbear mtd uci opkg netifd fstools uclient-fetch logd urandom-seed urngd \
 block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw wget libustream-openssl ca-certificates \
-default-settings luci luci-app-ddns luci-app-upnp luci-app-adbyby-plus luci-app-autoreboot luci-app-webadmin \
+default-settings luci luci-app-ddns luci-app-upnp luci-app-autoreboot luci-app-webadmin \
 luci-app-filetransfer luci-app-vsftpd luci-app-ssr-plus luci-app-unblockmusic \
 luci-app-arpbind luci-app-vlmcsd luci-app-wol luci-app-ramfree \
 luci-app-sfe luci-app-nlbwmon luci-app-accesscontrol luci-app-cpufreq \
@@ -62,7 +62,7 @@ endif
 DEFAULT_PACKAGES += $(DEFAULT_PACKAGES.$(DEVICE_TYPE))
 
 filter_packages = $(filter-out -% $(patsubst -%,%,$(filter -%,$(1))),$(1))
-extra_packages = $(if $(filter wpad-mini wpad-basic wpad nas,$(1)),iwinfo)
+extra_packages = $(if $(filter wpad wpad-% nas,$(1)),iwinfo)
 
 define ProfileDefault
   NAME:=
@@ -229,7 +229,9 @@ ifeq ($(DUMP),1)
     .PRECIOUS: $(TMP_CONFIG)
 
     ifdef KERNEL_TESTING_PATCHVER
-      FEATURES += testing-kernel
+      ifneq ($(KERNEL_TESTING_PATCHVER),$(KERNEL_PATCHVER))
+        FEATURES += testing-kernel
+      endif
     endif
     ifneq ($(CONFIG_OF),)
       FEATURES += dt

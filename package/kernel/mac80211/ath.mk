@@ -1,6 +1,6 @@
 PKG_DRIVERS += \
 	ath ath5k ath6kl ath6kl-sdio ath6kl-usb ath9k ath9k-common ath9k-htc ath10k \
-	carl9170 owl-loader
+	ath11k ar5523 carl9170 owl-loader wil6210
 
 PKG_CONFIG_DEPENDS += \
 	CONFIG_PACKAGE_ATH_DEBUG \
@@ -19,21 +19,25 @@ ifdef CONFIG_PACKAGE_MAC80211_DEBUGFS
 	ATH9K_DEBUGFS \
 	ATH9K_HTC_DEBUGFS \
 	ATH10K_DEBUGFS \
+	ATH11K_DEBUGFS \
 	CARL9170_DEBUGFS \
 	ATH5K_DEBUG \
-	ATH6KL_DEBUG
+	ATH6KL_DEBUG \
+	WIL6210_DEBUGFS
 endif
 
 ifdef CONFIG_PACKAGE_MAC80211_TRACING
   config-y += \
 	ATH10K_TRACING \
+	ATH11K_TRACING \
 	ATH6KL_TRACING \
 	ATH_TRACEPOINTS \
-	ATH5K_TRACER
+	ATH5K_TRACER \
+	WIL6210_TRACING
 endif
 
 config-$(call config_package,ath) += ATH_CARDS ATH_COMMON ATH_REG_DYNAMIC_USER_REG_HINTS
-config-$(CONFIG_PACKAGE_ATH_DEBUG) += ATH_DEBUG ATH10K_DEBUG ATH9K_STATION_STATISTICS
+config-$(CONFIG_PACKAGE_ATH_DEBUG) += ATH_DEBUG ATH10K_DEBUG ATH11K_DEBUG ATH9K_STATION_STATISTICS
 config-$(CONFIG_PACKAGE_ATH_DFS) += ATH9K_DFS_CERTIFIED ATH10K_DFS_CERTIFIED
 config-$(CONFIG_PACKAGE_ATH_SPECTRAL) += ATH9K_COMMON_SPECTRAL ATH10K_SPECTRAL
 config-$(CONFIG_PACKAGE_ATH_DYNACK) += ATH9K_DYNACK
@@ -54,6 +58,7 @@ config-$(CONFIG_ATH10K_THERMAL) += ATH10K_THERMAL
 
 config-$(call config_package,ath9k-htc) += ATH9K_HTC
 config-$(call config_package,ath10k) += ATH10K ATH10K_PCI
+config-$(call config_package,ath11k) += ATH11K
 
 config-$(call config_package,ath5k) += ATH5K
 ifdef CONFIG_TARGET_ath25
@@ -67,6 +72,9 @@ config-$(call config_package,ath6kl-sdio) += ATH6KL_SDIO
 config-$(call config_package,ath6kl-usb) += ATH6KL_USB
 
 config-$(call config_package,carl9170) += CARL9170
+config-$(call config_package,ar5523) += AR5523
+
+config-$(call config_package,wil6210) += WIL6210
 
 define KernelPackage/ath/config
   if PACKAGE_kmod-ath
@@ -218,6 +226,7 @@ define KernelPackage/ath9k/config
 	config ATH9K_SUPPORT_PCOEM
 		bool "Support chips used in PC OEM cards"
 		depends on PACKAGE_kmod-ath9k
+		default y if (x86_64 || i386)
 
        config ATH9K_TX99
                bool "Enable TX99 support (WARNING: testing only, breaks normal operation!)"
@@ -272,8 +281,23 @@ define KernelPackage/ath10k/config
 
        config ATH10K_THERMAL
                bool "Enable thermal sensors and throttling support"
+               default y
                depends on PACKAGE_kmod-ath10k
 
+endef
+
+define KernelPackage/ath11k
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Qualcomm 802.11ax wireless chipset support
+  URL:=https://wireless.wiki.kernel.org/en/users/drivers/ath11k
+  DEPENDS+= @TARGET_ipq807x +kmod-ath +@DRIVER_11N_SUPPORT +@DRIVER_11AC_SUPPORT +@DRIVER_11AX_SUPPORT +@DRIVER_11W_SUPPORT +kmod-crypto-michael-mic
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ath11k/ath11k.ko
+  AUTOLOAD:=$(call AutoProbe,ath11k)
+endef
+
+define KernelPackage/ath11k/description
+This module adds support for Qualcomm Technologies 802.11ax family of
+chipsets.
 endef
 
 define KernelPackage/carl9170
@@ -299,4 +323,20 @@ define KernelPackage/owl-loader/description
   together with the calibration data in the file system.
 
   This is necessary for devices like the Cisco Meraki Z1.
+endef
+
+define KernelPackage/ar5523
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Driver for Atheros AR5523 USB sticks
+  DEPENDS:=@USB_SUPPORT +kmod-mac80211 +kmod-ath +kmod-usb-core +kmod-input-core 
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ar5523/ar5523.ko
+  AUTOLOAD:=$(call AutoProbe,ar5523)
+endef
+
+define KernelPackage/wil6210
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=QCA/Wilocity 60g WiFi card wil6210 support
+  DEPENDS+= @PCI_SUPPORT +kmod-mac80211 +wil6210-firmware
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ath/wil6210/wil6210.ko
+  AUTOLOAD:=$(call AutoProbe,wil6210)
 endef

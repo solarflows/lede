@@ -5,15 +5,15 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
-PKG_VERSION:=2020.04
+PKG_VERSION:=2020.07
+PKG_RELEASE:=3
 
-PKG_HASH:=fe732aaf037d9cc3c0909bad8362af366ae964bbdac6913a34081ff4ad565372
+PKG_HASH:=c1f5bf9ee6bb6e648edbf19ce2ca9452f614b08a9f886f1a566aa42e8cf05f6a
 
 PKG_MAINTAINER:=Tobias Maedel <openwrt@tbspace.de>
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
-PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
 
 define U-Boot/Default
   BUILD_TARGET:=rockchip
@@ -21,20 +21,51 @@ define U-Boot/Default
   HIDDEN:=1
 endef
 
+
+# RK3328 boards
+
 define U-Boot/nanopi-r2s-rk3328
   BUILD_SUBTARGET:=armv8
   NAME:=NanoPi R2S
   BUILD_DEVICES:= \
     friendlyarm_nanopi-r2s
-  BL31=$(STAGING_DIR_IMAGE)/rk3328_bl31.elf
+  DEPENDS:=+PACKAGE_u-boot-nanopi-r2s-rk3328:arm-trusted-firmware-rockchip
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
+  ATF:=rk3328_bl31.elf
+  OF_PLATDATA:=$(1)
 endef
 
-define U-Boot/rock-pi-e-rk3328
+
+# RK3399 boards
+
+define U-Boot/nanopi-r4s-1gb-rk3399
   BUILD_SUBTARGET:=armv8
-  NAME:=Rock Pi E
+  NAME:=NanoPi R4S 1GB
   BUILD_DEVICES:= \
-    radxa_rock-pi-e
-  BL31=$(STAGING_DIR_IMAGE)/rk3328_bl31.elf
+    friendlyarm_nanopi-r4s-1gb
+  DEPENDS:=+PACKAGE_u-boot-nanopi-r4s-1gb-rk3399:arm-trusted-firmware-rockchip
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
+  ATF:=rk3399_bl31.elf
+endef
+
+define U-Boot/nanopi-r4s-4gb-rk3399
+  BUILD_SUBTARGET:=armv8
+  NAME:=NanoPi R4S 4GB
+  BUILD_DEVICES:= \
+    friendlyarm_nanopi-r4s-4gb
+  DEPENDS:=+PACKAGE_u-boot-nanopi-r4s-4gb-rk3399:arm-trusted-firmware-rockchip
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
+  ATF:=rk3399_bl31.elf
+endef
+
+define U-Boot/rock-pi-4-rk3399
+  BUILD_SUBTARGET:=armv8
+  NAME:=Rock Pi 4
+  BUILD_DEVICES:= \
+    radxa_rock-pi-4
+  DEPENDS:=+PACKAGE_u-boot-rock-pi-4-rk3399:arm-trusted-firmware-rockchip
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
+  ATF:=rk3399_bl31.elf
 endef
 
 define U-Boot/rockpro64-rk3399
@@ -42,22 +73,34 @@ define U-Boot/rockpro64-rk3399
   NAME:=RockPro64
   BUILD_DEVICES:= \
     pine64_rockpro64
-  BL31=$(STAGING_DIR_IMAGE)/rk3399_bl31.elf
+  DEPENDS:=+PACKAGE_u-boot-rockpro64-rk3399:arm-trusted-firmware-rockchip
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
+  ATF:=rk3399_bl31.elf
 endef
 
 UBOOT_TARGETS := \
-  nanopi-r2s-rk3328 \
-  rock-pi-e-rk3328 \
-  rockpro64-rk3399
+  nanopi-r4s-1gb-rk3399 \
+  nanopi-r4s-4gb-rk3399 \
+  rock-pi-4-rk3399 \
+  rockpro64-rk3399 \
+  nanopi-r2s-rk3328
 
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 
 UBOOT_MAKE_FLAGS += \
-  BL31=$(BL31)
+  BL31=$(STAGING_DIR_IMAGE)/$(ATF)
 
 define Build/Configure
-	echo CONFIG_CMD_SETEXPR=y >> $(PKG_BUILD_DIR)/configs/$(UBOOT_CONFIG)_defconfig
 	$(call Build/Configure/U-Boot)
+
+ifneq ($(OF_PLATDATA),)
+	mkdir -p $(PKG_BUILD_DIR)/tpl/dts
+	mkdir -p $(PKG_BUILD_DIR)/include/generated
+
+	$(CP) $(PKG_BUILD_DIR)/of-platdata/$(OF_PLATDATA)/dt-platdata.c $(PKG_BUILD_DIR)/tpl/dts/dt-platdata.c
+	$(CP) $(PKG_BUILD_DIR)/of-platdata/$(OF_PLATDATA)/dt-structs-gen.h $(PKG_BUILD_DIR)/include/generated/dt-structs-gen.h
+endif
+
 	$(SED) 's#CONFIG_MKIMAGE_DTC_PATH=.*#CONFIG_MKIMAGE_DTC_PATH="$(PKG_BUILD_DIR)/scripts/dtc/dtc"#g' $(PKG_BUILD_DIR)/.config
 	echo 'CONFIG_IDENT_STRING=" OpenWrt"' >> $(PKG_BUILD_DIR)/.config
 endef

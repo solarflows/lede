@@ -98,9 +98,15 @@ static void mt7621_hw_init(struct mt7620_gsw *gsw, struct device_node *np)
 	mt7530_mdio_w32(gsw, 0x7000, 0x3);
 	usleep_range(10, 20);
 
-	/* (GE1, Force 1000M/FD, FC OFF, MAX_RX_LENGTH 1536) */
-	mtk_switch_w32(gsw, 0x2305e30b, GSW_REG_MAC_P0_MCR);
-	mt7530_mdio_w32(gsw, 0x3600, 0x5e30b);
+	if ((rt_sysc_r32(SYSC_REG_CHIP_REV_ID) & 0xFFFF) == 0x0101) {
+		/* (GE1, Force 1000M/FD, FC ON, MAX_RX_LENGTH 1536) */
+		mtk_switch_w32(gsw, 0x2305e30b, GSW_REG_MAC_P0_MCR);
+		mt7530_mdio_w32(gsw, 0x3600, 0x5e30b);
+	} else {
+		/* (GE1, Force 1000M/FD, FC ON, MAX_RX_LENGTH 1536) */
+		mtk_switch_w32(gsw, 0x2305e33b, GSW_REG_MAC_P0_MCR);
+		mt7530_mdio_w32(gsw, 0x3600, 0x5e33b);
+	}
 
 	/* (GE2, Link down) */
 	mtk_switch_w32(gsw, 0x8000, GSW_REG_MAC_P1_MCR);
@@ -180,6 +186,22 @@ static void mt7621_hw_init(struct mt7620_gsw *gsw, struct device_node *np)
 	mt7530_mdio_w32(gsw, 0x7a74, 0x44);
 	mt7530_mdio_w32(gsw, 0x7a7c, 0x44);
 
+	/* Disable EEE */
+	for (i = 0; i <= 4; i++) {
+		_mt7620_mii_write(gsw, i, 13, 0x7);
+		_mt7620_mii_write(gsw, i, 14, 0x3C);
+		_mt7620_mii_write(gsw, i, 13, 0x4007);
+		_mt7620_mii_write(gsw, i, 14, 0x0);
+	}
+
+	/* Disable EEE 10Base-Te */
+	for (i = 0; i <= 4; i++) {
+		_mt7620_mii_write(gsw, i, 13, 0x1f);
+		_mt7620_mii_write(gsw, i, 14, 0x027b);
+		_mt7620_mii_write(gsw, i, 13, 0x401f);
+		_mt7620_mii_write(gsw, i, 14, 0x1177);
+	}
+
 	/* turn on all PHYs */
 	for (i = 0; i <= 4; i++) {
 		val = _mt7620_mii_read(gsw, i, 0);
@@ -195,7 +217,7 @@ static void mt7621_hw_init(struct mt7620_gsw *gsw, struct device_node *np)
 }
 
 static const struct of_device_id mediatek_gsw_match[] = {
-	{ .compatible = "mediatek,mt7621-gsw" },
+	{ .compatible = "mediatek,ralink-mt7621-gsw" },
 	{},
 };
 MODULE_DEVICE_TABLE(of, mediatek_gsw_match);
@@ -261,7 +283,7 @@ static struct platform_driver gsw_driver = {
 	.probe = mt7621_gsw_probe,
 	.remove = mt7621_gsw_remove,
 	.driver = {
-		.name = "mt7621-gsw",
+		.name = "ralink-mt7621-gsw",
 		.owner = THIS_MODULE,
 		.of_match_table = mediatek_gsw_match,
 	},
