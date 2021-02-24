@@ -5,6 +5,7 @@ echo -e "\033[32m Strat $0 \033[0m"
 if [ -f $s_dir/tmp/feeds.conf.default ];then
   RUNTIMES=1
 elif [[ ! -f $s_dir/tmp/feeds.conf.default ]] && [[ ! -f $s_dir/tmp/feeds.modify ]]; then
+  mkdir -vp $s_dir/tmp
   cat feeds.conf.default > $s_dir/tmp/feeds.conf.default
   echo -e "\033[32m It's The First Time You Run This Script. \033[0m"
   sleep 1
