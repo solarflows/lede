@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=aria2
 PKG_VERSION:=1.35.0
-PKG_RELEASE:=2020.12.29
+PKG_RELEASE:=2021.02.19
 STRIP:=true
 
 include $(INCLUDE_DIR)/package.mk
