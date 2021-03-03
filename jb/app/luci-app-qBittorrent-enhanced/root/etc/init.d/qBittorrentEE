@@ -10,7 +10,7 @@ NAME=qBittorrentEE
 args=/usr/bin/qBittorrentEE-nox
 
 QBT_PID_FILE=/var/run/qBittorrentEE.pid
-QBT_INI_FILE=/tmp/qBittorrent/config/qBittorrent.conf
+QBT_INI_FILE=/tmp/qBittorrentEE/config/qBittorrentEE.conf
 
 QBT_INSTANCE=""
 
