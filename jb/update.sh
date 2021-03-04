@@ -36,7 +36,7 @@ elif [ ! -d $work_dis ]; then
   mkdir -vp $work_dir
   mkdir -vp $work_dir/app
   # 克隆需要修改的插件到临时目录中
-  git clone https://github.com/kenzok8/openwrt-packages.git $work_dis/kenzok8
+  git clone https://github.com/hyy-666/openwrt-packages.git $work_dis/hyy-666
   git clone https://github.com/Lienol/openwrt-package.git $work_dis/lienol
   git clone https://github.com/lisaac/luci-app-dockerman.git $work_dis/luci-app-dockerman
   # 输出添加不需要修改的软件成功
@@ -65,13 +65,13 @@ cp -r $s_dir/app/. $work_dir/application
 cp -r $s_dir/dep/. $work_dir/dependency
 # 复制修改完的插件到工作目录
 cp -r $work_dis/lienol/luci-app-filebrowser $work_dir/application
-cp -r $work_dis/kenzok8/luci-app-adguardhome $work_dir/application
-cp -r $work_dis/kenzok8/luci-app-clash $work_dir/application
-cp -r $work_dis/kenzok8/luci-app-openclash $work_dir/application
-cp -r $work_dis/kenzok8/luci-app-smartdns $work_dir/application
+cp -r $work_dis/hyy-666/luci-app-adguardhome $work_dir/application
+cp -r $work_dis/hyy-666/luci-app-clash $work_dir/application
+cp -r $work_dis/hyy-666/luci-app-openclash $work_dir/application
+cp -r $work_dis/hyy-666/luci-app-smartdns $work_dir/application
 cp -r $work_dis/luci-app-dockerman/applications/luci-app-dockerman $work_dir/application
-cp -r $work_dis/kenzok8/AdGuardHome $work_dir/dependency
-cp -r $work_dis/kenzok8/smartdns $work_dir/smartdns
+cp -r $work_dis/hyy-666/AdGuardHome $work_dir/dependency
+cp -r $work_dis/hyy-666/smartdns $work_dir/smartdns
 # 检索安装所有已有插件到编译环境
 $root_dir/scripts/feeds install -a
 # 上一条指令执行正常则输出以下语句
