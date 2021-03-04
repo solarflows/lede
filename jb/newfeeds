@@ -1,4 +1,5 @@
 
+src-git helloworld https://github.com/fw876/helloworld
 src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom.git
 src-git OpenAppFilter https://github.com/destan19/OpenAppFilter.git
 src-git rosytheme https://github.com/rosywrt/luci-theme-rosy.git
