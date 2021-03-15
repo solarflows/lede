@@ -62,7 +62,7 @@ rm -rf $work_dir/dependency/*
 echo -e "\033[32m Clean Up ! \033[0m"
 # 复制自编写的插件到工作目录
 # cp -r $s_dir/app/. $work_dir/application
-# cp -r $s_dir/dep/. $work_dir/dependency
+cp -r $s_dir/dep/. $work_dir/dependency
 # 复制修改完的插件到工作目录
 cp -r $work_dis/lienol/luci-app-filebrowser $work_dir/application
 cp -r $work_dis/kenzok8/luci-app-adguardhome $work_dir/application
