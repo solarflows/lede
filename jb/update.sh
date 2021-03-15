@@ -11,21 +11,21 @@ work_dis=~/dis_temp
 # 脚本开始，设置输出文字的颜色
 echo -e "\033[32m Strat $0 \033[0m"
 # 判断工作目录下的app目录（不需要修改直接git pull的部分内容）是否存在
-if [ -e $work_dir/app ]; then
-# 存在时使用git pull脚本进行与源仓库的同步。
-  $s_dir/gitpull.sh $work_dir/app
-# 不存在时执行
-elif [ ! -d $work_dir/app ]; then
-  # 创建目录
-  mkdir -vp $work_dir
-  mkdir -vp $work_dir/app
-  # 克隆仓库
-  git clone https://github.com/jefferymvp/luci-app-koolproxyR.git $work_dir/app/luci-app-koolproxyR
-  git clone https://github.com/tty228/luci-app-serverchan.git $work_dir/app/luci-app-serverchan
-  git clone https://github.com/lisaac/luci-lib-docker.git $work_dir/app/luci-lib-docker
-  # 输出添加不需要修改的软件成功
-  echo -e "\033[32m Add App Success \033[0m"
-fi
+# if [ -e $work_dir/app ]; then
+# # 存在时使用git pull脚本进行与源仓库的同步。
+#   $s_dir/gitpull.sh $work_dir/app
+# # 不存在时执行
+# elif [ ! -d $work_dir/app ]; then
+#   # 创建目录
+#   mkdir -vp $work_dir
+#   mkdir -vp $work_dir/app
+#   # 克隆仓库
+#   git clone https://github.com/jefferymvp/luci-app-koolproxyR.git $work_dir/app/luci-app-koolproxyR
+#   git clone https://github.com/tty228/luci-app-serverchan.git $work_dir/app/luci-app-serverchan
+#   git clone https://github.com/lisaac/luci-lib-docker.git $work_dir/app/luci-lib-docker
+#   # 输出添加不需要修改的软件成功
+#   echo -e "\033[32m Add App Success \033[0m"
+# fi
 # 判断临时目录（存放需要修改不能git pull的内容）是否存在
 if [ -e $work_dis ]; then
 # 存在时使用git pull脚本进行与源仓库的同步。
