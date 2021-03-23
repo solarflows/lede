@@ -9,8 +9,8 @@ USE_PROCD=1
 NAME=qBittorrentEE
 args=/usr/bin/qBittorrentEE-nox
 
-QBT_PID_FILE=/var/run/qBittorrentEE.pid
-QBT_INI_FILE=/tmp/qBittorrentEE/config/qBittorrentEE.conf
+QBT_PID_FILE=/var/run/qBittorrent.pid
+QBT_INI_FILE=/tmp/qBittorrent/config/qBittorrent.conf
 
 QBT_INSTANCE=""
 
@@ -198,9 +198,9 @@ init_QBT(){
 		return 1;
 	}
 
-	local confdir="qBittorrentEE"
+	local confdir="qBittorrent"
 	[ -n "$configuration" ] && {
-		confdir="qBittorrentEE_$configuration"
+		confdir="qBittorrent_$configuration"
 	}
 
 	[ -d "$profile/$confdir/config" ] || {

@@ -12,7 +12,7 @@ function titlesplit(Value)
     return "<p style=\"font-size:20px;font-weight:bold;color: DodgerBlue\">" .. translate(Value) .. "</p>"
 end
 
-m = Map("qBittorrentEE", translate("qBittorrentEE"), translate("qBittorrentEE is a cross-platform free and open-source BitTorrent client")..t)
+m = Map("qBittorrentEE", translate("qBittorrentEE"), translate("qBittorrent-Enhanced-Edition is a cross-platform free and open-source BitTorrent client")..t)
 
 s = m:section(NamedSection, "main", "qBittorrentEE")
 
