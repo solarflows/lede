@@ -12,7 +12,7 @@ define Package/$(PKG_NAME)
 	CATEGORY:=Network
 	SUBMENU:=File Transfer
 	TITLE:=lightweight download utility
-	URL:=https://github.com/P3TERX/aria2-builder
+	URL:=https://github.com/P3TERX/Aria2-Pro-Core
 	DEPENDS:=+bash +curl +findutils +jq
 	USERID:=aria2=6800:aria2=6800
 endef
