@@ -76,6 +76,8 @@ cp -r $work_dis/kenzok8/smartdns $work_dir/smartdns
 $root_dir/scripts/feeds install -a
 # 上一条指令执行正常则输出以下语句
 if [ $? ]; then
+  find package/*/ feeds/*/ -maxdepth 2 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/shadowsocksr-libev-ssr-redir/shadowsocksr-libev-alt/g' {}
+  find package/*/ feeds/*/ -maxdepth 2 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/shadowsocksr-libev-ssr-server/shadowsocksr-libev-server/g' {}
   echo -e "\033[32m Install Feeds Well \033[0m"
 else
 # 异常输出
