@@ -70,7 +70,7 @@ cp -r $work_dis/kenzok8/luci-app-clash $work_dir/application
 cp -r $work_dis/kenzok8/luci-app-openclash $work_dir/application
 cp -r $work_dis/kenzok8/luci-app-smartdns $work_dir/application
 cp -r $work_dis/luci-app-dockerman/applications/luci-app-dockerman $work_dir/application
-cp -r $work_dis/kenzok8/AdGuardHome $work_dir/dependency
+cp -r $work_dis/kenzok8/adguardhome $work_dir/dependency
 cp -r $work_dis/kenzok8/smartdns $work_dir/smartdns
 # 检索安装所有已有插件到编译环境
 $root_dir/scripts/feeds install -a
