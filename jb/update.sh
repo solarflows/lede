@@ -38,7 +38,7 @@ elif [ ! -d $work_dis ]; then
   # 克隆需要修改的插件到临时目录中
   git clone https://github.com/kenzok8/openwrt-packages.git $work_dis/kenzok8
   git clone https://github.com/Lienol/openwrt-package.git $work_dis/lienol
-  git clone https://github.com/lisaac/luci-app-dockerman.git $work_dis/luci-app-dockerman
+  git clone https://github.com/hyy-666/luci-app-dockerman.git $work_dis/luci-app-dockerman
   # 输出添加不需要修改的软件成功
   echo -e "\033[32m Add App Success \033[0m"
 fi
