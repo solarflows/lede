@@ -30,7 +30,7 @@ echo -e "\033[32m Download Files \033[0m"
 make download -j8
 echo -e "\033[32m Start Compile Firmware \033[0m"
 sleep 2
-make -j4 || make -j1 V=s || echo -e "\033[31m Compile Fail !\033[0m"
+make -j$(($(nproc) + 1)) V=s || make -j1 V=s || echo -e "\033[31m Compile Fail !\033[0m"
 # if [ !$? ]; then
 #   make -j1 V=s
 # else
