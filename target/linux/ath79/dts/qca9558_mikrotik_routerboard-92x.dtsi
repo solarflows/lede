@@ -17,7 +17,7 @@
 		compatible = "gpio-leds";
 
 		led_user: user {
-			label = "green:user";
+			label = "mikrotik:green:user";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -125,4 +125,8 @@
 			reg = <0x0400000 0x7c00000>;
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };

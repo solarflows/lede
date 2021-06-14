@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,12 +20,12 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
-			label = "green:status";
+			label = "dir-610-a1:green:status";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "dir-610-a1:green:wps";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 	};

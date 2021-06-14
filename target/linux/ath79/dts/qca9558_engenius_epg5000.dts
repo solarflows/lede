@@ -20,30 +20,30 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "amber:power";
+			label = "epg5000:amber:power";
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		wlan2g {
-			label = "blue:wlan2g";
+			label = "epg5000:blue:wlan2g";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
 
 		wlan5g {
-			label = "blue:wlan5g";
+			label = "epg5000:blue:wlan5g";
 			gpios = <&gpio 23 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		wps_amber {
-			label = "amber:wps";
+			label = "epg5000:amber:wps";
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 		};
 
 		wps_blue {
-			label = "blue:wps";
+			label = "epg5000:blue:wps";
 			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -99,6 +99,8 @@
 &spi {
 	status = "okay";
 
+	num-cs = <1>;
+
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
@@ -151,6 +153,10 @@
 			};
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &usb_phy1 {

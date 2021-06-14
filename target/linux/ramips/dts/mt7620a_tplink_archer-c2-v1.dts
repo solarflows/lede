@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -22,29 +24,29 @@
 		compatible = "gpio-leds";
 
 		lan {
-			label = "green:lan";
+			label = "archer-c2-v1:green:lan";
 			gpios = <&gpio0 1 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "archer-c2-v1:green:usb";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ohci_port1>, <&ehci_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		led_wps: wps {
-			label = "green:wps";
+			label = "archer-c2-v1:green:wps";
 			gpios = <&gpio1 15 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
-			label = "green:wan";
+			label = "archer-c2-v1:green:wan";
 			gpios = <&gpio2 0 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "archer-c2-v1:green:wlan";
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
@@ -80,7 +82,7 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
-		spi-max-frequency = <30000000>;
+		spi-max-frequency = <10000000>;
 
 		partitions {
 			compatible = "fixed-partitions";

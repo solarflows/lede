@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6358.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -15,24 +17,24 @@
 		compatible = "gpio-leds";
 
 		power_green {
-			label = "green:power";
+			label = "96358VW:green:power";
 			gpios = <&pinctrl 4 0>;
 			default-state = "on";
 		};
 		stop_green {
-			label = "green:stop";
+			label = "96358VW:green:stop";
 			gpios = <&pinctrl 5 0>;
 		};
 		adsl_fail_green {
-			label = "green:adsl-fail";
+			label = "96358VW:green:adsl-fail";
 			gpios = <&pinctrl 15 1>;
 		};
 		ppp_green {
-			label = "green:ppp";
+			label = "96358VW:green:ppp";
 			gpios = <&pinctrl 22 1>;
 		};
 		ppp_fail_green {
-			label = "green:ppp-fail";
+			label = "96358VW:green:ppp-fail";
 			gpios = <&pinctrl 23 1>;
 		};
 	};

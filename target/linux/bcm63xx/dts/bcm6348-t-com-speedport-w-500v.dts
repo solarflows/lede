@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6348.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -36,24 +38,24 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "SPW500V:green:power";
 			gpios = <&pinctrl 0 1>;
 			default-state = "on";
 		};
 		power_red {
-			label = "red:power";
+			label = "SPW500V:red:power";
 			gpios = <&pinctrl 1 1>;
 		};
 		ppp_green {
-			label = "green:ppp";
+			label = "SPW500V:green:ppp";
 			gpios = <&pinctrl 3 1>;
 		};
 		pstn_green {
-			label = "green:pstn";
+			label = "SPW500V:green:pstn";
 			gpios = <&pinctrl 28 1>;
 		};
 		voip_green {
-			label = "green:voip";
+			label = "SPW500V:green:voip";
 			gpios = <&pinctrl 32 1>;
 		};
 	};

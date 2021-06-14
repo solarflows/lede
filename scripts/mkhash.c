@@ -79,22 +79,15 @@
 
 
 
-#ifndef __FreeBSD__
 #include <endian.h>
-#else
-#include <sys/endian.h>
-#endif
-
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <unistd.h>
-#include <sys/stat.h>
 
 #define ARRAY_SIZE(_n) (sizeof(_n) / sizeof((_n)[0]))
 
-#ifndef __FreeBSD__
 static void
 be32enc(void *buf, uint32_t u)
 {
@@ -105,7 +98,6 @@ be32enc(void *buf, uint32_t u)
 	p[2] = ((uint8_t) ((u >> 8) & 0xff));
 	p[3] = ((uint8_t) (u & 0xff));
 }
-#endif
 
 static void
 be64enc(void *buf, uint64_t u)
@@ -744,11 +736,7 @@ static int usage(const char *progname)
 {
 	int i;
 
-	fprintf(stderr, "Usage: %s <hash type> [options] [<file>...]\n"
-		"Options:\n"
-		"	-n		Print filename(s)\n"
-		"	-N		Suppress trailing newline\n"
-		"\n"
+	fprintf(stderr, "Usage: %s <hash type> [<file>...]\n"
 		"Supported hash types:", progname);
 
 	for (i = 0; i < ARRAY_SIZE(types); i++)
@@ -772,21 +760,13 @@ static struct hash_type *get_hash_type(const char *name)
 }
 
 
-static int hash_file(struct hash_type *t, const char *filename, bool add_filename,
-	bool no_newline)
+static int hash_file(struct hash_type *t, const char *filename, bool add_filename)
 {
 	const char *str;
 
 	if (!filename || !strcmp(filename, "-")) {
 		str = t->func(stdin);
 	} else {
-		struct stat path_stat;
-		stat(filename, &path_stat);
-		if (S_ISDIR(path_stat.st_mode)) {
-			fprintf(stderr, "Failed to open '%s': Is a directory\n", filename);
-			return 1;
-		}
-
 		FILE *f = fopen(filename, "r");
 
 		if (!f) {
@@ -803,10 +783,9 @@ static int hash_file(struct hash_type *t, const char *filename, bool add_filenam
 	}
 
 	if (add_filename)
-		printf("%s %s%s", str, filename ? filename : "-",
-			no_newline ? "" : "\n");
+		printf("%s %s\n", str, filename ? filename : "-");
 	else
-		printf("%s%s", str, no_newline ? "" : "\n");
+		printf("%s\n", str);
 	return 0;
 }
 
@@ -816,15 +795,12 @@ int main(int argc, char **argv)
 	struct hash_type *t;
 	const char *progname = argv[0];
 	int i, ch;
-	bool add_filename = false, no_newline = false;
+	bool add_filename = false;
 
-	while ((ch = getopt(argc, argv, "nN")) != -1) {
+	while ((ch = getopt(argc, argv, "n")) != -1) {
 		switch (ch) {
 		case 'n':
 			add_filename = true;
-			break;
-		case 'N':
-			no_newline = true;
 			break;
 		default:
 			return usage(progname);
@@ -842,13 +818,10 @@ int main(int argc, char **argv)
 		return usage(progname);
 
 	if (argc < 2)
-		return hash_file(t, NULL, add_filename, no_newline);
+		return hash_file(t, NULL, add_filename);
 
-	for (i = 0; i < argc - 1; i++) {
-		int ret = hash_file(t, argv[1 + i], add_filename, no_newline);
-		if (ret)
-			return ret;
-	}
+	for (i = 0; i < argc - 1; i++)
+		hash_file(t, argv[1 + i], add_filename);
 
 	return 0;
 }

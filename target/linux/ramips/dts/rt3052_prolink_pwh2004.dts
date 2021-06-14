@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -55,12 +57,12 @@
 		compatible = "gpio-leds";
 
 		wifi {
-			label = "red:wifi";
+			label = "pwh2004:red:wifi";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
-			label = "green:power";
+			label = "pwh2004:green:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 	};

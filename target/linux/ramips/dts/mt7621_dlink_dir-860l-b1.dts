@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -15,26 +17,30 @@
 		label-mac-device = &gmac0;
 	};
 
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
 		power {
-			label = "orange:power";
+			label = "dir-860l-b1:orange:power";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_green: power2 {
-			label = "green:power";
+			label = "dir-860l-b1:green:power";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
 		net {
-			label = "orange:net";
+			label = "dir-860l-b1:orange:net";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		net2 {
-			label = "green:net";
+			label = "dir-860l-b1:green:net";
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -143,9 +149,6 @@
 
 &pcie {
 	status = "okay";
-
-	reset-gpios = <&gpio 19 GPIO_ACTIVE_LOW>,
-		      <&gpio 8 GPIO_ACTIVE_LOW>;
 };
 
 &pcie0 {

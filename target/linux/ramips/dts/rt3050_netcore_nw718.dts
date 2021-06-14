@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,19 +20,19 @@
 		compatible = "gpio-leds";
 
 		led_cpu: cpu {
-			label = "amber:cpu";
+			label = "nw718:amber:cpu";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "amber:usb";
+			label = "nw718:amber:usb";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&otg_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		wps {
-			label = "amber:wps";
+			label = "nw718:amber:wps";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 	};

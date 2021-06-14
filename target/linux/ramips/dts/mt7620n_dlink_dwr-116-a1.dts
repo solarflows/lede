@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620n.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -34,15 +36,19 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
-			label = "green:status";
+			label = "dwr-116-a1:green:status";
 			gpios = <&gpio0 0 GPIO_ACTIVE_HIGH>;
 		};
 
 		wifi {
-			label = "green:wifi";
+			label = "dwr-116-a1:green:wifi";
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 		};
 	};
+};
+
+&gpio1 {
+	status = "okay";
 };
 
 &gpio3 {

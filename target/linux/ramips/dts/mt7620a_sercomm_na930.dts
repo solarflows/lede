@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -78,24 +80,24 @@
 		compatible = "gpio-leds";
 
 		zwave {
-			label = "blue:zwave";
+			label = "na930:blue:zwave";
 			gpios = <&gpio2 0 GPIO_ACTIVE_LOW>;
 		};
 
 		status {
-			label = "blue:status";
+			label = "na930:blue:status";
 			gpios = <&gpio2 26 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ohci_port1>, <&ehci_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		service {
-			label = "blue:service";
+			label = "na930:blue:service";
 			gpios = <&gpio2 28 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
-			label = "blue:power";
+			label = "na930:blue:power";
 			gpios = <&gpio2 29 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -125,6 +127,10 @@
 };
 
 &uart {
+	status = "okay";
+};
+
+&gpio1 {
 	status = "okay";
 };
 

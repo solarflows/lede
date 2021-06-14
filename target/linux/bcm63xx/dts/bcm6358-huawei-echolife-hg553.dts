@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6358.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -43,40 +45,40 @@
 		compatible = "gpio-leds";
 
 		led_power_blue: power_blue {
-			label = "blue:power";
+			label = "HW553:blue:power";
 			gpios = <&pinctrl 4 1>;
 			default-state = "on";
 		};
 		power_red {
-			label = "red:power";
+			label = "HW553:red:power";
 			gpios = <&pinctrl 5 1>;
 		};
 		hspa_red {
-			label = "red:hspa";
+			label = "HW553:red:hspa";
 			gpios = <&pinctrl 12 1>;
 		};
 		hspa_blue {
-			label = "blue:hspa";
+			label = "HW553:blue:hspa";
 			gpios = <&pinctrl 13 1>;
 		};
 		lan_red {
-			label = "red:lan";
+			label = "HW553:red:lan";
 			gpios = <&pinctrl 22 1>;
 		};
 		lan_blue {
-			label = "blue:lan";
+			label = "HW553:blue:lan";
 			gpios = <&pinctrl 23 1>;
 		};
 		wifi_red {
-			label = "red:wifi";
+			label = "HW553:red:wifi";
 			gpios = <&pinctrl 25 1>;
 		};
 		dsl_red {
-			label = "red:adsl";
+			label = "HW553:red:adsl";
 			gpios = <&pinctrl 34 1>;
 		};
 		dsl_blue {
-			label = "blue:adsl";
+			label = "HW553:blue:adsl";
 			gpios = <&pinctrl 35 1>;
 		};
 	};

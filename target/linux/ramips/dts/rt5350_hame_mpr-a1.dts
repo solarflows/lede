@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,12 +20,12 @@
 		compatible = "gpio-leds";
 
 		led_system: system {
-			label = "blue:system";
+			label = "mpr-a1:blue:system";
 			gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
 		};
 
 		power {
-			label = "red:power";
+			label = "mpr-a1:red:power";
 			gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -97,6 +99,10 @@
 	};
 };
 
+&gpio1 {
+	status = "okay";
+};
+
 &state_default {
 	gpio {
 		groups = "i2c", "jtag", "uartf", "led";
@@ -114,4 +120,12 @@
 
 &wmac {
 	ralink,mtd-eeprom = <&factory 0x0>;
+};
+
+&ehci {
+	status = "okay";
+};
+
+&ohci {
+	status = "okay";
 };

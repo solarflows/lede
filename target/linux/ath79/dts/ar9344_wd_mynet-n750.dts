@@ -24,22 +24,22 @@
 		compatible = "gpio-leds";
 
 		wifi {
-			label = "blue:wireless";
+			label = "mynet-n750:blue:wireless";
 			gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
 		};
 
 		internet {
-			label = "blue:internet";
+			label = "mynet-n750:blue:internet";
 			gpios = <&gpio 12 GPIO_ACTIVE_HIGH>;
 		};
 
 		wps {
-			label = "blue:wps";
+			label = "mynet-n750:blue:wps";
 			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
 		};
 
 		led_power: power {
-			label = "blue:power";
+			label = "mynet-n750:blue:power";
 			gpios = <&gpio 14 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -63,6 +63,10 @@
 	clock-frequency = <40000000>;
 };
 
+&uart {
+	status = "okay";
+};
+
 &gpio {
 	gpio_ext_lna0 {
 		gpio-hog;
@@ -81,6 +85,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";

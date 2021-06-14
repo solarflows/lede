@@ -46,30 +46,30 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "tp-link:green:power";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		wlan2g_green {
-			label = "green:wlan2g";
+			label = "tp-link:green:wlan2g";
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
 
 		wlan2g_red {
-			label = "red:wlan2g";
+			label = "tp-link:red:wlan2g";
 			gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan5g_green {
-			label = "green:wlan5g";
+			label = "tp-link:green:wlan5g";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		wlan5g_red {
-			label = "red:wlan5g";
+			label = "tp-link:red:wlan5g";
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -119,6 +119,8 @@
 &spi {
 	status = "okay";
 
+	num-cs = <1>;
+
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
@@ -166,6 +168,10 @@
 			};
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &wmac {

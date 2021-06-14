@@ -10,17 +10,17 @@
 		compatible = "gpio-leds";
 
 		tx {
-			label = "green:tx";
+			label = "awm002-evb:green:tx";
 			gpios = <&gpio0 15 GPIO_ACTIVE_LOW>;
 		};
 
 		rx {
-			label = "green:rx";
+			label = "awm002-evb:green:rx";
 			gpios = <&gpio0 16 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "awm002-evb:green:wps";
 			gpios = <&gpio0 21 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -60,4 +60,12 @@
 
 &esw {
 	mediatek,portmap = <0x3f>;
+};
+
+&ehci {
+	status = "okay";
+};
+
+&ohci {
+	status = "okay";
 };

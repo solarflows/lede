@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,32 +20,32 @@
 		compatible = "gpio-leds";
 
 		wifi {
-			label = "green:wifi";
+			label = "mzk-ex300np:green:wifi";
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 		};
 
 		led_wps: wps {
-			label = "green:wps";
+			label = "mzk-ex300np:green:wps";
 			gpios = <&gpio1 5 GPIO_ACTIVE_LOW>;
 		};
 
 		rep {
-			label = "blue:rep";
+			label = "mzk-ex300np:blue:rep";
 			gpios = <&gpio1 4 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi1 {
-			label = "blue:wifi1";
+			label = "mzk-ex300np:blue:wifi1";
 			gpios = <&gpio1 1 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi2 {
-			label = "blue:wifi2";
+			label = "mzk-ex300np:blue:wifi2";
 			gpios = <&gpio1 2 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi3 {
-			label = "blue:wifi3";
+			label = "mzk-ex300np:blue:wifi3";
 			gpios = <&gpio1 0 GPIO_ACTIVE_LOW>;
 		};
 	};

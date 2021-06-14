@@ -9,7 +9,7 @@
 
 &leds {
 	copy {
-		label = "green:copy";
+		label = "iodata:green:copy";
 		gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 	};
 };

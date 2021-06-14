@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -23,18 +25,18 @@
 		compatible = "gpio-leds";
 
 		led_blue: blue {
-			label = "blue:status";
+			label = "miwifi-mini:blue:status";
 			gpios = <&gpio1 0 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		yellow {
-			label = "yellow:status";
+			label = "miwifi-mini:yellow:status";
 			gpios = <&gpio1 2 GPIO_ACTIVE_LOW>;
 		};
 
 		red {
-			label = "red:status";
+			label = "miwifi-mini:red:status";
 			gpios = <&gpio1 5 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -50,7 +52,15 @@
 	};
 };
 
+&gpio0 {
+	status = "okay";
+};
+
 &gpio1 {
+	status = "okay";
+};
+
+&gpio2 {
 	status = "okay";
 };
 

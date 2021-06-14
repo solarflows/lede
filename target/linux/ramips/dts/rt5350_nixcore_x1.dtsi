@@ -108,6 +108,10 @@
 	};
 };
 
+&gpio0 {
+	status = "okay";
+};
+
 &gpio1 {
 	status = "okay";
 };
@@ -138,4 +142,12 @@
 
 &wmac {
 	ralink,mtd-eeprom = <&factory 0x0>;
+};
+
+&ehci {
+	status = "okay";
+};
+
+&ohci {
+	status = "okay";
 };

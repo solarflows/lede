@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+/dts-v1/;
+
 #include "bcm63268.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -54,50 +56,50 @@
 	led@2 {
 		reg = <2>;
 		active-low;
-		label = "red:internet";
+		label = "vg-8050:red:internet";
 	};
 
 	led@3 {
 		reg = <3>;
 		active-low;
-		label = "red:power";
+		label = "vg-8050:red:power";
 	};
 
 	led_power_green: led@6 {
 		reg = <6>;
 		active-low;
-		label = "green:power";
+		label = "vg-8050:green:power";
 		default-state = "on";
 	};
 
 	led@7 {
 		reg = <7>;
 		active-low;
-		label = "green:wps";
+		label = "vg-8050:green:wps";
 	};
 
 	led@8 {
 		reg = <8>;
 		active-low;
-		label = "green:internet";
+		label = "vg-8050:green:internet";
 	};
 
 	led@10 {
 		reg = <10>;
 		active-low;
-		label = "green:voip";
+		label = "vg-8050:green:voip";
 	};
 
 	led@12 {
 		reg = <12>;
 		active-low;
-		label = "red:voip";
+		label = "vg-8050:red:voip";
 	};
 
 	led@14 {
 		reg = <14>;
 		active-low;
-		label = "red:wps";
+		label = "vg-8050:red:wps";
 	};
 };
 

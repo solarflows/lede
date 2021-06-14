@@ -19,7 +19,6 @@ LOADADDR	:=
 LZMA_TEXT_START	:= 0x80a00000
 LOADER_DATA	:=
 BOARD		:=
-FLASH_START	:=
 FLASH_OFFS	:=
 FLASH_MAX	:=
 PLATFORM	:=
@@ -63,10 +62,6 @@ endif
 
 ifneq ($(strip $(KERNEL_CMDLINE)),)
 CFLAGS		+= -DCONFIG_KERNEL_CMDLINE='"$(KERNEL_CMDLINE)"'
-endif
-
-ifneq ($(strip $(FLASH_START)),)
-CFLAGS		+= -DCONFIG_FLASH_START=$(FLASH_START)
 endif
 
 ifneq ($(strip $(FLASH_OFFS)),)

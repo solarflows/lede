@@ -6,6 +6,7 @@ define Device/Default
   KERNEL_INSTALL := 1
   FILESYSTEMS := squashfs ext4
   PROFILES := Default
+  SUPPORTED_DEVICES := $(subst _,$(comma),$(1))
   DEVICE_DTS := ox810se-$(subst _,-,$(1))
   IMAGES := sysupgrade.tar
   IMAGE/sysupgrade.tar := sysupgrade-tar | append-metadata

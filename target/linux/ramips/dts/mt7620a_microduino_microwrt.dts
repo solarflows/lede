@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -26,6 +28,14 @@
 			linux,code = <KEY_WPS_BUTTON>;
 		};
 	};
+};
+
+&gpio2 {
+	status = "okay";
+};
+
+&gpio3 {
+	status = "okay";
 };
 
 &spi0 {

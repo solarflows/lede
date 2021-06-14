@@ -20,18 +20,18 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "d-link:green:power";
 			gpios = <&gpio 23 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		led_power_red: power_red {
-			label = "red:power";
+			label = "d-link:red:power";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi2g {
-			label = "green:wifi2g";
+			label = "d-link:green:wifi2g";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
@@ -50,6 +50,7 @@
 
 &spi {
 	status = "okay";
+	num-cs = <1>;
 
 	flash@0 {
 		#address-cells = <1>;
@@ -133,6 +134,7 @@
 	status = "okay";
 
 	phy-handle = <&phy0>;
+	phy-mode = "rgmii";
 	pll-data = <0x56000000 0x00000101 0x00001616>;
 
 	fixed-link {
@@ -145,6 +147,7 @@
 	status = "okay";
 
 	phy-mask = <0>;
+	phy-mode = "sgmii";
 	pll-data = <0x03000101 0x00000101 0x00001616>;
 
 	fixed-link {
@@ -154,6 +157,10 @@
 };
 
 &pcie0 {
+	status = "okay";
+};
+
+&uart {
 	status = "okay";
 };
 

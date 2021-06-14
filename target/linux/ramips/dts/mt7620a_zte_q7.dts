@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,12 +20,12 @@
 		compatible = "gpio-leds";
 
 		statred {
-			label = "red:status";
+			label = "zte-q7:red:status";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 
 		led_status_blue: statblue {
-			label = "blue:status";
+			label = "zte-q7:blue:status";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -37,6 +39,10 @@
 			linux,code = <KEY_RESTART>;
 		};
 	};
+};
+
+&gpio0 {
+	status = "okay";
 };
 
 &gpio1 {

@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -14,6 +16,10 @@
 		led-upgrade = &led_status;
 	};
 
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
 	keys {
 		compatible = "gpio-keys";
 
@@ -28,32 +34,32 @@
 		compatible = "gpio-leds";
 
 		system {
-			label = "green:system";
+			label = "gb-pc2:green:system";
 			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
 		};
 
 		led_status: status {
-			label = "green:status";
+			label = "gb-pc2:green:status";
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		lan1 {
-			label = "green:lan1";
+			label = "gb-pc2:green:lan1";
 			gpios = <&gpio 24 GPIO_ACTIVE_LOW>;
 		};
 
 		lan2 {
-			label = "green:lan2";
+			label = "gb-pc2:green:lan2";
 			gpios = <&gpio 25 GPIO_ACTIVE_LOW>;
 		};
 
 		lan3-yellow {
-			label = "yellow:lan3";
+			label = "gb-pc2:yellow:lan3";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		lan3-green {
-			label = "green:lan3";
+			label = "gb-pc2:green:lan3";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 	};

@@ -34,6 +34,7 @@ define Device/bcm63xx-nand
   CFE_WFI_FLAGS :=
   UBINIZE_OPTS := -E 5
   DEVICE_PACKAGES += nand-utils
+  SUPPORTED_DEVICES := $(subst _,$(comma),$(1))
 endef
 
 define Device/sercomm-nand

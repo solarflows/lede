@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0-only OR MIT
+// SPDX-License-Identifier: GPL-2.0 OR MIT
 
 #include "qcom-ipq4019.dtsi"
 #include <dt-bindings/gpio/gpio.h>
@@ -108,34 +108,34 @@
 		compatible = "gpio-leds";
 
 		wifi_green {
-			label = "green:wifi";
+			label = "ap-303h:green:wifi";
 			gpios = <&tlmm 27 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		wifi_amber {
-			label = "amber:wifi";
+			label = "ap-303h:amber:wifi";
 			gpios = <&tlmm 28 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "phy1tpt";
 		};
 
 		pse {
-			label = "green:pse";
+			label = "ap-303h:green:pse";
 			gpios = <&tlmm 42 GPIO_ACTIVE_HIGH>;
 		};
 
 		led_system_red: system_red {
-			label = "red:system";
+			label = "ap-303h:red:system";
 			gpios = <&tlmm 25 GPIO_ACTIVE_HIGH>;
 		};
 
 		led_system_green: system_green {
-			label = "green:system";
+			label = "ap-303h:green:system";
 			gpios = <&tlmm 24 GPIO_ACTIVE_HIGH>;
 		};
 
 		led_system_amber: system_amber {
-			label = "amber:system";
+			label = "ap-303h:amber:system";
 			gpios = <&tlmm 26 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -198,7 +198,6 @@
 			function = "mdio";
 			bias-pull-up;
 		};
-
 		mux_2 {
 			pins = "gpio7";
 			function = "mdc";
@@ -213,7 +212,6 @@
 			drive-strength = <12>;
 			bias-disable;
 		};
-
 		pin_cs {
 			function = "gpio";
 			pins = "gpio12", "gpio59";

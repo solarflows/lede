@@ -423,9 +423,8 @@ csum8_get(struct csum_state *css)
 
 
 void
-csum16_update(void *data, uint32_t len, struct csum_state *css)
+csum16_update(uint8_t *p, uint32_t len, struct csum_state *css)
 {
-	uint8_t *p = data;
 	uint16_t t;
 
 	if (css->odd) {
@@ -469,10 +468,8 @@ csum_init(struct csum_state *css, int size)
 
 
 void
-csum_update(void *data, uint32_t len, struct csum_state *css)
+csum_update(uint8_t *p, uint32_t len, struct csum_state *css)
 {
-	uint8_t *p = data;
-
 	switch (css->size) {
 	case CSUM_SIZE_8:
 		csum8_update(p,len,css);
@@ -496,9 +493,6 @@ csum_get(struct csum_state *css)
 	case CSUM_SIZE_16:
 		ret = csum16_get(css);
 		break;
-	default:
-		ERR("invalid checksum size\n");
-		return 0;
 	}
 
 	return ret;
@@ -509,21 +503,19 @@ csum_get(struct csum_state *css)
  * routines to write data to the output file
  */
 int
-write_out_data(FILE *outfile, void *data, size_t len,
+write_out_data(FILE *outfile, uint8_t *data, size_t len,
 		struct csum_state *css)
 {
-	uint8_t *ptr = data;
-
 	errno = 0;
 
-	fwrite(ptr, len, 1, outfile);
+	fwrite(data, len, 1, outfile);
 	if (errno) {
 		ERRS("unable to write output file");
 		return ERR_FATAL;
 	}
 
 	if (css) {
-		csum_update(ptr, len, css);
+		csum_update(data, len, css);
 	}
 
 	return 0;
@@ -800,6 +792,7 @@ parse_opt_block(char ch, char *arg)
 {
 	char buf[MAX_ARG_LEN];
 	char *argv[MAX_ARG_COUNT];
+	int argc;
 	char *p;
 	struct csys_block *block;
 	int i;
@@ -861,7 +854,7 @@ parse_opt_block(char ch, char *arg)
 		return ERR_FATAL;
 	}
 
-	parse_arg(arg, buf, argv);
+	argc = parse_arg(arg, buf, argv);
 
 	i = 0;
 	p = argv[i++];

@@ -10,22 +10,22 @@
 		compatible = "gpio-leds";
 
 		usb {
-			label = "green:usb";
+			label = "we1026-h:green:usb";
 			gpios = <&gpio2 2 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
-			label = "green:lan";
+			label = "we1026-h:green:lan";
 			gpios = <&gpio2 3 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
-			label = "green:wan";
+			label = "we1026-h:green:wan";
 			gpios = <&gpio2 4 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi {
-			label = "green:wifi";
+			label = "we1026-h:green:wifi";
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 		};
 	};

@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -22,12 +24,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "wn-gx300gr:green:power";
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "wn-gx300gr:green:wps";
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 		};
 	};

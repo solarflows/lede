@@ -1,7 +1,9 @@
-# SPDX-License-Identifier: GPL-2.0-only
 #
 # Copyright (C) 2017-2019 Tomasz Maciej Nowak <tmn505@gmail.com>
-
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
@@ -12,9 +14,13 @@ define Build/tegra-sdcard
 	$(if $(DEVICE_DTS),\
 		$(foreach dtb,$(DEVICE_DTS),$(CP) $(DTS_DIR)/$(dtb).dtb $@.boot), \
 		$(CP) $(DTS_DIR)/*.dtb $@.boot)
+	sed \
+		-e 's#@ROOT@#$(IMG_PART_SIGNATURE)#g' \
+		-e 's#@KERNEL@#$(KERNEL_NAME)#g' \
+		$(BOOT_SCRIPT) > $@-boot.scr
 	mkimage -A arm -O linux -T script -C none -a 0 -e 0 \
 		-n '$(DEVICE_TITLE) OpenWrt bootscript' \
-		-d $(BOOT_SCRIPT) \
+		-d $@-boot.scr \
 		$@.boot/boot.scr
 
 	SIGNATURE="$(IMG_PART_SIGNATURE)" \
@@ -36,6 +42,7 @@ define Device/Default
   KERNEL_NAME := zImage
   KERNEL := kernel-bin
   PROFILES := Default
+  SUPPORTED_DEVICES := $(subst _,$(comma),$(1))
 endef
 
 define Device/compulab_trimslice
@@ -43,7 +50,7 @@ define Device/compulab_trimslice
   DEVICE_MODEL := TrimSlice
   DEVICE_DTS := tegra20-trimslice
   DEVICE_PACKAGES := kmod-r8169 kmod-rt2800-usb kmod-rtc-em3027 \
-	kmod-usb-storage wpad-mini
+	kmod-usb-storage wpad-basic-wolfssl
   UBOOT := trimslice-mmc
 endef
 TARGET_DEVICES += compulab_trimslice

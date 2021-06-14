@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -61,17 +63,17 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "mzk-w300nh2:green:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "amber:wlan";
+			label = "mzk-w300nh2:amber:wlan";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "amber:wps";
+			label = "mzk-w300nh2:amber:wps";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 		};
 	};

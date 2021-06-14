@@ -4,6 +4,8 @@
  *
  * Copyright (C) 2020 Daniel González Cabanelas <dgcbueu@gmail.com>
  */
+ 
+/dts-v1/;
 
 #include "bcm63167-sercomm-h500-s.dtsi"
 

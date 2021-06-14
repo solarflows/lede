@@ -40,12 +40,12 @@
 		compatible = "gpio-leds";
 
 		led_diag: diag {
-			label = "red:diag";
+			label = "buffalo:red:diag";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "buffalo:green:usb";
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&hub_port>;
 			linux,default-trigger = "usbport";
@@ -107,6 +107,9 @@
 &spi {
 	status = "okay";
 
+	cs-gpios = <0>, <0>;
+	num-cs = <2>;
+
 	flash0: flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
@@ -140,6 +143,10 @@
 
 &pll {
 	clocks = <&extosc>;
+};
+
+&uart {
+	status = "okay";
 };
 
 &usb_phy {

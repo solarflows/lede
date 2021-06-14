@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6368.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -43,38 +45,38 @@
 		compatible = "gpio-leds";
 
 		inet_green {
-			label = "green:inet";
+			label = "R1000H:green:inet";
 			gpios = <&pinctrl 5 0>;
 		};
 
 		usb_green {
-			label = "green:usb";
+			label = "R1000H:green:usb";
 			gpios = <&pinctrl 21 1>;
 		};
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "R1000H:green:power";
 			gpios = <&pinctrl 22 0>;
 			default-state = "on";
 		};
 
 		wps_green {
-			label = "green:wps";
+			label = "R1000H:green:wps";
 			gpios = <&pinctrl 23 1>;
 		};
 
 		power_red {
-			label = "red:power";
+			label = "R1000H:red:power";
 			gpios = <&pinctrl 24 0>;
 		};
 
 		wps_red {
-			label = "red:wps";
+			label = "R1000H:red:wps";
 			gpios = <&pinctrl 30 1>;
 		};
 
 		inet_red {
-			label = "red:inet";
+			label = "R1000H:red:inet";
 			gpios = <&pinctrl 31 0>;
 		};
 	};

@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -15,28 +17,32 @@
 		label-mac-device = &gmac0;
 	};
 
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "wr1201:green:power";
 			gpios = <&gpio 24 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "wr1201:green:usb";
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&xhci_ehci_port1>, <&ehci_port2>;
 			linux,default-trigger = "usbport";
 		};
 
 		eth_link {
-			label = "green:eth_link";
+			label = "wr1201:green:eth_link";
 			gpios = <&gpio 26 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "wr1201:green:wps";
 			gpios = <&gpio 23 GPIO_ACTIVE_LOW>;
 		};
 	};

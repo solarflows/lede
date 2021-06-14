@@ -10,6 +10,7 @@
 	compatible = "pisen,ts-d084", "qca,ar9331";
 
 	aliases {
+		serial0 = &uart;
 		led-boot = &led_system;
 		led-failsafe = &led_system;
 		led-running = &led_system;
@@ -32,7 +33,7 @@
 		compatible = "gpio-leds";
 
 		led_system: system {
-			label = "blue:system";
+			label = "ts-d084:blue:system";
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -88,6 +89,10 @@
 &eth1 {
 	status = "okay";
 	compatible = "syscon", "simple-mfd";
+};
+
+&uart {
+	status = "okay";
 };
 
 &usb {

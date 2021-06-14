@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7628an.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -33,12 +35,12 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power {
-			label = "green:power";
+			label = "tl-wr840n-v5:green:power";
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 		};
 
 		orange {
-			label = "orange:power";
+			label = "tl-wr840n-v5:orange:power";
 			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 	};

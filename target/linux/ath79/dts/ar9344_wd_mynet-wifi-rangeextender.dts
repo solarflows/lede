@@ -24,34 +24,34 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "blue:power";
+			label = "mynet-wifi-rangeextender:blue:power";
 			gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
 			/* LED has no off state. It's either on or it blinks */
 		};
 
 		lan {
-			label = "green:lan";
+			label = "mynet-wifi-rangeextender:green:lan";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi {
-			label = "blue:wifi";
+			label = "mynet-wifi-rangeextender:blue:wifi";
 			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		wifi-rssi-low {
-			label = "blue:rssi-low";
+			label = "mynet-wifi-rangeextender:blue:rssi-low";
 			gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi-rssi-med {
-			label = "blue:rssi-med";
+			label = "mynet-wifi-rangeextender:blue:rssi-med";
 			gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi-rssi-max {
-			label = "blue:rssi-max";
+			label = "mynet-wifi-rangeextender:blue:rssi-max";
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -81,8 +81,14 @@
 	clock-frequency = <25000000>;
 };
 
+&uart {
+	status = "okay";
+};
+
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = /* "s25fl064k", */ "jedec,spi-nor";
@@ -144,10 +150,10 @@
 &eth0 {
 	status = "okay";
 
-	pll-data = <0x02000000 0x00000101 0x00001313>;
+	pll-data = <0x0e000000 0x3c000101 0x3c001313>;
 
 	/* ethernet MAC is stored in nvram */
-	phy-mode = "rgmii-id";
+	phy-mode = "rgmii";
 	phy-handle = <&phy4>;
 
 	gmac-config {

@@ -36,12 +36,12 @@
 		compatible = "gpio-leds";
 
 		led_system: system {
-			label = "green:system";
+			label = "tp-link:green:system";
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 		};
 
 		qss {
-			label = "green:qss";
+			label = "tp-link:green:qss";
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -49,6 +49,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -103,4 +105,8 @@
 &eth1 {
 	mtd-mac-address = <&uboot 0x1fc00>;
 	mtd-mac-address-increment = <1>;
+};
+
+&uart {
+	status = "okay";
 };

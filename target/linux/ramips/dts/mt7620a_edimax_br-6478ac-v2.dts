@@ -1,15 +1,22 @@
-// SPDX-License-Identifier: GPL-2.0-only
 /*
+ * Device Tree file for the Edimax BR-6478AC V2
+ * based on Linksys E1700
+ *
  * Copyright (C) 2016 Rohan Murch <rohan.murch@gmail.com>
  * Copyright (C) 2016 Hans Ulli Kroll <ulli.kroll@googlemail.com>
  * Copyright (C) 2017 James McKenzie <openwrt@madingley.org>
+ *
+ * This file is licensed under the terms of the GNU General Public
+ * License version 2.  This program is licensed "as is" without any
+ * warranty of any kind, whether express or implied.
  */
+
+/dts-v1/;
 
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
-#include <dt-bindings/mtd/partitions/uimage.h>
 
 / {
 	compatible = "edimax,br-6478ac-v2", "ralink,mt7620a-soc";
@@ -36,22 +43,22 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "white:power";
+			label = "br-6478ac-v2:white:power";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 		};
 
 		internet {
-			label = "blue:internet";
+			label = "br-6478ac-v2:blue:internet";
 			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "blue:wlan";
+			label = "br-6478ac-v2:blue:wlan";
 			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "blue:usb";
+			label = "br-6478ac-v2:blue:usb";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ohci_port1>, <&ehci_port1>;
 			linux,default-trigger = "usbport";
@@ -111,9 +118,7 @@
 			};
 
 			partition@70000 {
-				compatible = "openwrt,uimage", "denx,uimage";
-				openwrt,offset = <FW_EDIMAX_OFFSET>;
-				openwrt,partition-magic = <FW_MAGIC_EDIMAX>;
+				compatible = "edimax,uimage";
 				label = "firmware";
 				reg = <0x00070000 0x00790000>;
 			};

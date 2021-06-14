@@ -7,6 +7,7 @@
 
 / {
 	aliases {
+		serial0 = &uart;
 		label-mac-device = &wmac;
 	};
 };
@@ -17,6 +18,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -47,6 +50,10 @@
 			};
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &eth0 {

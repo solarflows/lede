@@ -19,12 +19,12 @@
 		compatible = "gpio-leds";
 
 		led_globe: globe {
-			label = "green:globe";
+			label = "ubnt:green:globe";
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 		};
 
 		power {
-			label = "green:power";
+			label = "ubnt:green:power";
 			gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
 		};
 	};

@@ -4,7 +4,6 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
-#include <dt-bindings/mtd/partitions/uimage.h>
 
 / {
 	chosen {
@@ -52,62 +51,62 @@
 		pinctrl-0 = <&jtag_disable_pins &switch_led_disable_pins &clks_disable_pins>;
 
 		wan_green {
-			label = "green:wan";
+			label = "netgear:green:wan";
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_amber {
-			label = "amber:wan";
+			label = "netgear:amber:wan";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 
 		lan1_green {
-			label = "green:lan1";
+			label = "netgear:green:lan1";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		lan1_amber {
-			label = "amber:lan1";
+			label = "netgear:amber:lan1";
 			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
 		};
 
 		lan2_green {
-			label = "green:lan2";
+			label = "netgear:green:lan2";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		lan2_amber {
-			label = "amber:lan2";
+			label = "netgear:amber:lan2";
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 		};
 
 		lan3_green {
-			label = "green:lan3";
+			label = "netgear:green:lan3";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
 		lan3_amber {
-			label = "amber:lan3";
+			label = "netgear:amber:lan3";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
 		lan4_green {
-			label = "green:lan4";
+			label = "netgear:green:lan4";
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 		};
 
 		lan4_amber {
-			label = "amber:lan4";
+			label = "netgear:amber:lan4";
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 		};
 
 		wps_green {
-			label = "green:wps";
+			label = "netgear:green:wps";
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 		};
 
 		usb_green {
-			label = "green:usb";
+			label = "netgear:green:usb";
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&hub_port>;
 			linux,default-trigger = "usbport";
@@ -118,18 +117,18 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "netgear:green:power";
 			gpios = <&ath9k 2 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_amber: power_amber {
-			label = "amber:power";
+			label = "netgear:amber:power";
 			gpios = <&ath9k 1 GPIO_ACTIVE_LOW>;
 			default-state = "keep";
 		};
 
 		wlan_blue {
-			label = "blue:wlan";
+			label = "netgear:blue:wlan";
 			gpios = <&ath9k 0 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -138,6 +137,7 @@
 
 &spi {
 	status = "okay";
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -183,6 +183,10 @@
 			output-high;
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &usb_phy {

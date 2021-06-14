@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Copyright (C) 2014-2016 OpenWrt.org
 # Copyright (C) 2016 LEDE-Project.org
@@ -13,9 +14,6 @@ touch /etc/config/ubootenv
 board=$(board_name)
 
 case "$board" in
-buffalo,ls421de)
-	ubootenv_add_uci_config "/dev/mtd3" "0x0" "0x10000"
-	;;
 cznic,turris-omnia)
 	if grep -q 'U-Boot 2015.10-rc2' /dev/mtd0; then
 		ubootenv_add_uci_config "/dev/mtd0" "0xc0000" "0x10000" "0x40000"

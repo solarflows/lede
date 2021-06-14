@@ -1,4 +1,5 @@
-// SPDX-License-Identifier: GPL-2.0-only
+// SPDX-License-Identifier: GPL-2.0
+/dts-v1/;
 
 #include "mt7620a.dtsi"
 
@@ -20,22 +21,22 @@
 		compatible = "gpio-leds";
 
 		led_power: power_r {
-			label = "red:power";
+			label = "fon2601:red:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		internet_g {
-			label = "green:internet";
+			label = "fon2601:green:internet";
 			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
 		};
 
 		net_g {
-			label = "green:net";
+			label = "fon2601:green:net";
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi_g {
-			label = "green:wifi";
+			label = "fon2601:green:wifi";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -83,8 +84,7 @@
 			};
 
 			partition@50000 {
-				compatible = "openwrt,uimage", "denx,uimage";
-				openwrt,padding = <32>;
+				compatible = "fonfxc,uimage";
 				label = "firmware";
 				reg = <0x50000 0xf90000>;
 			};

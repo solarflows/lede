@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,7 +20,7 @@
 		compatible = "gpio-leds";
 
 		led_system: system {
-			label = "blue:system";
+			label = "jhr-n805r:blue:system";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 	};

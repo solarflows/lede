@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6358.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -43,28 +45,28 @@
 		compatible = "gpio-leds";
 
 		ses_green {
-			label = "green:ses";
+			label = "spw303v:green:ses";
 			gpios = <&pinctrl 0 1>;
 		};
 		power_adsl_red {
-			label = "red:power+adsl";
+			label = "spw303v:red:power+adsl";
 			gpios = <&pinctrl 2 1>;
 		};
 		ppp_green {
-			label = "green:ppp";
+			label = "spw303v:green:ppp";
 			gpios = <&pinctrl 5 1>;
 		};
 		led_power_adsl_green: power_adsl_green {
-			label = "green:power+adsl";
+			label = "spw303v:green:power+adsl";
 			gpios = <&pinctrl 22 1>;
 			default-state = "on";
 		};
 		voip_green {
-			label = "green:voip";
+			label = "spw303v:green:voip";
 			gpios = <&pinctrl 27 1>;
 		};
 		pots_green {
-			label = "green:pots";
+			label = "spw303v:green:pots";
 			gpios = <&pinctrl 31 1>;
 		};
 	};

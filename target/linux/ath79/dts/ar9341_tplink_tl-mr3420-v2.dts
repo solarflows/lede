@@ -27,7 +27,7 @@
 
 &leds {
 	usb {
-		label = "green:usb";
+		label = "tp-link:green:usb";
 		gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		trigger-sources = <&hub_port>;
 		linux,default-trigger = "usbport";
@@ -44,6 +44,8 @@
 };
 
 &spi {
+	num-cs = <1>;
+
 	status = "okay";
 
 	flash@0 {

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+/dts-v1/;
 
 #include "mt7628an.dtsi"
 
@@ -37,29 +38,29 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "blue:power";
+			label = "re305-v1:blue:power";
 			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan2g {
-			label = "blue:wlan2g";
+			label = "re305-v1:blue:wlan2g";
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		wlan5g {
-			label = "blue:wlan5g";
+			label = "re305-v1:blue:wlan5g";
 			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
 
 		rssi1 {
-			label = "red:rssi";
+			label = "re305-v1:red:rssi";
 			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 
 		rssi2 {
-			label = "blue:rssi";
+			label = "re305-v1:blue:rssi";
 			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
 		};
 	};

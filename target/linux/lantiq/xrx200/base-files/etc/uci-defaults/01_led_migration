@@ -27,8 +27,6 @@ bt,homehub-v5a)
 	;;
 esac
 
-remove_devicename_leds
-
 migrations_apply system
 
 exit 0

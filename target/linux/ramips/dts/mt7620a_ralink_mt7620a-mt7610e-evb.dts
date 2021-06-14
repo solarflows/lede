@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -22,6 +24,10 @@
 			linux,code = <BTN_1>;
 		};
 	};
+};
+
+&gpio0 {
+	status = "okay";
 };
 
 &spi0 {

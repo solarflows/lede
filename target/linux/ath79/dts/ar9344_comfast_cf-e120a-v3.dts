@@ -10,6 +10,7 @@
 	model = "COMFAST CF-E120A v3";
 
 	aliases {
+		serial0 = &uart;
 		led-boot = &led_rssihigh;
 		led-failsafe = &led_rssihigh;
 		led-upgrade = &led_rssihigh;
@@ -23,38 +24,38 @@
 		pinctrl-0 = <&led_rssimediumhigh_pin>;
 
 		wan {
-			label = "green:wan";
+			label = "cf-e120a-v3:green:wan";
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
-			label = "green:lan";
+			label = "cf-e120a-v3:green:lan";
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "cf-e120a-v3:green:wlan";
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		rssilow {
-			label = "red:rssilow";
+			label = "cf-e120a-v3:red:rssilow";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimediumlow {
-			label = "red:rssimediumlow";
+			label = "cf-e120a-v3:red:rssimediumlow";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimediumhigh {
-			label = "green:rssimediumhigh";
+			label = "cf-e120a-v3:green:rssimediumhigh";
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 		};
 
 		led_rssihigh: rssihigh {
-			label = "green:rssihigh";
+			label = "cf-e120a-v3:green:rssihigh";
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -79,6 +80,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -115,6 +118,10 @@
 			};
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &eth0 {

@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -72,27 +74,27 @@
 		compatible = "gpio-leds";
 
 		status {
-			label = "amber:status";
+			label = "dir-300-b1:amber:status";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_status_green: status2 {
-			label = "green:status";
+			label = "dir-300-b1:green:status";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
-			label = "amber:wan";
+			label = "dir-300-b1:amber:wan";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 
 		wan2 {
-			label = "green:wan";
+			label = "dir-300-b1:green:wan";
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "blue:wps";
+			label = "dir-300-b1:blue:wps";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 	};

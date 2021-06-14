@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+/dts-v1/;
 
 #include "mt7620a.dtsi"
 
@@ -40,12 +41,12 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
-			label = "green:status";
+			label = "dir-510l:green:status";
 			gpios = <&gpio0 14 GPIO_ACTIVE_HIGH>;
 		};
 
 		status-red {
-			label = "red:status";
+			label = "dir-510l:red:status";
 			gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -56,6 +57,10 @@
 };
 
 &uart {
+	status = "okay";
+};
+
+&gpio0 {
 	status = "okay";
 };
 

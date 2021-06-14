@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620n.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,7 +20,7 @@
 		compatible = "gpio-leds";
 
 		led_system: system {
-			label = "blue:system";
+			label = "var11n-300:blue:system";
 			gpios = <&gpio0 0 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -32,6 +34,10 @@
 			linux,code = <KEY_RESTART>;
 		};
 	};
+};
+
+&gpio0 {
+	status = "okay";
 };
 
 &spi0 {

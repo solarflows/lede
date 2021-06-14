@@ -102,15 +102,8 @@ sub config_sub($$) {
 	my $cfg1 = shift;
 	my $cfg2 = shift;
 	my %config = %{$cfg1};
-	my @keys = map {
-		my $expr = $_;
-		$expr =~ /[?.*]/ ?
-			map {
-				/^$expr$/ ? $_ : ()
-			} keys %config : $expr;
-	} keys %$cfg2;
-
-	foreach my $config (@keys) {
+	
+	foreach my $config (keys %$cfg2) {
 		delete $config{$config};
 	}
 	return \%config;

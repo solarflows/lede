@@ -1,4 +1,4 @@
-if PACKAGE_busybox || PACKAGE_busybox-selinux
+if PACKAGE_busybox
 
 config BUSYBOX_CUSTOM
 	bool "Customize busybox options"

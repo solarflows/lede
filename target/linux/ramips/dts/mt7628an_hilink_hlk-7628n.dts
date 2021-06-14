@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+/dts-v1/;
 
 #include "mt7628an.dtsi"
 
@@ -23,7 +24,7 @@
 		compatible = "gpio-leds";
 
 		wlan {
-			label = "green:wlan";
+			label = "hlk-7628n:green:wlan";
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -78,10 +79,6 @@
 			};
 		};
 	};
-};
-
-&ethernet {
-	mtd-mac-address = <&factory 0x28>;
 };
 
 &wmac {

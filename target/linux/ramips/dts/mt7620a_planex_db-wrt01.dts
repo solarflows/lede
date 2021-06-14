@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,7 +20,7 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "orange:power";
+			label = "db-wrt01:orange:power";
 			gpios = <&gpio1 1 GPIO_ACTIVE_LOW>;
 		};
 	};

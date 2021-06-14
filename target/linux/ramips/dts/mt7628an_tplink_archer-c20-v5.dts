@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+/dts-v1/;
 
 #include "mt7628an_tplink_8m-split-uboot.dtsi"
 
@@ -33,50 +34,42 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "archer-c20-v5:green:power";
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan2g {
-			label = "green:wlan2g";
+			label = "archer-c20-v5:green:wlan2g";
 			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		wlan5g {
-			label = "green:wlan5g";
+			label = "archer-c20-v5:green:wlan5g";
 			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
 
 		lan {
-			label = "green:lan";
+			label = "archer-c20-v5:green:lan";
 			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_green {
-			label = "green:wan";
+			label = "archer-c20-v5:green:wan";
 			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_orange {
-			label = "orange:wan";
+			label = "archer-c20-v5:orange:wan";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "archer-c20-v5:green:wps";
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 		};
 	};
-};
-
-&ehci {
-	status = "disabled";
-};
-
-&ohci {
-	status = "disabled";
 };
 
 &state_default {

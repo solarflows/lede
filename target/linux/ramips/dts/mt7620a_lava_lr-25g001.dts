@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -34,17 +36,17 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
-			label = "green:status";
+			label = "lr-25g001:green:status";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi2g {
-			label = "green:wifi2g";
+			label = "lr-25g001:green:wifi2g";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi5g {
-			label = "green:wifi5g";
+			label = "lr-25g001:green:wifi5g";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -59,6 +61,10 @@
 			gpios = <&gpio0 12 GPIO_ACTIVE_HIGH>;
 		};
 	};
+};
+
+&gpio0 {
+	status = "okay";
 };
 
 &spi0 {

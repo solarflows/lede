@@ -20,10 +20,7 @@ STAGING_SUBDIR_HOST := staging_dir/host
 STAGING_SUBDIR_TARGET := staging_dir/$(TARGET_DIR_NAME)
 STAGING_SUBDIR_TOOLCHAIN := staging_dir/toolchain-$(ARCH)$(ARCH_SUFFIX)_gcc-$(GCCV)_$(LIBC)$(if $(CONFIG_arm),_eabi)
 
-BUNDLER_PATH := $(subst $(space),:,$(filter-out $(TOPDIR)/%,$(subst :,$(space),$(PATH))))
-BUNDLER_COMMAND := PATH=$(BUNDLER_PATH) $(XARGS) $(SCRIPT_DIR)/bundle-libraries.sh $(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)
-
-EXCLUDE_DIRS:= \
+EXCLUDE_DIRS:=*/ccache/* \
 	*/stamp \
 	*/stampfiles \
 	*/man \
@@ -43,7 +40,7 @@ SDK_DIRS = \
 GIT_URL:=$(shell git config --get remote.origin.url 2>/dev/null)
 GIT_URL:=$(if $(CONFIG_BUILDBOT),$(filter git://% http://% https://%,$(GIT_URL)),$(GIT_URL))
 GIT_COMMIT:=$(shell git rev-parse HEAD 2>/dev/null)
-GIT_BRANCH:=$(filter-out HEAD,$(shell git rev-parse --abbrev-ref HEAD 2>/dev/null))
+GIT_BRANCH:=$(filter-out master HEAD,$(shell git rev-parse --abbrev-ref HEAD 2>/dev/null))
 GIT_TAGNAME:=$(shell git show-ref --tags --dereference 2>/dev/null | sed -ne '/^$(GIT_COMMIT) / { s|^.*/||; s|\^.*||; p }')
 
 BASE_FEED:=$(if $(GIT_URL),src-git base $(GIT_URL)$(if $(GIT_BRANCH),;$(GIT_BRANCH),$(if $(GIT_TAGNAME),;$(GIT_TAGNAME))))
@@ -67,12 +64,14 @@ KERNEL_FILES_ARCH = \
 	include \
 	*/include \
 	scripts \
-	kernel/asm-offsets.s
+	kernel/asm-offsets.s \
+	kernel/module.lds
 
 KERNEL_FILES_BASE := \
 	.config \
 	Makefile \
 	scripts \
+	tools/objtool \
 	include \
 	Module.symvers \
 	modules.builtin \
@@ -83,12 +82,7 @@ KERNEL_FILES := $(patsubst $(TOPDIR)/%,%,$(wildcard $(addprefix $(LINUX_DIR)/,$(
 all: compile
 
 $(BIN_DIR)/$(SDK_NAME).tar.xz: clean
-	mkdir -p \
-		$(SDK_BUILD_DIR)/dl \
-		$(SDK_BUILD_DIR)/package \
-		$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_TARGET)/include \
-		$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_TARGET)/usr/include
-
+	mkdir -p $(SDK_BUILD_DIR)/dl $(SDK_BUILD_DIR)/package
 	$(CP) -L $(INCLUDE_DIR) $(SCRIPT_DIR) $(SDK_BUILD_DIR)/
 	$(TAR) -cf - -C $(TOPDIR) \
 		`cd $(TOPDIR); find $(KDIR_BASE)/ -name \*.ko` \
@@ -102,18 +96,10 @@ $(BIN_DIR)/$(SDK_NAME).tar.xz: clean
 	$(TAR) -cf - -C $(TOPDIR) $(KDIR_BASE)/tools/usb/usbip/ | \
 		$(TAR) -xf - -C $(SDK_BUILD_DIR)
 
-	# Copy objtool executables.  They are required for building external
-	# modules if "Compile-time stack metadata validation" is enabled.
-	if grep -q '^CONFIG_STACK_VALIDATION=y' $(LINUX_DIR)/.config; then \
-		$(TAR) -cf - -C $(TOPDIR) \
-				`cd $(TOPDIR); find $(KDIR_BASE)/tools/objtool -type f -executable` | \
-			$(TAR) -xf - -C $(SDK_BUILD_DIR); \
-	fi
-
 	(cd $(SDK_BUILD_DIR); find $(STAGING_SUBDIR_HOST)/bin $(STAGING_SUBDIR_HOST)/usr/bin \
 		$(STAGING_SUBDIR_TOOLCHAIN)/bin $(STAGING_SUBDIR_TOOLCHAIN)/*/bin $(STAGING_SUBDIR_TOOLCHAIN)/libexec \
 		$(KDIR_BASE) \
-		-type f | $(BUNDLER_COMMAND))
+		-type f | $(XARGS) $(SCRIPT_DIR)/bundle-libraries.sh $(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST))
 
 	@-( \
 		find \
@@ -143,16 +129,17 @@ $(BIN_DIR)/$(SDK_NAME).tar.xz: clean
 		./files/include/prepare.mk \
 		./files/README.SDK \
 		$(SDK_BUILD_DIR)/
-	mkdir -p $(SDK_BUILD_DIR)/package/kernel
 	$(CP) \
 		$(TOPDIR)/package/Makefile \
 		$(TOPDIR)/package/libs/toolchain \
-		$(SDK_BUILD_DIR)/package/
-	$(CP) \
 		$(TOPDIR)/package/kernel/linux \
-		$(SDK_BUILD_DIR)/package/kernel/
+		$(SDK_BUILD_DIR)/package/
 
-	-rm -rf $(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/.prereq-build
+	-rm -rf \
+		$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/ccache \
+		$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_TARGET)/ccache \
+		$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_TOOLCHAIN)/ccache \
+		$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/.prereq-build
 
 	-rm -f $(SDK_BUILD_DIR)/feeds.conf.default
 	$(if $(BASE_FEED),echo "$(BASE_FEED)" > $(SDK_BUILD_DIR)/feeds.conf.default)
@@ -169,7 +156,7 @@ $(BIN_DIR)/$(SDK_NAME).tar.xz: clean
 	find $(SDK_BUILD_DIR) -name CVS | $(XARGS) rm -rf
 	-make -C $(SDK_BUILD_DIR)/scripts/config clean
 	(cd $(BUILD_DIR); \
-		tar -I 'xz -T0 -7e' -cf $@ $(SDK_NAME); \
+		tar -I 'xz -7e' -cf $@ $(SDK_NAME); \
 	)
 
 download:

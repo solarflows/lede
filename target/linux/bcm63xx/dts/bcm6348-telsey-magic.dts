@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6348.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -15,38 +17,38 @@
 		compatible = "gpio-leds";
 
 		power {
-			label = "green:power";
+			label = "MAGIC:green:power";
 			gpios = <&pinctrl 0 1>;
 			default-state = "on";
 		};
 
 		stop {
-			label = "green:stop";
+			label = "MAGIC:green:stop";
 			gpios = <&pinctrl 1 1>;
 		};
 
 		hpna {
-			label = "green:hpna";
+			label = "MAGIC:green:hpna";
 			gpios = <&pinctrl 4 1>;
 		};
 
 		status {
-			label = "green:adsl";
+			label = "MAGIC:green:adsl";
 			gpios = <&pinctrl 5 1>;
 		};
 
 		voip {
-			label = "green:voip";
+			label = "MAGIC:green:voip";
 			gpios = <&pinctrl 22 1>;
 		};
 
 		wifi {
-			label = "green:wifi";
+			label = "MAGIC:green:wifi";
 			gpios = <&pinctrl 28 0>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "MAGIC:green:usb";
 			gpios = <&pinctrl 35 1>;
 		};
 	};

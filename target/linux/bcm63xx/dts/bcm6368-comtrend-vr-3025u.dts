@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6368.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -36,24 +38,24 @@
 		compatible = "gpio-leds";
 
 		dsl_green {
-			label = "green:dsl";
+			label = "VR-3025u:green:dsl";
 			gpios = <&pinctrl 2 1>;
 		};
 		inet_green {
-			label = "green:inet";
+			label = "VR-3025u:green:inet";
 			gpios = <&pinctrl 5 0>;
 		};
 		led_power_green: power_green {
-			label = "green:power";
+			label = "VR-3025u:green:power";
 			gpios = <&pinctrl 22 0>;
 			default-state = "on";
 		};
 		power_red {
-			label = "red:power";
+			label = "VR-3025u:red:power";
 			gpios = <&pinctrl 24 0>;
 		};
 		inet_red {
-			label = "red:inet";
+			label = "VR-3025u:red:inet";
 			gpios = <&pinctrl 31 0>;
 		};
 	};

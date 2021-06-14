@@ -1,5 +1,5 @@
 #!/bin/sh
-# SPDX-License-Identifier: GPL-2.0-only
+# SPDX-License-Identifier: GPL-2.0
 
 PKG="Qt5Core Qt5Gui Qt5Widgets"
 PKG2="QtCore QtGui"

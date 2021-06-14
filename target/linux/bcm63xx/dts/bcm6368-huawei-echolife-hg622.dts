@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6368.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -30,19 +32,19 @@
 		compatible = "gpio-leds";
 
 		dsl_green {
-			label = "green:dsl";
+			label = "HG622:green:dsl";
 			gpios = <&pinctrl 2 1>;
 		};
 		inet_green {
-			label = "green:inet";
+			label = "HG622:green:inet";
 			gpios = <&pinctrl 5 1>;
 		};
 		usb_green {
-			label = "green:usb";
+			label = "HG622:green:usb";
 			gpios = <&pinctrl 11 1>;
 		};
 		power_green {
-			label = "green:power";
+			label = "HG622:green:power";
 			gpios = <&pinctrl 22 1>;
 			default-state = "on";
 		};

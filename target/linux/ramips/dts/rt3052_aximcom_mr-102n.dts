@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -65,19 +67,19 @@
 		compatible = "gpio-leds";
 
 		usb {
-			label = "green:usb";
+			label = "mr-102n:green:usb";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&otg_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		led_status: status {
-			label = "amber:status";
+			label = "mr-102n:amber:status";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "mr-102n:green:wlan";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 		};
 	};

@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -14,6 +16,10 @@
 		led-upgrade = &led_run;
 	};
 
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
 	keys {
 		compatible = "gpio-keys";
 
@@ -28,12 +34,12 @@
 		compatible = "gpio-leds";
 
 		led_run: run {
-			label = "green:run";
+			label = "ew1200:green:run";
 			gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "ew1200:green:usb";
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&xhci_ehci_port1>, <&ehci_port2>;
 			linux,default-trigger = "usbport";

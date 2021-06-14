@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7628an_wrtnode_wrtnode2.dtsi"
 
 / {
@@ -18,7 +20,7 @@
 		pinctrl-0 = <&led_pins>;
 
 		led_indicator: indicator {
-			label = "blue:indicator";
+			label = "wrtnode:blue:indicator";
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 	};

@@ -127,6 +127,7 @@ static struct board_info *find_board(char *id)
 static void usage(int status)
 {
 	FILE *stream = (status != EXIT_SUCCESS) ? stderr : stdout;
+	struct board_info *board;
 
 	fprintf(stream, "Usage: %s [OPTIONS...]\n", progname);
 	fprintf(stream,
@@ -275,6 +276,8 @@ static int build_fw(void)
 	char *buf;
 	char *p;
 	int ret = EXIT_FAILURE;
+	int writelen = 0;
+	uint32_t crc;
 	struct fw_header *hdr;
 	struct fw_tail *tail;
 
@@ -358,6 +361,11 @@ static int build_fw(void)
 int main(int argc, char *argv[])
 {
 	int ret = EXIT_FAILURE;
+	int err;
+
+	FILE *outfile;
+
+	progname = basename(argv[0]);
 
 	while ( 1 ) {
 		int c;

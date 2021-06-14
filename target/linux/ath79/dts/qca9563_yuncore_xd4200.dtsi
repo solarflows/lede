@@ -64,6 +64,8 @@
 &spi {
 	status = "okay";
 
+	num-cs = <1>;
+
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
@@ -98,6 +100,10 @@
 			};
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &wmac {

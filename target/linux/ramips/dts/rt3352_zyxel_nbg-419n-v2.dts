@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3352.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,17 +20,17 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "nbg-419n2:green:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "nbg-419n2:green:wps";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "nbg-419n2:green:usb";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ohci_port1>, <&ehci_port1>;
 			linux,default-trigger = "usbport";

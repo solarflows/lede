@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6348.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -29,12 +31,12 @@
 		compatible = "gpio-leds";
 
 		phone_green {
-			label = "green:phone";
+			label = "CPVA502+:green:phone";
 			gpios = <&pinctrl 0 1>;
 		};
 
 		link_amber {
-			label = "amber:link";
+			label = "CPVA502+:amber:link";
 			gpios = <&pinctrl 5 1>;
 		};
 	};

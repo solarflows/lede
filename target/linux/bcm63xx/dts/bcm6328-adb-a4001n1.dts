@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6328.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -43,52 +45,52 @@
 		compatible = "gpio-leds";
 
 		inet_red {
-			label = "red:inet";
+			label = "A4001N1:red:inet";
 			gpios = <&pinctrl 2 1>;
 		};
 		ppp_green {
-			label = "green:ppp";
+			label = "A4001N1:green:ppp";
 			gpios = <&pinctrl 3 1>;
 		};
 		led_power_green: power_green {
-			label = "green:power";
+			label = "A4001N1:green:power";
 			gpios = <&pinctrl 4 1>;
 			default-state = "on";
 		};
 		ppp_red {
-			label = "red:ppp";
+			label = "A4001N1:red:ppp";
 			gpios = <&pinctrl 5 1>;
 		};
 		usb_green {
-			label = "green:3g";
+			label = "A4001N1:green:3g";
 			gpios = <&pinctrl 6 1>;
 		};
 		usb_red {
-			label = "red:3g";
+			label = "A4001N1:red:3g";
 			gpios = <&pinctrl 7 1>;
 		};
 		power_red {
-			label = "red:power";
+			label = "A4001N1:red:power";
 			gpios = <&pinctrl 8 1>;
 		};
 		wlan_green {
-			label = "green:wlan";
+			label = "A4001N1:green:wlan";
 			gpios = <&pinctrl 9 1>;
 		};
 		wlan_red {
-			label = "red:wlan";
+			label = "A4001N1:red:wlan";
 			gpios = <&pinctrl 10 1>;
 		};
 		inet_green {
-			label = "green:inet";
+			label = "A4001N1:green:inet";
 			gpios = <&pinctrl 11 1>;
 		};
 		eth_red {
-			label = "red:eth";
+			label = "A4001N1:red:eth";
 			gpios = <&pinctrl 20 1>;
 		};
 		eth_green {
-			label = "green:eth";
+			label = "A4001N1:green:eth";
 			gpios = <&pinctrl 31 1>;
 		};
 	};

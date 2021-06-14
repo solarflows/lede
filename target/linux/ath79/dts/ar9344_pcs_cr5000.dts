@@ -10,6 +10,7 @@
 	compatible = "pcs,cr5000", "qca,ar9344";
 
 	aliases {
+		serial0 = &uart;
 		led-boot = &led_power;
 		led-failsafe = &led_power;
 		led-running = &led_power;
@@ -41,20 +42,20 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "amber:power";
+			label = "pcs:amber:power";
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>,
 				<&gpio 4 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		wlan2g {
-			label = "blue:wlan";
+			label = "pcs:blue:wlan";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		wps_white {
-			label = "white:wps";
+			label = "pcs:white:wps";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -64,8 +65,14 @@
 	clock-frequency = <25000000>;
 };
 
+&uart {
+	status = "okay";
+};
+
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";

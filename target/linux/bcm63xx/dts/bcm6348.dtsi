@@ -1,5 +1,3 @@
-/dts-v1/;
-
 / {
 	#address-cells = <1>;
 	#size-cells = <1>;
@@ -94,7 +92,7 @@
 			};
 
 			pinctrl_mii_snoop: mii_snoop {
-				function = "mii_snoop";
+				function = "ext_ephy";
 				groups = "group1", "group4";
 			};
 
@@ -125,12 +123,7 @@
 
 			pinctrl_utopia: utopia {
 				function = "utopia";
-				groups = "group1", "group3", "group4";
-			};
-
-			pinctrl_diag: diag {
-				function = "diag";
-				groups = "group0", "group1", "group2", "group3", "group4";
+				groups = "group0", "group1", "group3";
 			};
 		};
 

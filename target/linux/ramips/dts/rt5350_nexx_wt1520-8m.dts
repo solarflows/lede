@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350_nexx_wt1520.dtsi"
 
 / {

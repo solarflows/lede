@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3883.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -29,12 +31,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "red:power";
+			label = "wlr-6000:red:power";
 			gpios = <&gpio0 1 GPIO_ACTIVE_LOW>;
 		};
 
 		ops {
-			label = "white:ops";
+			label = "wlr-6000:white:ops";
 			gpios = <&gpio0 0 GPIO_ACTIVE_LOW>;
 		};
 	};

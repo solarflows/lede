@@ -101,32 +101,32 @@
 		compatible = "gpio-leds";
 
 		info_red: info_red {
-			label = "red:info";
+			label = "fritzbox-7530:red:info";
 			gpios = <&tlmm 32 GPIO_ACTIVE_LOW>;
 		};
 
 		info_green: info {
-			label = "green:info";
+			label = "fritzbox-7530:green:info";
 			gpios = <&tlmm 33 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "fritzbox-7530:green:wlan";
 			gpios = <&tlmm 34 GPIO_ACTIVE_LOW>;
 		};
 
 		fon {
-			label = "green:fon";
+			label = "fritzbox-7530:green:fon";
 			gpios = <&tlmm 35 GPIO_ACTIVE_LOW>;
 		};
 
 		power_green: power {
-			label = "green:power";
+			label = "fritzbox-7530:green:power";
 			gpios = <&tlmm 39 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "fritzbox-7530:green:wps";
 			gpios = <&tlmm 45 GPIO_ACTIVE_LOW>;
 		};
 	};

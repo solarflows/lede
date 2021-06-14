@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7628an_tplink_8m.dtsi"
 
 / {
@@ -31,58 +33,50 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "tl-wr841n-v13:green:power";
 			gpios = <&gpio 36 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "tl-wr841n-v13:green:wps";
 			gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
 		};
 
 		lan1 {
-			label = "green:lan1";
+			label = "tl-wr841n-v13:green:lan1";
 			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
 		};
 
 		lan2 {
-			label = "green:lan2";
+			label = "tl-wr841n-v13:green:lan2";
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 		};
 
 		lan3 {
-			label = "green:lan3";
+			label = "tl-wr841n-v13:green:lan3";
 			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
 		};
 
 		lan4 {
-			label = "green:lan4";
+			label = "tl-wr841n-v13:green:lan4";
 			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_green {
-			label = "green:wan";
+			label = "tl-wr841n-v13:green:wan";
 			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_orange {
-			label = "orange:wan";
+			label = "tl-wr841n-v13:orange:wan";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "tl-wr841n-v13:green:wlan";
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 	};
-};
-
-&ehci {
-	status = "disabled";
-};
-
-&ohci {
-	status = "disabled";
 };
 
 &state_default {

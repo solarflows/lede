@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,12 +20,12 @@
 		compatible = "gpio-leds";
 
 		led_wlan: wlan {
-			label = "blue:wlan";
+			label = "ht-tm02:blue:wlan";
 			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
-			label = "green:lan";
+			label = "ht-tm02:green:lan";
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -45,6 +47,10 @@
 			linux,input-type = <EV_SW>;
 		};
 	};
+};
+
+&gpio0 {
+	status = "okay";
 };
 
 &spi0 {
@@ -105,4 +111,12 @@
 
 &wmac {
 	ralink,mtd-eeprom = <&factory 0x0>;
+};
+
+&ehci {
+	status = "okay";
+};
+
+&ohci {
+	status = "okay";
 };

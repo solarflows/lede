@@ -1,11 +1,13 @@
-# SPDX-License-Identifier: GPL-2.0-only
 #
 # Copyright (C) 2016 LEDE Project
-
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
 ARCH:=mips
 SUBTARGET:=ase
 BOARDNAME:=Amazon-SE
-FEATURES+=atm mips16 small_flash
+FEATURES:=squashfs atm mips16 small_flash
 CPU_TYPE:=mips32
 
 DEFAULT_PACKAGES+=kmod-leds-gpio kmod-gpio-button-hotplug \

@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,7 +20,7 @@
 		compatible = "gpio-leds";
 
 		led_wps: wps {
-			label = "green:wps";
+			label = "awapn2403:green:wps";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 	};

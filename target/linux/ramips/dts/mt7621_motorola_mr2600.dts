@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+/dts-v1/;
 
 #include "mt7621_dlink_dir-8xx-a1.dtsi"
 
@@ -17,27 +18,27 @@
 		compatible = "gpio-leds";
 
 		led_power_orange: power_orange {
-			label = "orange:power";
+			label = "mr2600:orange:power";
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "mr2600:green:power";
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 		};
 
 		led_net_orange: net_orange {
-			label = "orange:net";
+			label = "mr2600:orange:net";
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 		};
 
 		net_green {
-			label = "green:net";
+			label = "mr2600:green:net";
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "mr2600:green:usb";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&xhci_ehci_port1>, <&ehci_port2>;
 			linux,default-trigger = "usbport";

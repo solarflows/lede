@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7628an_tplink_8m.dtsi"
 
 / {
@@ -25,38 +27,30 @@
 		compatible = "gpio-leds";
 
 		lan {
-			label = "green:lan";
+			label = "tl-wr840n-v4:green:lan";
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
-			label = "green:power";
+			label = "tl-wr840n-v4:green:power";
 			gpios = <&gpio 36 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
-			label = "green:wan";
+			label = "tl-wr840n-v4:green:wan";
 			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "tl-wr840n-v4:green:wlan";
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "tl-wr840n-v4:green:wps";
 			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
 		};
 	};
-};
-
-&ehci {
-	status = "disabled";
-};
-
-&ohci {
-	status = "disabled";
 };
 
 &state_default {

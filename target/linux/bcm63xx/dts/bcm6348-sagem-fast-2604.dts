@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6348.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -29,20 +31,20 @@
 		compatible = "gpio-leds";
 
 		power_green {
-			label = "green:power";
+			label = "F@ST2604:green:power";
 			gpios = <&pinctrl 0 1>;
 			default-state = "on";
 		};
 		power_red {
-			label = "red:power";
+			label = "F@ST2604:red:power";
 			gpios = <&pinctrl 1 1>;
 		};
 		inet_red {
-			label = "red:inet";
+			label = "F@ST2604:red:inet";
 			gpios = <&pinctrl 4 1>;
 		};
 		wps_green {
-			label = "green:wps";
+			label = "F@ST2604:green:wps";
 			gpios = <&pinctrl 5 1>;
 		};
 	};

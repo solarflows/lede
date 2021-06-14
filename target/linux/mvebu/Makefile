@@ -10,11 +10,10 @@ FEATURES:=fpu usb pci pcie gpio nand squashfs ramdisk boot-part rootfs-part
 SUBTARGETS:=cortexa9 cortexa53 cortexa72
 
 KERNEL_PATCHVER:=5.4
-KERNEL_TESTING_PATCHVER:=5.10
+KERNEL_TESTING_PATCHVER:=5.4
 
 include $(INCLUDE_DIR)/target.mk
 
-DEFAULT_PACKAGES += uboot-envtools kmod-gpio-button-hotplug \
-	autocore-arm
+DEFAULT_PACKAGES += uboot-envtools kmod-gpio-button-hotplug
 
 $(eval $(call BuildTarget))

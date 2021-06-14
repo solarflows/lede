@@ -2,7 +2,7 @@
 
 &leds {
 	usb_green {
-		label = "green:usb";
+		label = "netgear:green:usb";
 		gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		trigger-sources = <&hub_port>;
 		linux,default-trigger = "usbport";

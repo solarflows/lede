@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6368.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -15,24 +17,24 @@
 		compatible = "gpio-leds";
 
 		dsl_green {
-			label = "green:adsl";
+			label = "96368MVNgr:green:adsl";
 			gpios = <&pinctrl 2 1>;
 		};
 		inet_fail_green {
-			label = "green:inet-fail";
+			label = "96368MVNgr:green:inet-fail";
 			gpios = <&pinctrl 3 0>;
 		};
 		inet_green {
-			label = "green:inet";
+			label = "96368MVNgr:green:inet";
 			gpios = <&pinctrl 5 0>;
 		};
 		power_green {
-			label = "green:power";
+			label = "96368MVNgr:green:power";
 			gpios = <&pinctrl 22 0>;
 			default-state = "on";
 		};
 		wps_green {
-			label = "green:wps";
+			label = "96368MVNgr:green:wps";
 			gpios = <&pinctrl 23 1>;
 		};
 	};

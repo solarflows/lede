@@ -1,3 +1,7 @@
+include ./common-netgear.mk	# for netgear-uImage
+
+DEVICE_VARS += RAS_ROOTFS_SIZE RAS_BOARD RAS_VERSION
+
 define Build/append-okli-kernel
 	dd if="$(KDIR)/loader-$(word 1,$(1)).uImage" >> "$@"
 endef
@@ -95,21 +99,6 @@ define Device/domywifi_dw33d
   DEVICE_MODEL := DW33D
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-storage kmod-usb-ledtrig-usbport \
 	kmod-ath10k-ct ath10k-firmware-qca988x-ct
-  KERNEL_SIZE := 5120k
-  IMAGE_SIZE := 98304k
-  BLOCKSIZE := 128k
-  PAGESIZE := 2048
-  UBINIZE_OPTS := -E 5
-  IMAGES += factory.bin
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
-  IMAGE/factory.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | \
-	check-size
-endef
-TARGET_DEVICES += domywifi_dw33d
-
-define Device/domywifi_dw33d-nor
-  $(Device/domywifi_dw33d)
-  DEVICE_VARIANT := NOR
   IMAGE_SIZE := 14464k
   BLOCKSIZE := 64k
   LOADER_TYPE := bin
@@ -118,13 +107,13 @@ define Device/domywifi_dw33d-nor
   COMPILE/loader-$(1).bin := loader-okli-compile
   COMPILE/loader-$(1).uImage := append-loader-okli $(1) | pad-to 64k | lzma | uImage lzma
   KERNEL := kernel-bin | append-dtb | lzma | uImage lzma -M 0x4f4b4c49
-  IMAGES := sysupgrade.bin breed-factory.bin
+  IMAGES += factory.bin
   IMAGE/sysupgrade.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | append-metadata | \
 	check-size
-  IMAGE/breed-factory.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | \
+  IMAGE/factory.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | \
 	prepad-okli-kernel $(1) | pad-to 14528k | append-okli-kernel $(1)
 endef
-TARGET_DEVICES += domywifi_dw33d-nor
+TARGET_DEVICES += domywifi_dw33d
 
 define Device/glinet_gl-ar300m-common-nand
   SOC := qca9531
@@ -208,10 +197,10 @@ define Device/netgear_ath79_nand
   PAGESIZE := 2048
   IMAGE_SIZE := 25600k
   KERNEL := kernel-bin | append-dtb | lzma -d20 | \
-	pad-offset $$(KERNEL_SIZE) 129 | uImage lzma | \
+	pad-offset $$(KERNEL_SIZE) 129 | netgear-uImage lzma | \
 	append-string -e '\xff' | \
-	append-uImage-fakehdr filesystem $$(UIMAGE_MAGIC)
-  KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma -d20 | uImage lzma
+	append-uImage-fakehdr filesystem $$(NETGEAR_KERNEL_MAGIC)
+  KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma -d20 | netgear-uImage lzma
   IMAGES := sysupgrade.bin factory.img
   IMAGE/factory.img := append-kernel | append-ubi | netgear-dni | \
 	check-size
@@ -224,7 +213,7 @@ define Device/netgear_wndr3700-v4
   SOC := ar9344
   DEVICE_MODEL := WNDR3700
   DEVICE_VARIANT := v4
-  UIMAGE_MAGIC := 0x33373033
+  NETGEAR_KERNEL_MAGIC := 0x33373033
   NETGEAR_BOARD_ID := WNDR3700v4
   NETGEAR_HW_ID := 29763948+128+128
   $(Device/netgear_ath79_nand)
@@ -234,7 +223,7 @@ TARGET_DEVICES += netgear_wndr3700-v4
 define Device/netgear_wndr4300
   SOC := ar9344
   DEVICE_MODEL := WNDR4300
-  UIMAGE_MAGIC := 0x33373033
+  NETGEAR_KERNEL_MAGIC := 0x33373033
   NETGEAR_BOARD_ID := WNDR4300
   NETGEAR_HW_ID := 29763948+0+128+128+2x2+3x3
   $(Device/netgear_ath79_nand)
@@ -244,7 +233,7 @@ TARGET_DEVICES += netgear_wndr4300
 define Device/netgear_wndr4300sw
   SOC := ar9344
   DEVICE_MODEL := WNDR4300SW
-  UIMAGE_MAGIC := 0x33373033
+  NETGEAR_KERNEL_MAGIC := 0x33373033
   NETGEAR_BOARD_ID := WNDR4300SW
   NETGEAR_HW_ID := 29763948+0+128+128+2x2+3x3
   $(Device/netgear_ath79_nand)
@@ -254,7 +243,7 @@ TARGET_DEVICES += netgear_wndr4300sw
 define Device/netgear_wndr4300tn
   SOC := ar9344
   DEVICE_MODEL := WNDR4300TN
-  UIMAGE_MAGIC := 0x33373033
+  NETGEAR_KERNEL_MAGIC := 0x33373033
   NETGEAR_BOARD_ID := WNDR4300TN
   NETGEAR_HW_ID := 29763948+0+128+128+2x2+3x3
   $(Device/netgear_ath79_nand)
@@ -265,7 +254,7 @@ define Device/netgear_wndr4300-v2
   SOC := qca9563
   DEVICE_MODEL := WNDR4300
   DEVICE_VARIANT := v2
-  UIMAGE_MAGIC := 0x27051956
+  NETGEAR_KERNEL_MAGIC := 0x27051956
   NETGEAR_BOARD_ID := WNDR4500series
   NETGEAR_HW_ID := 29764821+2+128+128+3x3+3x3+5508012175
   $(Device/netgear_ath79_nand)
@@ -276,7 +265,7 @@ define Device/netgear_wndr4500-v3
   SOC := qca9563
   DEVICE_MODEL := WNDR4500
   DEVICE_VARIANT := v3
-  UIMAGE_MAGIC := 0x27051956
+  NETGEAR_KERNEL_MAGIC := 0x27051956
   NETGEAR_BOARD_ID := WNDR4500series
   NETGEAR_HW_ID := 29764821+2+128+128+3x3+3x3+5508012173
   $(Device/netgear_ath79_nand)
@@ -305,6 +294,5 @@ define Device/zyxel_nbg6716
   IMAGE/factory.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | \
 	zyxel-factory
   UBINIZE_OPTS := -E 5
-  DEFAULT := n
 endef
 TARGET_DEVICES += zyxel_nbg6716

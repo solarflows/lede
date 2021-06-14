@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,22 +20,22 @@
 		compatible = "gpio-leds";
 
 		status {
-			label = "blue:status";
+			label = "f7c027:blue:status";
 			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
 		};
 
 		power {
-			label = "blue:power";
+			label = "f7c027:blue:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		led_status_orange: orange {
-			label = "orange:status";
+			label = "f7c027:orange:status";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 		};
 
 		relay {
-			label = "device:relay";
+			label = "f7c027:device:relay";
 			gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
 		};
 	};

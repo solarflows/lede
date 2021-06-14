@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620n.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -28,12 +30,12 @@
 		compatible = "gpio-leds";
 
 		led_wifi: wifi {
-			label = "blue:wifi";
+			label = "u35wf:blue:wifi";
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
-			label = "green:eth";
+			label = "u35wf:green:eth";
 			gpios = <&gpio2 4 GPIO_ACTIVE_LOW>;
 		};
 	};

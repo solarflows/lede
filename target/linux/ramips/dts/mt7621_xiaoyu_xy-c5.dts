@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -15,16 +17,20 @@
 		label-mac-device = &ethernet;
 	};
 
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
 		work {
-			label = "green:work";
+			label = "xy-c5:green:work";
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_sys: sys {
-			label = "green:sys";
+			label = "xy-c5:green:sys";
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 		};
 	};

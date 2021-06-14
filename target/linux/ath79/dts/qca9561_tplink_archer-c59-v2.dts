@@ -9,7 +9,7 @@
 
 &leds {
 	usb	{
-		label =	"green:usb";
+		label =	"tp-link:green:usb";
 		gpios =	<&led_gpio 7 GPIO_ACTIVE_LOW>;
 		linux,default-trigger =	"usbport";
 		trigger-sources	= <&hub_port>;
@@ -33,6 +33,7 @@
 
 &spi {
 	status = "okay";
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";

@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6328.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -22,28 +24,28 @@
 		compatible = "gpio-leds";
 
 		inet_fail {
-			label = "internet-fail";
+			label = "96328avng::internet-fail";
 			gpios = <&pinctrl 2 1>;
 		};
 		dsl {
-			label = "dsl";
+			label = "96328avng::dsl";
 			gpios = <&pinctrl 3 1>;
 		};
 		led_power: power {
-			label = "power";
+			label = "96328avng::power";
 			gpios = <&pinctrl 4 1>;
 			default-state = "on";
 		};
 		power_fail {
-			label = "power-fail";
+			label = "96328avng::power-fail";
 			gpios = <&pinctrl 8 1>;
 		};
 		wps {
-			label = "wps";
+			label = "96328avng::wps";
 			gpios = <&pinctrl 9 1>;
 		};
 		inet {
-			label = "internet";
+			label = "96328avng::internet";
 			gpios = <&pinctrl 11 1>;
 		};
 	};

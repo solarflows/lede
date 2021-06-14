@@ -1,11 +1,12 @@
 ARCH:=mips
 SUBTARGET:=falcon
 BOARDNAME:=Falcon
-FEATURES+=nand source-only
+FEATURES:=squashfs nand
 CPU_TYPE:=24kc
 
 DEFAULT_PACKAGES+= kmod-leds-gpio \
-	kmod-gpio-button-hotplug
+	kmod-gpio-button-hotplug \
+	kmod-ledtrig-heartbeat
 
 define Target/Description
 	Lantiq Falcon

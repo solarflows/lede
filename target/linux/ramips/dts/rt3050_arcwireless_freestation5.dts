@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -70,17 +72,17 @@
 		 * not present in the Freestation5 device.
 		 */
 		wifi {
-			label = "unknown:wifi";
+			label = "freestation5:unknown:wifi";
 			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
 		};
 
 		powerg {
-			label = "unknown:powerg";
+			label = "freestation5:unknown:powerg";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "unknown:usb";
+			label = "freestation5:unknown:usb";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 	};

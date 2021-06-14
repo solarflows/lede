@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -28,12 +30,12 @@
 		compatible = "gpio-leds";
 
 		led_wifi: wifi {
-			label = "red:wifi";
+			label = "u25awf:red:wifi";
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
-			label = "green:lan";
+			label = "u25awf:green:lan";
 			gpios = <&gpio2 4 GPIO_ACTIVE_LOW>;
 		};
 	};

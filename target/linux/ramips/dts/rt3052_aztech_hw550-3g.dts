@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -55,24 +57,24 @@
 		compatible = "gpio-leds";
 
 		usb {
-			label = "green:usb";
+			label = "hw550-3g:green:usb";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&otg_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		3g {
-			label = "green:3g";
+			label = "hw550-3g:green:3g";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 		};
 
 		led_status: status {
-			label = "green:status";
+			label = "hw550-3g:green:status";
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "hw550-3g:green:wps";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 	};

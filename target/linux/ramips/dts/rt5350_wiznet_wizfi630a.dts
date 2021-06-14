@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -22,22 +24,22 @@
 		compatible = "gpio-leds";
 
 		led_run: run {
-			label = ":run";
+			label = "wizfi630a::run";
 			gpios = <&gpio0 1 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = ":wps";
+			label = "wizfi630a::wps";
 			gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
 		};
 
 		uart1 {
-			label = ":uart1";
+			label = "wizfi630a::uart1";
 			gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
 		};
 
 		uart2 {
-			label = ":uart2";
+			label = "wizfi630a::uart2";
 			gpios = <&gpio0 21 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -70,6 +72,10 @@
 			linux,code = <BTN_1>;
 		};
 	};
+};
+
+&gpio1 {
+	status = "okay";
 };
 
 &spi0 {
@@ -139,4 +145,12 @@
 
 &wmac {
 	ralink,mtd-eeprom = <&factory 0x0>;
+};
+
+&ehci {
+	status = "okay";
+};
+
+&ohci {
+	status = "okay";
 };

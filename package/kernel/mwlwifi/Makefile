@@ -34,8 +34,7 @@ define KernelPackage/mwlwifi
   AUTOLOAD:=$(call AutoLoad,50,mwlwifi)
 endef
 
-NOSTDINC_FLAGS := \
-	$(KERNEL_NOSTDINC_FLAGS) \
+NOSTDINC_FLAGS = \
 	-I$(PKG_BUILD_DIR) \
 	-I$(STAGING_DIR)/usr/include/mac80211-backport/uapi \
 	-I$(STAGING_DIR)/usr/include/mac80211-backport \

@@ -20,22 +20,22 @@
 		compatible = "gpio-leds";
 
 		power {
-			label = "blue:power";
+			label = "om5pac:blue:power";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi_green {
-			label = "green:wifi";
+			label = "om5pac:green:wifi";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi_yellow {
-			label = "yellow:wifi";
+			label = "om5pac:yellow:wifi";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi_red {
-			label = "red:wifi";
+			label = "om5pac:red:wifi";
 			gpios = <&gpio 23 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -81,12 +81,17 @@
 	status = "okay";
 };
 
+&uart {
+	status = "okay";
+};
+
 &pll {
 	clocks = <&extosc>;
 };
 
 &spi {
 	status = "okay";
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -148,6 +153,7 @@
 	pll-data = <0x82000101 0x80000101 0x80001313>;
 
 	phy-handle = <&phy4>;
+	phy-mode = "rgmii";
 };
 
 &eth1 {
@@ -156,4 +162,5 @@
 	pll-data = <0x03000101 0x80000101 0x80001313>;
 
 	phy-handle = <&phy1>;
+	phy-mode = "sgmii";
 };

@@ -22,9 +22,7 @@
 	partition@50000 {
 		label = "firmware";
 		reg = <0x50000 0xfa0000>;
-		compatible = "openwrt,uimage", "denx,uimage";
-		openwrt,ih-magic = <0x32323030>;
-		openwrt,ih-type = <IH_TYPE_FILESYSTEM>;
+		compatible = "netgear,uimage";
 	};
 
 	art: partition@ff0000 {

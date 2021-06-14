@@ -20,19 +20,19 @@
 		compatible = "gpio-leds";
 
 		led_system: system {
-			label = "green:system";
+			label = "librerouter-v1:green:system";
 			gpios = <&gpio 23 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 		};
 
 		wifi_green {
-			label = "green:wlan2g";
+			label = "librerouter-v1:green:wlan2g";
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		status_blue {
-			label = "blue:status";
+			label = "librerouter-v1:blue:status";
 			gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -75,6 +75,10 @@
 	};
 };
 
+&uart {
+	status = "okay";
+};
+
 &usb_phy0 {
 	status = "okay";
 };
@@ -97,6 +101,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -175,6 +181,7 @@
 &eth1 {
 	status = "okay";
 
+	phy-mode = "sgmii";
 	pll-data = <0x03000101 0x00000101 0x00001616>;
 	mtd-mac-address = <&art 0x6>;
 

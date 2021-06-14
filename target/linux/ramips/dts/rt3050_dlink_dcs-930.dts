@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -55,17 +57,17 @@
 		compatible = "gpio-leds";
 
 		wifi {
-			label = "red:alert";
+			label = "dcs-930:red:alert";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_status: status {
-			label = "green:status";
+			label = "dcs-930:green:status";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "blue:wps";
+			label = "dcs-930:blue:wps";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 	};

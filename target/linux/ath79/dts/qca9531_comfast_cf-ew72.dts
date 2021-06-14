@@ -23,17 +23,17 @@
 		pinctrl-0 = <&jtag_disable_pins>;
 
 		lan {
-			label = "blue:lan";
+			label = "cf-ew72:blue:lan";
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		led_wan: wan {
-			label = "blue:wan";
+			label = "cf-ew72:blue:wan";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "blue:wlan";
+			label = "cf-ew72:blue:wlan";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -66,6 +66,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "winbond,w25q128", "jedec,spi-nor";
@@ -102,6 +104,10 @@
 			};
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &eth0 {

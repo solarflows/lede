@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6368.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -50,29 +52,29 @@
 		compatible = "gpio-leds";
 
 		dsl_green {
-			label = "green:dsl";
+			label = "HW65x:green:dsl";
 			gpios = <&pinctrl 2 1>;
 		};
 		internet_green {
-			label = "green:internet";
+			label = "HW65x:green:internet";
 			gpios = <&pinctrl 5 1>;
 		};
 
 		usb_green {
-			label = "green:usb";
+			label = "HW65x:green:usb";
 			gpios = <&pinctrl 14 1>;
 		};
 		led_power_green: power_green {
-			label = "green:power";
+			label = "HW65x:green:power";
 			gpios = <&pinctrl 22 1>;
 			default-state = "on";
 		};
 		voip_green {
-			label = "green:voip";
+			label = "HW65x:green:voip";
 			gpios = <&pinctrl 25 1>;
 		};
 		wps_green {
-			label = "green:wps";
+			label = "HW65x:green:wps";
 			gpios = <&pinctrl 27 1>;
 		};
 	};

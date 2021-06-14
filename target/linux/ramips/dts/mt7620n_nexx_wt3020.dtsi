@@ -28,10 +28,14 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "blue:power";
+			label = "wt3020:blue:power";
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 		};
 	};
+};
+
+&gpio2 {
+	status = "okay";
 };
 
 &gpio3 {

@@ -23,7 +23,7 @@
 		compatible = "gpio-leds";
 
 		led_diag: diag {
-			label = "red:diag";
+			label = "buffalo:red:diag";
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -32,41 +32,41 @@
 		compatible = "gpio-leds";
 
 		band2g_a {
-			label = "amber:band2g";
+			label = "buffalo:amber:band2g";
 			gpios = <&ath9k0 1 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "buffalo:green:usb";
 			gpios = <&ath9k0 3 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&usb_ohci_port>, <&usb_ehci_port>;
 			linux,default-trigger = "usbport";
 		};
 
 		band2g_g {
-			label = "green:band2g";
+			label = "buffalo:green:band2g";
 			gpios = <&ath9k0 5 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		band5g_g {
-			label = "green:band5g";
+			label = "buffalo:green:band5g";
 			gpios = <&ath9k1 1 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
 
 		router {
-			label = "green:router";
+			label = "buffalo:green:router";
 			gpios = <&ath9k1 3 GPIO_ACTIVE_LOW>;
 		};
 
 		movie_engine {
-			label = "blue:movie_engine";
+			label = "buffalo:blue:movie_engine";
 			gpios = <&ath9k1 4 GPIO_ACTIVE_LOW>;
 		};
 
 		band5g_a {
-			label = "amber:band5g";
+			label = "buffalo:amber:band5g";
 			gpios = <&ath9k1 5 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -212,6 +212,10 @@
 	};
 };
 
+&uart {
+	status = "okay";
+};
+
 &pll {
 	clocks = <&extosc>;
 };
@@ -219,6 +223,8 @@
 &spi {
 	status = "okay";
 
+	num-cs = <2>;
+	cs-gpios = <0>, <0>;
 
 	flash0: flash@0 {
 		compatible = "jedec,spi-nor";

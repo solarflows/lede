@@ -23,17 +23,17 @@
 		pinctrl-0 = <&jtag_disable_pins &pinmux_led_rssihigh &pinmux_led_rssilow>;
 
 		led_lan: lan {
-			label = "blue:lan";
+			label = "cf-wr752ac-v1:blue:lan";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 
 		rssihigh {
-			label = "green:rssihigh";
+			label = "cf-wr752ac-v1:green:rssihigh";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
 		rssilow {
-			label = "red:rssilow";
+			label = "cf-wr752ac-v1:red:rssilow";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -66,6 +66,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -102,6 +104,10 @@
 			};
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &eth0 {

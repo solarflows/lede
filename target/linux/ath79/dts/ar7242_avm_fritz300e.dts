@@ -32,18 +32,18 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "fritz300e:green:power";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		lan {
-			label = "green:lan";
+			label = "fritz300e:green:lan";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "fritz300e:green:wlan";
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -53,27 +53,27 @@
 		compatible = "gpio-leds";
 
 		rssi0 {
-			label = "green:rssi0";
+			label = "fritz300e:green:rssi0";
 			gpios = <&ath9k 10 GPIO_ACTIVE_LOW>;
 		};
 
 		rssi1 {
-			label = "green:rssi1";
+			label = "fritz300e:green:rssi1";
 			gpios = <&ath9k 4 GPIO_ACTIVE_LOW>;
 		};
 
 		rssi2 {
-			label = "green:rssi2";
+			label = "fritz300e:green:rssi2";
 			gpios = <&ath9k 6 GPIO_ACTIVE_LOW>;
 		};
 
 		rssi3 {
-			label = "green:rssi3";
+			label = "fritz300e:green:rssi3";
 			gpios = <&ath9k 7 GPIO_ACTIVE_LOW>;
 		};
 
 		rssi4 {
-			label = "green:rssi4";
+			label = "fritz300e:green:rssi4";
 			gpios = <&ath9k 5 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -95,6 +95,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -131,6 +133,10 @@
 			};
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &pcie {

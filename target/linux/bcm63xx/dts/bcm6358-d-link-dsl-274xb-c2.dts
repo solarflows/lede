@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6358.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -36,24 +38,24 @@
 		compatible = "gpio-leds";
 
 		inet_green {
-			label = "green:internet";
+			label = "dsl-274xb:green:internet";
 			gpios = <&pinctrl 2 0>;
 		};
 		power_red {
-			label = "red:power";
+			label = "dsl-274xb:red:power";
 			gpios = <&pinctrl 4 1>;
 		};
 		led_power_green: power_green {
-			label = "green:power";
+			label = "dsl-274xb:green:power";
 			gpios = <&pinctrl 5 1>;
 			default-state = "on";
 		};
 		dsl_green {
-			label = "green:adsl";
+			label = "dsl-274xb:green:adsl";
 			gpios = <&pinctrl 9 1>;
 		};
 		inet_red {
-			label = "red:internet";
+			label = "dsl-274xb:red:internet";
 			gpios = <&pinctrl 10 0>;
 		};
 	};

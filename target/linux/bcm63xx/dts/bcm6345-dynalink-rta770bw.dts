@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6345.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -36,22 +38,22 @@
 		compatible = "gpio-leds";
 
 		usb {
-			label = "green:usb";
+			label = "RTA770BW:green:usb";
 			gpios = <&gpio0 7 1>;
 		};
 
 		adsl {
-			label = "green:adsl";
+			label = "RTA770BW:green:adsl";
 			gpios = <&gpio0 8 0>;
 		};
 
 		led_diag: diag {
-			label = "green:diag";
+			label = "RTA770BW:green:diag";
 			gpios = <&gpio0 10 1>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "RTA770BW:green:wlan";
 			gpios = <&gpio0 11 1>;
 		};
 	};

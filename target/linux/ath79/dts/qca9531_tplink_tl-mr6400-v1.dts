@@ -22,38 +22,38 @@
 
 		/* D12 */
 		wan {
-			label = "white:wan";
+			label = "tp-link:white:wan";
 			gpios = <&gpio 0 GPIO_ACTIVE_HIGH>;
 		};
 
 		/* D11 */
 		4g {
-			label = "white:4g";
+			label = "tp-link:white:4g";
 			gpios = <&gpio 1 GPIO_ACTIVE_HIGH>;
 		};
 
 		/* D5 */
 		wps {
-			label = "white:wps";
+			label = "tp-link:white:wps";
 			gpios = <&gpio 3 GPIO_ACTIVE_HIGH>;
 		};
 
 		/* D3 */
 		wlan {
-			label = "white:wlan";
+			label = "tp-link:white:wlan";
 			gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		/* D2 */
 		led_power: power {
-			label = "white:power";
+			label = "tp-link:white:power";
 			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
 		};
 
 		/* D4 */
 		lan {
-			label = "white:lan";
+			label = "tp-link:white:lan";
 			gpios = <&gpio 16 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -89,8 +89,14 @@
 	};
 };
 
+&uart {
+	status = "okay";
+};
+
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";

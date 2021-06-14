@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+/dts-v1/;
 
 #include "mt7628an.dtsi"
 
@@ -13,7 +14,7 @@
 		compatible = "gpio-leds";
 
 		wifi {
-			label = "blue:wifi";
+			label = "rak633:blue:wifi";
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 	};

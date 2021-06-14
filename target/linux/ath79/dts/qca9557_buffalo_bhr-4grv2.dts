@@ -20,23 +20,23 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "bhr-4grv2:green:power";
 			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		diag {
-			label = "orange:diag";
+			label = "bhr-4grv2:orange:diag";
 			gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
 		};
 
 		vpn_orange {
-			label = "orange:vpn";
+			label = "bhr-4grv2:orange:vpn";
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 		};
 
 		vpn_green {
-			label = "green:vpn";
+			label = "bhr-4grv2:green:vpn";
 			gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -63,6 +63,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -133,4 +135,8 @@
 		speed = <1000>;
 		full-duplex;
 	};
+};
+
+&uart {
+	status = "okay";
 };

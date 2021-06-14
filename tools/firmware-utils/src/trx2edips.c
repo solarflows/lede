@@ -140,10 +140,6 @@ int main(int argc, char *argv[])
 	rewind(fpIn);
 	/* read the whole file*/
 	res = fread(buf, 1, length, fpIn);
-	if (res != length) {
-		fprintf(stderr, "Unable to fread from input file\n");
-		return EXIT_FAILURE;
-	}
 
 	p = (struct trx_header *)buf;
 	if (LOAD32_LE(p->magic) != TRX_MAGIC) {

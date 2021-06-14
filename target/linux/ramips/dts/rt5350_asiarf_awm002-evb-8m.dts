@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350_asiarf_awm002-evb.dtsi"
 
 / {

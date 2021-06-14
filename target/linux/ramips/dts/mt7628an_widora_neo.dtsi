@@ -21,7 +21,7 @@
 		compatible = "gpio-leds";
 
 		led_wifi: wifi {
-			label = "orange:wifi";
+			label = "widora:orange:wifi";
 			gpios = <&wgpio 0 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 		};

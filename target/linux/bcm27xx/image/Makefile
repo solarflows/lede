@@ -1,8 +1,10 @@
-# SPDX-License-Identifier: GPL-2.0-only
 #
 # Copyright (C) 2012-2019 OpenWrt.org
 # Copyright (C) 2016-2017 LEDE project
-
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
@@ -77,7 +79,7 @@ define Device/rpi
   DEVICE_PACKAGES := \
 	cypress-firmware-43430-sdio \
 	cypress-nvram-43430-sdio-rpi-zero-w \
-	kmod-brcmfmac wpad-basic
+	kmod-brcmfmac wpad-basic-wolfssl
 endef
 ifeq ($(SUBTARGET),bcm2708)
   TARGET_DEVICES += rpi
@@ -108,7 +110,7 @@ define Device/rpi-2
 	cypress-nvram-43430-sdio-rpi-3b \
 	cypress-firmware-43455-sdio \
 	cypress-nvram-43455-sdio-rpi-3b-plus cypress-nvram-43455-sdio-rpi-4b \
-	kmod-brcmfmac wpad-basic
+	kmod-brcmfmac wpad-basic-wolfssl
   IMAGE/sysupgrade.img.gz := boot-common | boot-2708 | boot-2711 | sdcard-img | gzip | append-metadata
   IMAGE/factory.img.gz := boot-common | boot-2708 | boot-2711 | sdcard-img | gzip
 endef
@@ -137,7 +139,7 @@ define Device/rpi-3
 	cypress-nvram-43430-sdio-rpi-3b \
 	cypress-firmware-43455-sdio \
 	cypress-nvram-43455-sdio-rpi-3b-plus \
-	kmod-brcmfmac wpad-basic
+	kmod-brcmfmac wpad-basic-wolfssl
 endef
 ifeq ($(SUBTARGET),bcm2710)
   TARGET_DEVICES += rpi-3
@@ -158,7 +160,7 @@ define Device/rpi-4
   DEVICE_PACKAGES := \
 	cypress-firmware-43455-sdio \
 	cypress-nvram-43455-sdio-rpi-4b \
-	kmod-brcmfmac wpad-basic
+	kmod-brcmfmac wpad-basic-wolfssl
   IMAGE/sysupgrade.img.gz := boot-common | boot-2711 | sdcard-img | gzip | append-metadata
   IMAGE/factory.img.gz := boot-common | boot-2711 | sdcard-img | gzip
 endef

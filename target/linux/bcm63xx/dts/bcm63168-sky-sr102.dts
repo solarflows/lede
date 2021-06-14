@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm63268.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -36,64 +38,64 @@
 		compatible = "gpio-leds";
 
 		lan1_green {
-			label = "green:lan1";
+			label = "SR102:green:lan1";
 			gpios = <&pinctrl 1 1>;
 		};
 		power_red {
-			label = "red:power";
+			label = "SR102:red:power";
 			gpios = <&pinctrl 2 1>;
 		};
 		wifi_red {
-			label = "red:wifi";
+			label = "SR102:red:wifi";
 			gpios = <&pinctrl 3 1>;
 		};
 		inet_red {
-			label = "red:inet";
+			label = "SR102:red:inet";
 			gpios = <&pinctrl 4 1>;
 		};
 		inet_white {
-			label = "white:inet";
+			label = "SR102:white:inet";
 			gpios = <&pinctrl 5 0>;
 		};
 		led_power_white: power_white {
-			label = "white:power";
+			label = "SR102:white:power";
 			gpios = <&pinctrl 6 0>;
 			default-state = "on";
 		};
 		wifi_white {
-			label = "white:wifi";
+			label = "SR102:white:wifi";
 			gpios = <&pinctrl 8 0>;
 		};
 		lan2_red {
-			label = "red:lan2";
+			label = "SR102:red:lan2";
 			gpios = <&pinctrl 9 1>;
 		};
 		lan3_red {
-			label = "red:lan3";
+			label = "SR102:red:lan3";
 			gpios = <&pinctrl 10 1>;
 		};
 		lan4_red {
-			label = "red:lan4";
+			label = "SR102:red:lan4";
 			gpios = <&pinctrl 11 1>;
 		};
 		lan1_red {
-			label = "red:lan1";
+			label = "SR102:red:lan1";
 			gpios = <&pinctrl 12 1>;
 		};
 		lan2_green {
-			label = "green:lan2";
+			label = "SR102:green:lan2";
 			gpios = <&pinctrl 13 0>;
 		};
 		lan3_green {
-			label = "green:lan3";
+			label = "SR102:green:lan3";
 			gpios = <&pinctrl 14 1>;
 		};
 		lan4_green {
-			label = "green:lan4";
+			label = "SR102:green:lan4";
 			gpios = <&pinctrl 15 1>;
 		};
 		hd_white {
-			label = "white:hd";
+			label = "SR102:white:hd";
 			gpios = <&pinctrl 18 0>;
 		};
 	};

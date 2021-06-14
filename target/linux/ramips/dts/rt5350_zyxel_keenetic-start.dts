@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+/dts-v1/;
 
 #include "rt5350.dtsi"
 
@@ -21,12 +22,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "zyxel:green:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		internet {
-			label = "green:internet";
+			label = "zyxel:green:internet";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 	};

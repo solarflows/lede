@@ -11,6 +11,7 @@
 		led-failsafe = &led_user;
 		led-upgrade = &led_user;
 		led-running = &led_user;
+		serial0 = &uart;
 	};
 
 	leds {
@@ -19,39 +20,39 @@
 		pinctrl-0 = <&led_wan_pin>;
 
 		power {
-			label = "blue:power";
+			label = "mikrotik:blue:power";
 			gpios = <&gpio 17 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 		};
 
 		led_user: user {
-			label = "green:user";
+			label = "mikrotik:green:user";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
-			label = "green:lan";
+			label = "mikrotik:green:lan";
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "mikrotik:green:wlan";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		rssilow {
-			label = "green:rssilow";
+			label = "mikrotik:green:rssilow";
 			gpios = <&gpio 9 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimediumlow {
-			label = "green:rssimediumlow";
+			label = "mikrotik:green:rssimediumlow";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimediumhigh {
-			label = "green:rssimediumhigh";
+			label = "mikrotik:green:rssimediumhigh";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
@@ -59,7 +60,7 @@
 		unregistered here to avoid conflict.
 
 		rssihigh {
-			label = "green:rssihigh";
+			label = "mikrotik:green:rssihigh";
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 		};
 		*/

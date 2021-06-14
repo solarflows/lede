@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,7 +20,7 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "x8:green:power";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -94,4 +96,12 @@
 &wmac {
 	ralink,mtd-eeprom = <&factory 0x0>;
 	ralink,led-polarity = <1>;
+};
+
+&ehci {
+	status = "okay";
+};
+
+&ohci {
+	status = "okay";
 };

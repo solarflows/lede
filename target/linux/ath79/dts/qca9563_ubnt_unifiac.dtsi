@@ -17,12 +17,12 @@
 		compatible = "gpio-leds";
 
 		led_white: led_white {
-			label = "white:dome";
+			label = "ubnt:white:dome";
 			gpios = <&gpio 7 GPIO_ACTIVE_HIGH>;
 		};
 
 		led_blue: led_blue {
-			label = "blue:dome";
+			label = "ubnt:blue:dome";
 			gpios = <&gpio 8 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -39,12 +39,17 @@
 	};
 };
 
+&uart {
+	status = "okay";
+};
+
 &pcie {
 	status = "okay";
 };
 
 &spi {
 	status = "okay";
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -75,7 +80,7 @@
 			};
 
 			partition@800000 {
-				label = "kernel1";
+				label = "ubnt-airos";
 				reg = <0x800000 0x790000>;
 				read-only;
 			};

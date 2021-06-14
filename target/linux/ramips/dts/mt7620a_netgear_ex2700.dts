@@ -1,7 +1,14 @@
-// SPDX-License-Identifier: GPL-2.0-only
 /*
+ * Device Tree file for the Netgear EX2700
+ *
  * Copyright (C) 2016 Joseph C. Lehner <joseph.c.lehner@gmail.com>
+ *
+ * This file is licensed under the terms of the GNU General Public
+ * License version 2.  This program is licensed "as is" without any
+ * warranty of any kind, whether express or implied.
  */
+
+/dts-v1/;
 
 #include "mt7620a_netgear_ex2700_wn3000rp-v3.dtsi"
 
@@ -20,38 +27,38 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power_g {
-			label = "green:power";
+			label = "ex2700:green:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		power_r {
-			label = "red:power";
+			label = "ex2700:red:power";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 		};
 
 		device_g {
-			label = "green:device";
+			label = "ex2700:green:device";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 
 		device_r {
-			label = "red:device";
+			label = "ex2700:red:device";
 			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
 		};
 
 		router_g {
-			label = "green:router";
+			label = "ex2700:green:router";
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 
 		router_r {
-			label = "red:router";
+			label = "ex2700:red:router";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "ex2700:green:wps";
 			gpios = <&gpio1 15 GPIO_ACTIVE_LOW>;
 		};
 	};

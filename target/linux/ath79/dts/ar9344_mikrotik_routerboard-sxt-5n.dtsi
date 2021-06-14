@@ -14,44 +14,45 @@
 		led-failsafe = &led_user;
 		led-running = &led_user;
 		led-upgrade = &led_user;
+		serial0 = &uart;
 	};
 
 	leds {
 		compatible = "gpio-leds";
 
 		power {
-			label = "green:power";
+			label = "mikrotik:green:power";
 			gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 		};
 
 		rssilow {
-			label = "green:rssilow";
+			label = "mikrotik:green:rssilow";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimediumlow {
-			label = "green:rssimediumlow";
+			label = "mikrotik:green:rssimediumlow";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimedium {
-			label = "green:rssimedium";
+			label = "mikrotik:green:rssimedium";
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimediumhigh {
-			label = "green:rssimediumhigh";
+			label = "mikrotik:green:rssimediumhigh";
 			gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
 		};
 
 		rssihigh {
-			label = "green:rssihigh";
+			label = "mikrotik:green:rssihigh";
 			gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
 		};
 
 		led_user: user {
-			label = "green:user";
+			label = "mikrotik:green:user";
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -85,6 +86,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -160,6 +163,10 @@
 			reg = <0x0400000 0x7c00000>;
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &eth0 {

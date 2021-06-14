@@ -42,14 +42,14 @@
 		compatible = "gpio-export";
 
 		usb_power {
-			label = "power:usb";
+			label = "d-link:power:usb";
 			gpio-export,name = "d-link:power:usb";
 			gpio-export,output = <0>;
 			gpios = <&gpio_ext 3 GPIO_ACTIVE_LOW>;
 		};
 
 		zwave_power {
-			label = "power:zwave";
+			label = "d-link:power:zwave";
 			gpio-export,name = "d-link:power:zwave";
 			gpio-export,output = <0>;
 			gpios = <&gpio_ext 1 GPIO_ACTIVE_LOW>;
@@ -76,12 +76,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "d-link:green:power";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		status {
-			label = "red:status";
+			label = "d-link:red:status";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -89,6 +89,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -143,6 +145,10 @@
 			};
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &usb0 {

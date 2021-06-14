@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,7 +20,7 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "mzk-dp150n:green:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -33,6 +35,10 @@
 			linux,code = <KEY_RESTART>;
 		};
 	};
+};
+
+&gpio1 {
+	status = "okay";
 };
 
 &spi0 {

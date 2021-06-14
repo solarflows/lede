@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+/dts-v1/;
 
 #include "mt7620a_tplink_re2x0-v1.dtsi"
 
@@ -17,32 +18,32 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "re200-v1:green:power";
 			gpios = <&gpio1 0 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
-			label = "green:lan";
+			label = "re200-v1:green:lan";
 			gpios = <&gpio2 0 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "re200-v1:green:wlan";
 			gpios = <&gpio1 3 GPIO_ACTIVE_LOW>;
 		};
 
 		qss {
-			label = "green:qss";
+			label = "re200-v1:green:qss";
 			gpios = <&gpio1 15 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan2g_red {
-			label = "red:wlan2g";
+			label = "re200-v1:red:wlan2g";
 			gpios = <&gpio0 2 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan2g_green {
-			label = "green:wlan2g";
+			label = "re200-v1:green:wlan2g";
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};

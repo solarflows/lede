@@ -23,32 +23,32 @@
 		pinctrl-0 = <&jtag_disable_pins &led_rssilow_pin &led_rssimediumhigh_pin &led_rssihigh_pin>;
 
 		wan {
-			label = "green:wan";
+			label = "cf-e110n-v2:green:wan";
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
-			label = "green:lan";
+			label = "cf-e110n-v2:green:lan";
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		rssilow {
-			label = "red:rssilow";
+			label = "cf-e110n-v2:red:rssilow";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimediumlow {
-			label = "red:rssimediumlow";
+			label = "cf-e110n-v2:red:rssimediumlow";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimediumhigh {
-			label = "green:rssimediumhigh";
+			label = "cf-e110n-v2:green:rssimediumhigh";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		led_rssihigh: rssihigh {
-			label = "green:rssihigh";
+			label = "cf-e110n-v2:green:rssihigh";
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -57,7 +57,7 @@
 		compatible = "gpio-leds";
 
 		wlan {
-			label = "green:wlan";
+			label = "cf-e110n-v2:green:wlan";
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -91,6 +91,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "winbond,w25q128", "jedec,spi-nor";
@@ -127,6 +129,10 @@
 			};
 		};
 	};
+};
+
+&uart {
+	status = "okay";
 };
 
 &eth0 {

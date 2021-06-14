@@ -20,22 +20,22 @@
 		compatible = "gpio-leds";
 
 		power_orange {
-			label = "orange:power";
+			label = "trendnet:orange:power";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "trendnet:green:power";
 			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 		};
 
 		planet_green {
-			label = "green:planet";
+			label = "trendnet:green:planet";
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 		};
 
 		planet_orange {
-			label = "orange:planet";
+			label = "trendnet:orange:planet";
 			gpios = <&gpio 23 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -64,6 +64,10 @@
 };
 
 &pcie1 {
+	status = "okay";
+};
+
+&uart {
 	status = "okay";
 };
 
@@ -99,6 +103,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";

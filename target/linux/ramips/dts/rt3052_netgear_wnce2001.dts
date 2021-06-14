@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -22,22 +24,22 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power-green {
-			label = "green:power";
+			label = "wnce2001:green:power";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
 		power-red {
-			label = "red:power";
+			label = "wnce2001:red:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan-green {
-			label = "green:wlan";
+			label = "wnce2001:green:wlan";
 			gpios = <&gpio0 12 GPIO_ACTIVE_HIGH>;
 		};
 
 		wlan-red {
-			label = "red:wlan";
+			label = "wnce2001:red:wlan";
 			gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
 		};
 	};

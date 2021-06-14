@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6318.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -36,22 +38,22 @@
 		compatible = "gpio-leds";
 
 		inet {
-			label = "green:inet";
+			label = "96318REF_P300:green:inet";
 			gpios = <&pinctrl 8 1>;
 		};
 
 		inet_fail {
-			label = "red:inet-fail";
+			label = "96318REF_P300:red:inet-fail";
 			gpios = <&pinctrl 9 1>;
 		};
 
 		post_failed {
-			label = "red:post-failed";
+			label = "96318REF_P300:red:post-failed";
 			gpios = <&pinctrl 11 1>;
 		};
 
 		usb_pwron {
-			label = "usb-pwron";
+			label = "96318REF_P300::usb-pwron";
 			gpios = <&pinctrl 13 1>;
 			default-state = "on";
 		};

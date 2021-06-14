@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -7,11 +9,15 @@
 	compatible = "storylink,sap-g3200u3", "mediatek,mt7621-soc";
 	model = "STORYLiNK SAP-G3200U3";
 
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
 		usb {
-			label = "green:usb";
+			label = "sap-g3200u3:green:usb";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&xhci_ehci_port1>, <&ehci_port2>;
 			linux,default-trigger = "usbport";

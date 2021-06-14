@@ -898,8 +898,6 @@ static int fe_poll_rx(struct napi_struct *napi, int budget,
 	struct fe_rx_dma *rxd, trxd;
 	int done = 0, pad;
 
-	fe_reg_w32(rx_intr, FE_REG_FE_INT_STATUS);
-
 	if (netdev->features & NETIF_F_RXCSUM)
 		checksum_bit = soc->checksum_bit;
 	else
@@ -992,6 +990,9 @@ release_desc:
 		done++;
 	}
 
+	if (done < budget)
+		fe_reg_w32(rx_intr, FE_REG_FE_INT_STATUS);
+
 	return done;
 }
 
@@ -1005,8 +1006,6 @@ static int fe_poll_tx(struct fe_priv *priv, int budget, u32 tx_intr,
 	int done = 0;
 	u32 idx, hwidx;
 	struct fe_tx_ring *ring = &priv->tx_ring;
-
-	fe_reg_w32(tx_intr, FE_REG_FE_INT_STATUS);
 
 	idx = ring->tx_free_idx;
 	hwidx = fe_reg_r32(FE_REG_TX_DTX_IDX0);
@@ -1031,7 +1030,9 @@ static int fe_poll_tx(struct fe_priv *priv, int budget, u32 tx_intr,
 	if (idx == hwidx) {
 		/* read hw index again make sure no new tx packet */
 		hwidx = fe_reg_r32(FE_REG_TX_DTX_IDX0);
-		if (idx != hwidx)
+		if (idx == hwidx)
+			fe_reg_w32(tx_intr, FE_REG_FE_INT_STATUS);
+		else
 			*tx_again = 1;
 	} else {
 		*tx_again = 1;
@@ -1111,11 +1112,7 @@ poll_again:
 	return rx_done;
 }
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 10, 0)
 static void fe_tx_timeout(struct net_device *dev)
-#else
-static void fe_tx_timeout(struct net_device *dev, unsigned int txqueue)
-#endif
 {
 	struct fe_priv *priv = netdev_priv(dev);
 	struct fe_tx_ring *ring = &priv->tx_ring;

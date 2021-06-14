@@ -17,30 +17,30 @@
 		compatible = "gpio-leds";
 
 		led_system: system {
-			label = "white:system";
+			label = "tp-link:white:system";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		wlan {
-			label = "white:wlan";
+			label = "tp-link:white:wlan";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
-			label = "white:lan";
+			label = "tp-link:white:lan";
 			gpios = <&gpio 23 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "white:usb";
+			label = "tp-link:white:usb";
 			gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&hub_port1>, <&hub_port0>;
 			linux,default-trigger = "usbport";
 		};
 
 		qss {
-			label = "white:qss";
+			label = "tp-link:white:qss";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -133,6 +133,10 @@
 };
 
 &pcie1 {
+	status = "okay";
+};
+
+&uart {
 	status = "okay";
 };
 

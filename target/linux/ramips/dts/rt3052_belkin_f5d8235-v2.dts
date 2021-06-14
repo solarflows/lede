@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -59,49 +61,49 @@
 		compatible = "gpio-leds";
 
 		internet {
-			label = "blue:internet";
+			label = "f5d8235-v2:blue:internet";
 			gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;
 		};
 
 		internet2 {
-			label = "amber:internet";
+			label = "f5d8235-v2:amber:internet";
 			gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
 		};
 
 		modem {
-			label = "blue:modem";
+			label = "f5d8235-v2:blue:modem";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 		};
 
 		modem2 {
-			label = "amber:modem";
+			label = "f5d8235-v2:amber:modem";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_router: router {
-			label = "blue:router";
+			label = "f5d8235-v2:blue:router";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		storage {
-			label = "blue:storage";
+			label = "f5d8235-v2:blue:storage";
 			gpios = <&gpio0 23 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&otg_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		storage2 {
-			label = "amber:storage";
+			label = "f5d8235-v2:amber:storage";
 			gpios = <&gpio0 22 GPIO_ACTIVE_LOW>;
 		};
 
 		security {
-			label = "blue:security";
+			label = "f5d8235-v2:blue:security";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 
 		security2 {
-			label = "amber:security";
+			label = "f5d8235-v2:amber:security";
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 	};

@@ -13,7 +13,7 @@
 
 &leds {
 	usb {
-		label = "green:usb";
+		label = "tp-link:green:usb";
 		gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		linux,default-trigger = "usbport";
 		trigger-sources = <&hub_port>;

@@ -8,7 +8,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ds-lite
-PKG_RELEASE:=8
+PKG_VERSION:=7
+PKG_RELEASE:=4
 PKG_LICENSE:=GPL-2.0
 
 include $(INCLUDE_DIR)/package.mk

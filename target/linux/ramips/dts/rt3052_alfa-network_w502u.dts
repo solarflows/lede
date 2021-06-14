@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -59,14 +61,14 @@
 		compatible = "gpio-leds";
 
 		usb {
-			label = "blue:usb";
+			label = "w502u:blue:usb";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&otg_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		led_wps: wps {
-			label = "blue:wps";
+			label = "w502u:blue:wps";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 	};

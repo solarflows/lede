@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -14,46 +16,50 @@
 		led-upgrade = &led_power;
 	};
 
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
 		internet_g {
-			label = "green:internet";
+			label = "wsr-1166:green:internet";
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 		};
 
 		router_g {
-			label = "green:router";
+			label = "wsr-1166:green:router";
 			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
 		};
 
 		router_o {
-			label = "orange:router";
+			label = "wsr-1166:orange:router";
 			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 
 		internet_o {
-			label = "orange:internet";
+			label = "wsr-1166:orange:internet";
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi_o {
-			label = "orange:wifi";
+			label = "wsr-1166:orange:wifi";
 			gpios = <&gpio 45 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
-			label = "green:power";
+			label = "wsr-1166:green:power";
 			gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
 		};
 
 		diag {
-			label = "orange:diag";
+			label = "wsr-1166:orange:diag";
 			gpios = <&gpio 47 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi_g {
-			label = "green:wifi";
+			label = "wsr-1166:green:wifi";
 			gpios = <&gpio 48 GPIO_ACTIVE_LOW>;
 		};
 	};

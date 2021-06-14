@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt2880.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -53,17 +55,17 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "ar725w:green:power";
 			gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
 		};
 
 		wpsred {
-			label = "red:wps";
+			label = "ar725w:red:wps";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
 		wpsblue {
-			label = "blue:wps";
+			label = "ar725w:blue:wps";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -84,6 +86,10 @@
 			linux,code = <KEY_RESTART>;
 		};
 	};
+};
+
+&gpio0 {
+	status = "okay";
 };
 
 &state_default {

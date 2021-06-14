@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6348.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -36,16 +38,16 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "AR1004G:green:power";
 			gpios = <&pinctrl 0 1>;
 			default-state = "on";
 		};
 		inet_green {
-			label = "green:inet";
+			label = "AR1004G:green:inet";
 			gpios = <&pinctrl 3 1>;
 		};
 		power_red {
-			label = "red:power";
+			label = "AR1004G:red:power";
 			gpios = <&pinctrl 6 1>;
 		};
 	};

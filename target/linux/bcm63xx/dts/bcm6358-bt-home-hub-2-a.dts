@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6358.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -56,92 +58,92 @@
 	led@0 {
 		reg = <0>;
 		active-low;
-		label = "red:power";
+		label = "HOMEHUB2A:red:power";
 	};
 
 	led_power_green: led@1 {
 		reg = <0>;
 		active-low;
-		label = "green:power";
+		label = "HOMEHUB2A:green:power";
 		default-state = "on";
 	};
 
 	led@2 {
 		reg = <2>;
 		active-low;
-		label = "blue:power";
+		label = "HOMEHUB2A:blue:power";
 	};
 
 	led@3 {
 		reg = <3>;
 		active-low;
-		label = "red:broadband";
+		label = "HOMEHUB2A:red:broadband";
 	};
 
 	led@4 {
 		reg = <4>;
 		active-low;
-		label = "green:broadband";
+		label = "HOMEHUB2A:green:broadband";
 	};
 
 	led@5 {
 		reg = <5>;
 		active-low;
-		label = "blue:broadband";
+		label = "HOMEHUB2A:blue:broadband";
 	};
 
 	led@6 {
 		reg = <6>;
 		active-low;
-		label = "red:wireless";
+		label = "HOMEHUB2A:red:wireless";
 	};
 
 	led@7 {
 		reg = <7>;
 		active-low;
-		label = "green:wireless";
+		label = "HOMEHUB2A:green:wireless";
 	};
 
 	led@8 {
 		reg = <8>;
 		active-low;
-		label = "blue:wireless";
+		label = "HOMEHUB2A:blue:wireless";
 	};
 
 	led@9 {
 		reg = <9>;
 		active-low;
-		label = "red:phone";
+		label = "HOMEHUB2A:red:phone";
 	};
 
 	led@10 {
 		reg = <10>;
 		active-low;
-		label = "green:phone";
+		label = "HOMEHUB2A:green:phone";
 	};
 
 	led@11 {
 		reg = <11>;
 		active-low;
-		label = "blue:phone";
+		label = "HOMEHUB2A:blue:phone";
 	};
 
 	led@12 {
 		reg = <12>;
 		active-low;
-		label = "red:upgrading";
+		label = "HOMEHUB2A:red:upgrading";
 	};
 
 	led_upgrading_green: led@13 {
 		reg = <13>;
 		active-low;
-		label = "green:upgrading";
+		label = "HOMEHUB2A:green:upgrading";
 	};
 
 	led@14 {
 		reg = <14>;
 		active-low;
-		label = "blue:upgrading";
+		label = "HOMEHUB2A:blue:upgrading";
 	};
 };
 

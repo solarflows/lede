@@ -34,47 +34,51 @@
 		compatible = "gpio-leds";
 
 		eth {
-			label = "green:eth";
+			label = "asl26555:green:eth";
 			gpios = <&gpio0 0 GPIO_ACTIVE_LOW>;
 		};
 
 		wan-red {
-			label = "red:wan";
+			label = "asl26555:red:wan";
 			gpios = <&gpio0 1 GPIO_ACTIVE_HIGH>;
 		};
 
 		wan-green {
-			label = "green:wan";
+			label = "asl26555:green:wan";
 			gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "asl26555:green:wlan";
 			gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
 		};
 
 		led_power_green: power-green {
-			label = "green:power";
+			label = "asl26555:green:power";
 			gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>;
 		};
 
 		power-red {
-			label = "red:power";
+			label = "asl26555:red:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_HIGH>;
 		};
 
 		3g-green {
-			label = "green:3g";
+			label = "asl26555:green:3g";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&otg_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		3g-red {
-			label = "red:3g";
+			label = "asl26555:red:3g";
 			gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
 		};
 	};
+};
+
+&gpio0 {
+	status = "okay";
 };
 
 &state_default {

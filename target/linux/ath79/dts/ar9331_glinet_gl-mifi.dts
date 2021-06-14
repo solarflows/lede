@@ -10,6 +10,7 @@
 	model = "GL.iNet GL-MiFi";
 
 	aliases {
+		serial0 = &uart;
 		label-mac-device = &eth0;
 	};
 
@@ -17,23 +18,23 @@
 		compatible = "gpio-leds";
 
 		wlan {
-			label = "green:wlan";
+			label = "gl-mifi:green:wlan";
 			gpios = <&gpio 1 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		lan {
-			label = "green:lan";
+			label = "gl-mifi:green:lan";
 			gpios = <&gpio 16 GPIO_ACTIVE_HIGH>;
 		};
 
 		wan {
-			label = "green:wan";
+			label = "gl-mifi:green:wan";
 			gpios = <&gpio 27 GPIO_ACTIVE_HIGH>;
 		};
 
 		3g4g {
-			label = "green:3g4g";
+			label = "gl-mifi:green:3g4g";
 			gpios = <&gpio 0 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -68,6 +69,10 @@
 	};
 };
 
+&uart {
+	status = "okay";
+};
+
 &usb {
 	status = "okay";
 
@@ -81,6 +86,8 @@
 
 &spi {
 	status = "okay";
+
+	num-chipselects = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";

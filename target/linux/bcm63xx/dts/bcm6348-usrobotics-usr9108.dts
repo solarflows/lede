@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6348.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -15,11 +17,11 @@
 		compatible = "gpio-leds";
 
 		usb {
-			label = "usb";
+			label = "96348GW-A::usb";
 			gpios = <&pinctrl 0 1>;
 		};
 		dsl {
-			label = "adsl";
+			label = "96348GW-A::adsl";
 			gpios = <&pinctrl 3 1>;
 		};
 	};

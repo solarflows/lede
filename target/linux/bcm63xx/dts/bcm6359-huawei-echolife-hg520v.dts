@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6358.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -36,7 +38,7 @@
 		compatible = "gpio-leds";
 
 		led_inet_green: inet_green {
-			label = "green:net";
+			label = "HW520:green:net";
 			gpios = <&pinctrl 32 1>;
 		};
 	};

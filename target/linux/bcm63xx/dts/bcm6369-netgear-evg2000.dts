@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6368.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -43,44 +45,44 @@
 		compatible = "gpio-leds";
 
 		voip1_green {
-			label = "green:voip1";
+			label = "EVG2000:green:voip1";
 			gpios = <&pinctrl 14 1>;
 		};
 		voip2_green {
-			label = "green:voip2";
+			label = "EVG2000:green:voip2";
 			gpios = <&pinctrl 2 1>;
 		};
 		inet_red {
-			label = "red:inet";
+			label = "EVG2000:red:inet";
 			gpios = <&pinctrl 4 1>;
 		};
 		inet_green {
-			label = "green:inet";
+			label = "EVG2000:green:inet";
 			gpios = <&pinctrl 5 1>;
 		};
 		usb_green {
-			label = "green:usb";
+			label = "EVG2000:green:usb";
 			gpios = <&pinctrl 15 1>;
 		};
 		led_power_green: power_green {
-			label = "green:power";
+			label = "EVG2000:green:power";
 			gpios = <&pinctrl 22 1>;
 			default-state = "on";
 		};
 		power_red {
-			label = "red:power";
+			label = "EVG2000:red:power";
 			gpios = <&pinctrl 23 1>;
 		};
 		lan_green {
-			label = "green:lan";
+			label = "EVG2000:green:lan";
 			gpios = <&pinctrl 24 1>;
 		};
 		wireless_green {
-			label = "green:wireless";
+			label = "EVG2000:green:wireless";
 			gpios = <&pinctrl 26 1>;
 		};
 		wan_green {
-			label = "green:wan";
+			label = "EVG2000:green:wan";
 			gpios = <&pinctrl 27 1>;
 		};
 	};

@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Copyright (C) 2012-2014 OpenWrt.org
 #
@@ -15,7 +16,6 @@ case "$board" in
 checkpoint,l-50|\
 cloudengines,pogoe02|\
 cloudengines,pogoplugv4|\
-globalscale,sheevaplug|\
 iom,ix2-200|\
 linksys,e4200-v2|\
 linksys,ea4500|\

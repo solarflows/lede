@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -55,12 +57,12 @@
 		compatible = "gpio-leds";
 
 		led_security: security {
-			label = "green:security";
+			label = "v22rw-2x2:green:security";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "red:wps";
+			label = "v22rw-2x2:red:wps";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 	};

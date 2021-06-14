@@ -52,13 +52,12 @@ static void init_crc32()
 	}
 }
 
-static uint32_t crc32buf(const void *buf, size_t len)
+static uint32_t crc32buf(unsigned char *buf, size_t len)
 {
 	uint32_t crc = 0xFFFFFFFF;
-	const uint8_t *in = buf;
 
-	for (; len; len--, in++)
-		crc = crc32[(uint8_t)crc ^ *in] ^ (crc >> BPB);
+	for (; len; len--, buf++)
+		crc = crc32[(uint8_t)crc ^ *buf] ^ (crc >> BPB);
 	return ~crc;
 }
 

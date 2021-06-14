@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -14,16 +16,20 @@
 		led-upgrade = &led_power;
 	};
 
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
 		wifi {
-			label = "orange:wifi";
+			label = "re6500:orange:wifi";
 			gpios = <&gpio 0 GPIO_ACTIVE_HIGH>;
 		};
 
 		led_power: power {
-			label = "white:power";
+			label = "re6500:white:power";
 			gpios = <&gpio 9 GPIO_ACTIVE_HIGH>;
 		};
 	};

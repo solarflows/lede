@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,12 +20,12 @@
 		compatible = "gpio-leds";
 
 		led_wps: wps {
-			label = "white:wps";
+			label = "psg1208:white:wps";
 			gpios = <&gpio1 15 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "white:wlan2g";
+			label = "psg1208:white:wlan2g";
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -53,8 +55,7 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
-		spi-max-frequency = <80000000>;
-		m25p,fast-read;
+		spi-max-frequency = <10000000>;
 
 		partitions {
 			compatible = "fixed-partitions";

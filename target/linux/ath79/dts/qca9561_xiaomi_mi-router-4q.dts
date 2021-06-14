@@ -36,24 +36,29 @@
 		compatible = "gpio-leds";
 
 		led_red: led_red {
-			label = "red:led";
+			label = "mi-router-4q:red:led";
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 		};
 
 		led_yellow: led_yellow {
-			label = "yellow:led";
+			label = "mi-router-4q:yellow:led";
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 		};
 
 		led_blue: led_blue {
-			label = "blue:led";
+			label = "mi-router-4q:blue:led";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 	};
 };
 
+&uart {
+	status = "okay";
+};
+
 &spi {
 	status = "okay";
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";

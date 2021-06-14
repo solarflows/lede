@@ -1,27 +1,22 @@
-# SPDX-License-Identifier: GPL-2.0-only
 #
-# Copyright (C) 2006-2020 OpenWrt.org
+# Copyright (C) 2006-2014 OpenWrt.org
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
 
 ifndef DUMP
   include $(INCLUDE_DIR)/feeds.mk
 endif
 
+# invoke ipkg-build with some default options
+IPKG_BUILD:= \
+  $(SCRIPT_DIR)/ipkg-build -c -o 0 -g 0
+
 IPKG_REMOVE:= \
   $(SCRIPT_DIR)/ipkg-remove
 
 IPKG_STATE_DIR:=$(TARGET_DIR)/usr/lib/opkg
-
-# Generates a make statement to return a wildcard for candidate ipkg files
-# 1: package name
-define gen_ipkg_wildcard
-  $(1)$$(if $$(filter -%,$$(ABIV_$(1))),,[^a-z-])*
-endef
-
-# 1: package name
-# 2: candidate ipk files
-define remove_ipkg_files
-  $(if $(strip $(2)),$(IPKG_REMOVE) $(1) $(2))
-endef
 
 # 1: package name
 # 2: variable name
@@ -99,7 +94,7 @@ _endef=endef
 
 ifeq ($(DUMP),)
   define BuildTarget/ipkg
-    ABIV_$(1):=$(if $(filter-out kmod-%,$(1)),$(ABI_VERSION))
+    ABIV_$(1):=$(call GetABISuffix,$(1))
     PDIR_$(1):=$(call FeedPackageDir,$(1))
     IPKG_$(1):=$$(PDIR_$(1))/$(1)$$(ABIV_$(1))_$(VERSION)_$(PKGARCH).ipk
     IDIR_$(1):=$(PKG_BUILD_DIR)/ipkg-$(PKGARCH)/$(1)
@@ -156,12 +151,7 @@ ifeq ($(DUMP),)
 
     $(STAGING_DIR_ROOT)/stamp/.$(1)_installed: $(PKG_BUILD_DIR)/.pkgdir/$(1).installed
 	mkdir -p $(STAGING_DIR_ROOT)/stamp
-	$(if $(ABI_VERSION),echo '$(ABI_VERSION)' | cmp -s - $(PKG_INFO_DIR)/$(1).version || { \
-		echo '$(ABI_VERSION)' > $(PKG_INFO_DIR)/$(1).version; \
-		$(foreach pkg,$(filter-out $(1),$(PROVIDES)), \
-			cp $(PKG_INFO_DIR)/$(1).version $(PKG_INFO_DIR)/$(pkg).version; \
-		) \
-	} )
+	$(if $(ABI_VERSION),echo '$(ABI_VERSION)' | cmp -s - $(PKG_INFO_DIR)/$(1).version || echo '$(ABI_VERSION)' > $(PKG_INFO_DIR)/$(1).version)
 	$(call locked,$(CP) $(PKG_BUILD_DIR)/.pkgdir/$(1)/. $(STAGING_DIR_ROOT)/,root-copy)
 	touch $$@
 
@@ -175,7 +165,7 @@ Package: $(1)$$(ABIV_$(1))
 Version: $(VERSION)
 $$(call addfield,Depends,$$(Package/$(1)/DEPENDS)
 )$$(call addfield,Conflicts,$$(call mergelist,$(CONFLICTS))
-)$$(call addfield,Provides,$$(call mergelist,$$(filter-out $(1)$$(ABIV_$(1)),$(PROVIDES)$$(if $$(ABIV_$(1)), $(1) $(foreach provide,$(PROVIDES),$(provide)$$(ABIV_$(1))))))
+)$$(call addfield,Provides,$$(call mergelist,$$(filter-out $(1)$$(ABIV_$(1)),$(PROVIDES)$$(if $$(ABIV_$(1)), $(1) $(foreach provide,$(PROVIDES),$(provide)$$(call GetABISuffix,$(provide))))))
 )$$(call addfield,Alternatives,$$(call mergelist,$(ALTERNATIVES))
 )$$(call addfield,Source,$(SOURCE)
 )$$(call addfield,SourceName,$(1)
@@ -183,8 +173,6 @@ $$(call addfield,Depends,$$(Package/$(1)/DEPENDS)
 )$$(call addfield,LicenseFiles,$(LICENSE_FILES)
 )$$(call addfield,Section,$(SECTION)
 )$$(call addfield,Require-User,$(USERID)
-)$$(call addfield,SourceDateEpoch,$(PKG_SOURCE_DATE_EPOCH)
-)$$(if $$(ABIV_$(1)),ABIVersion: $$(ABIV_$(1))
 )$(if $(PKG_CPE_ID),CPE-ID: $(PKG_CPE_ID)
 )$(if $(filter hold,$(PKG_FLAGS)),Status: unknown hold not-installed
 )$(if $(filter essential,$(PKG_FLAGS)),Essential: yes
@@ -196,10 +184,8 @@ $(_endef)
     $$(IPKG_$(1)) : export CONTROL=$$(Package/$(1)/CONTROL)
     $$(IPKG_$(1)) : export DESCRIPTION=$$(Package/$(1)/description)
     $$(IPKG_$(1)) : export PATH=$$(TARGET_PATH_PKG)
-    $$(IPKG_$(1)) : export PKG_SOURCE_DATE_EPOCH:=$(PKG_SOURCE_DATE_EPOCH)
     $(PKG_INFO_DIR)/$(1).provides $$(IPKG_$(1)): $(STAMP_BUILT) $(INCLUDE_DIR)/package-ipkg.mk
-	@rm -rf $$(IDIR_$(1)); \
-		$$(call remove_ipkg_files,$(1),$$(call opkg_package_files,$(call gen_ipkg_wildcard,$(1))))
+	@rm -rf $$(IDIR_$(1)) $$(if $$(call opkg_package_files,$(1)*),; $$(IPKG_REMOVE) $(1) $$(call opkg_package_files,$(1)*))
 	mkdir -p $(PACKAGE_DIR) $$(IDIR_$(1))/CONTROL $(PKG_INFO_DIR)
 	$(call Package/$(1)/install,$$(IDIR_$(1)))
 	$(if $(Package/$(1)/install-overlay),mkdir -p $(PACKAGE_DIR) $$(IDIR_$(1))/rootfs-overlay)
@@ -221,8 +207,8 @@ $(_endef)
     ifneq ($$(CONFIG_IPK_FILES_CHECKSUMS),)
 	(cd $$(IDIR_$(1)); \
 		( \
-			find . -type f \! -path ./CONTROL/\* -exec $(MKHASH) sha256 -n \{\} \; 2> /dev/null | \
-			sed 's|\([[:blank:]]\)\./| \1/|' > $$(IDIR_$(1))/CONTROL/files-sha256sum \
+			find . -type f \! -path ./CONTROL/\* -exec sha256sum \{\} \; 2> /dev/null | \
+			sed 's|\([[:blank:]]\)\./|\1/|' > $$(IDIR_$(1))/CONTROL/files-sha256sum \
 		) || true \
 	)
     endif
@@ -235,13 +221,13 @@ $(_endef)
 		( \
 			echo "#!/bin/sh"; \
 			echo "[ \"\$$$${IPKG_NO_SCRIPT}\" = \"1\" ] && exit 0"; \
-			echo "[ -s "\$$$${IPKG_INSTROOT}/lib/functions.sh" ] || exit 0"; \
+			echo "[ -x "\$$$${IPKG_INSTROOT}/lib/functions.sh" ] || exit 0"; \
 			echo ". \$$$${IPKG_INSTROOT}/lib/functions.sh"; \
 			echo "default_postinst \$$$$0 \$$$$@"; \
 		) > postinst; \
 		( \
 			echo "#!/bin/sh"; \
-			echo "[ -s "\$$$${IPKG_INSTROOT}/lib/functions.sh" ] || exit 0"; \
+			echo "[ -x "\$$$${IPKG_INSTROOT}/lib/functions.sh" ] || exit 0"; \
 			echo ". \$$$${IPKG_INSTROOT}/lib/functions.sh"; \
 			echo "default_prerm \$$$$0 \$$$$@"; \
 		) > prerm; \
@@ -263,11 +249,11 @@ $(_endef)
     endif
 
 	$(INSTALL_DIR) $$(PDIR_$(1))
-	$(FAKEROOT) $(SCRIPT_DIR)/ipkg-build -m "$(FILE_MODES)" $$(IDIR_$(1)) $$(PDIR_$(1))
+	$(IPKG_BUILD) $$(IDIR_$(1)) $$(PDIR_$(1))
 	@[ -f $$(IPKG_$(1)) ]
 
     $(1)-clean:
-	$$(call remove_ipkg_files,$(1),$$(call opkg_package_files,$(call gen_ipkg_wildcard,$(1))))
+	$$(if $$(call opkg_package_files,$(1)*),$$(IPKG_REMOVE) $(1) $$(call opkg_package_files,$(1)*))
 
     clean: $(1)-clean
 

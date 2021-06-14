@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -55,27 +57,27 @@
 		compatible = "gpio-leds";
 
 		3g {
-			label = "green:3g";
+			label = "ur-336un:green:3g";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		gateway {
-			label = "green:gateway";
+			label = "ur-336un:green:gateway";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 		};
 
 		ap {
-			label = "green:ap";
+			label = "ur-336un:green:ap";
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 
 		led_wps: wps {
-			label = "green:wps";
+			label = "ur-336un:green:wps";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 
 		station {
-			label = "green:station";
+			label = "ur-336un:green:station";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 	};

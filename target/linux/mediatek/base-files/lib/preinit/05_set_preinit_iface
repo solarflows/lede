@@ -1,14 +1,6 @@
 set_preinit_iface() {
 	ip link set eth0 up
-
-	case $(board_name) in
-	ubnt,unifi-6-lr)
-		ifname=eth0
-		;;
-	*)
-		ifname=lan1
-		;;
-	esac
+	ifname=lan1
 }
 
 boot_hook_add preinit_main set_preinit_iface

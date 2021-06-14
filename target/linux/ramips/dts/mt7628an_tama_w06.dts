@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7628an.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -11,17 +13,17 @@
 		compatible = "gpio-leds";
 
 		wps {
-			label = "green:wps";
+			label = "w06:green:wps";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
-			label = "green:wan";
+			label = "w06:green:wan";
 			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 
 		wireless {
-			label = "green:wlan";
+			label = "w06:green:wlan";
 			gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -37,8 +39,16 @@
 	};
 };
 
+&ehci {
+	status = "okay";
+};
+
 &ethernet {
 	mtd-mac-address = <&factory 0x28>;
+};
+
+&ohci {
+	status = "okay";
 };
 
 &state_default {

@@ -9,12 +9,14 @@
 
 &leds {
 	wan_amber {
-		label = "amber:wan";
+		label = "tp-link:amber:wan";
 		gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 	};
 };
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";

@@ -20,34 +20,34 @@
 		compatible = "gpio-leds";
 
 		led_router: router {
-			label = "green:router";
+			label = "wn-ag300dgr:green:router";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		children {
-			label = "green:children";
+			label = "wn-ag300dgr:green:children";
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		eco {
-			label = "green:eco";
+			label = "wn-ag300dgr:green:eco";
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 		};
 
 		notification {
-			label = "amber:notification";
+			label = "wn-ag300dgr:amber:notification";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan2g {
-			label = "green:wlan2g";
+			label = "wn-ag300dgr:green:wlan2g";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		wlan5g {
-			label = "green:wlan5g";
+			label = "wn-ag300dgr:green:wlan5g";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
@@ -108,6 +108,8 @@
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -193,6 +195,10 @@
 };
 
 &pcie {
+	status = "okay";
+};
+
+&uart {
 	status = "okay";
 };
 

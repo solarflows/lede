@@ -14,16 +14,20 @@
 		label-mac-device = &wan;
 	};
 
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
 		wps {
-			label = "green:wps";
+			label = "iodata:green:wps";
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
-			label = "green:power";
+			label = "iodata:green:power";
 			gpios = <&gpio 9 GPIO_ACTIVE_HIGH>;
 		};
 	};

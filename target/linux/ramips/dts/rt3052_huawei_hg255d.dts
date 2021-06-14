@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -61,34 +63,34 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "hg255d:green:power";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
 		internet {
-			label = "green:internet";
+			label = "hg255d:green:internet";
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi {
-			label = "green:wlan";
+			label = "hg255d:green:wlan";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "hg255d:green:usb";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&otg_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		wps {
-			label = "green:wps";
+			label = "hg255d:green:wps";
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 
 		voice {
-			label = "green:voice";
+			label = "hg255d:green:voice";
 			gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;
 		};
 	};

@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350_7links_px-4885.dtsi"
 
 / {

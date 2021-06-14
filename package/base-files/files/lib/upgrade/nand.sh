@@ -1,15 +1,16 @@
+#!/bin/sh
 # Copyright (C) 2014 OpenWrt.org
 #
 
 . /lib/functions.sh
 
-# 'kernel' partition or UBI volume on NAND contains the kernel
+# 'kernel' partition on NAND contains the kernel
 CI_KERNPART="${CI_KERNPART:-kernel}"
 
 # 'ubi' partition on NAND contains UBI
 CI_UBIPART="${CI_UBIPART:-ubi}"
 
-# 'rootfs' UBI volume on NAND contains the rootfs
+# 'rootfs' partition on NAND contains the rootfs
 CI_ROOTPART="${CI_ROOTPART:-rootfs}"
 
 ubi_mknod() {
@@ -108,7 +109,7 @@ nand_restore_config() {
 		rmdir /tmp/new_root
 		return 1
 	fi
-	mv "$1" "/tmp/new_root/sysupgrade.tgz"
+	mv "$1" "/tmp/new_root/$BACKUP_FILE"
 	umount /tmp/new_root
 	sync
 	rmdir /tmp/new_root
@@ -117,12 +118,8 @@ nand_restore_config() {
 nand_upgrade_prepare_ubi() {
 	local rootfs_length="$1"
 	local rootfs_type="$2"
-	local kernel_length="$3"
+	local has_kernel="${3:-0}"
 	local has_env="${4:-0}"
-	local rootfs_data_max="$(fw_printenv -n rootfs_data_max 2>/dev/null)"
-	[ -n "$rootfs_data_max" ] && rootfs_data_max=$(($rootfs_data_max))
-
-	[ -n "$rootfs_length" -o -n "$kernel_length" ] || return 1
 
 	local mtdnum="$( find_mtd_index "$CI_UBIPART" )"
 	if [ ! "$mtdnum" ]; then
@@ -152,24 +149,23 @@ nand_upgrade_prepare_ubi() {
 	local root_ubivol="$( nand_find_volume $ubidev $CI_ROOTPART )"
 	local data_ubivol="$( nand_find_volume $ubidev rootfs_data )"
 
-	local ubiblk ubiblkvol
-	for ubiblk in /dev/ubiblock*_? ; do
-		[ -e "$ubiblk" ] || continue
-		echo "removing ubiblock${ubiblk:13}"
-		ubiblkvol=ubi${ubiblk:13}
-		if ! ubiblock -r /dev/$ubiblkvol; then
-			echo "cannot remove $ubiblk"
-			return 1
+	# remove ubiblock device of rootfs
+	local root_ubiblk="ubiblock${root_ubivol:3}"
+	if [ "$root_ubivol" -a -e "/dev/$root_ubiblk" ]; then
+		echo "removing $root_ubiblk"
+		if ! ubiblock -r /dev/$root_ubivol; then
+			echo "cannot remove $root_ubiblk"
+			return 1;
 		fi
-	done
+	fi
 
 	# kill volumes
 	[ "$kern_ubivol" ] && ubirmvol /dev/$ubidev -N $CI_KERNPART || true
-	[ "$root_ubivol" -a "$root_ubivol" != "$kern_ubivol" ] && ubirmvol /dev/$ubidev -N $CI_ROOTPART || true
+	[ "$root_ubivol" ] && ubirmvol /dev/$ubidev -N $CI_ROOTPART || true
 	[ "$data_ubivol" ] && ubirmvol /dev/$ubidev -N rootfs_data || true
 
 	# update kernel
-	if [ -n "$kernel_length" ]; then
+	if [ "$has_kernel" = "1" ]; then
 		if ! ubimkvol /dev/$ubidev -N $CI_KERNPART -s $kernel_length; then
 			echo "cannot create kernel volume"
 			return 1;
@@ -177,31 +173,20 @@ nand_upgrade_prepare_ubi() {
 	fi
 
 	# update rootfs
-	if [ -n "$rootfs_length" ]; then
-		local rootfs_size_param
-		if [ "$rootfs_type" = "ubifs" ]; then
-			rootfs_size_param="-m"
-		else
-			rootfs_size_param="-s $rootfs_length"
-		fi
-		if ! ubimkvol /dev/$ubidev -N $CI_ROOTPART $rootfs_size_param; then
-			echo "cannot create rootfs volume"
-			return 1;
-		fi
+	local root_size_param
+	if [ "$rootfs_type" = "ubifs" ]; then
+		root_size_param="-m"
+	else
+		root_size_param="-s $rootfs_length"
+	fi
+	if ! ubimkvol /dev/$ubidev -N $CI_ROOTPART $root_size_param; then
+		echo "cannot create rootfs volume"
+		return 1;
 	fi
 
 	# create rootfs_data for non-ubifs rootfs
 	if [ "$rootfs_type" != "ubifs" ]; then
-		local availeb=$(cat /sys/devices/virtual/ubi/$ubidev/avail_eraseblocks)
-		local ebsize=$(cat /sys/devices/virtual/ubi/$ubidev/eraseblock_size)
-		local avail_size=$(( $availeb * $ebsize ))
-		local rootfs_data_size_param="-m"
-		if [ -n "$rootfs_data_max" ] &&
-		   [ "$rootfs_data_max" != "0" ] &&
-		   [ "$rootfs_data_max" -le "$avail_size" ]; then
-			rootfs_data_size_param="-s $rootfs_data_max"
-		fi
-		if ! ubimkvol /dev/$ubidev -N rootfs_data $rootfs_data_size_param; then
+		if ! ubimkvol /dev/$ubidev -N rootfs_data -m; then
 			echo "cannot initialize rootfs_data volume"
 			return 1
 		fi
@@ -246,9 +231,9 @@ nand_upgrade_ubinized() {
 
 # Write the UBIFS image to UBI volume
 nand_upgrade_ubifs() {
-	local rootfs_length=$( (cat $1 | wc -c) 2> /dev/null)
+	local rootfs_length=`(cat $1 | wc -c) 2> /dev/null`
 
-	nand_upgrade_prepare_ubi "$rootfs_length" "ubifs" "" ""
+	nand_upgrade_prepare_ubi "$rootfs_length" "ubifs" "0" "0"
 
 	local ubidev="$( nand_find_ubi "$CI_UBIPART" )"
 	local root_ubivol="$(nand_find_volume $ubidev $CI_ROOTPART)"
@@ -257,83 +242,49 @@ nand_upgrade_ubifs() {
 	nand_do_upgrade_success
 }
 
-nand_upgrade_fit() {
-	local fit_file="$1"
-	local fit_length="$(wc -c < "$fit_file")"
-
-	nand_upgrade_prepare_ubi "" "" "$fit_length" "1"
-
-	local fit_ubidev="$(nand_find_ubi "$CI_UBIPART")"
-	local fit_ubivol="$(nand_find_volume $fit_ubidev "$CI_KERNPART")"
-	ubiupdatevol /dev/$fit_ubivol -s $fit_length $fit_file
-
-	nand_do_upgrade_success
-}
-
 nand_upgrade_tar() {
 	local tar_file="$1"
 	local kernel_mtd="$(find_mtd_index $CI_KERNPART)"
 
-	local board_dir=$(tar tf "$tar_file" | grep -m 1 '^sysupgrade-.*/$')
+	local board_dir=$(tar tf $tar_file | grep -m 1 '^sysupgrade-.*/$')
 	board_dir=${board_dir%/}
 
-	kernel_length=$( (tar xf "$tar_file" ${board_dir}/kernel -O | wc -c) 2> /dev/null)
-	local has_rootfs=0
-	local rootfs_length
-	local rootfs_type
+	local kernel_length=`(tar xf $tar_file ${board_dir}/kernel -O | wc -c) 2> /dev/null`
+	local rootfs_length=`(tar xf $tar_file ${board_dir}/root -O | wc -c) 2> /dev/null`
 
-	tar tf "$tar_file" ${board_dir}/root 1>/dev/null 2>/dev/null && has_rootfs=1
-	[ "$has_rootfs" = "1" ] && {
-		rootfs_length=$( (tar xf "$tar_file" ${board_dir}/root -O | wc -c) 2> /dev/null)
-		rootfs_type="$(identify_tar "$tar_file" ${board_dir}/root)"
-	}
+	local rootfs_type="$(identify_tar "$tar_file" ${board_dir}/root)"
 
 	local has_kernel=1
 	local has_env=0
 
 	[ "$kernel_length" != 0 -a -n "$kernel_mtd" ] && {
-		tar xf "$tar_file" ${board_dir}/kernel -O | mtd write - $CI_KERNPART
+		tar xf $tar_file ${board_dir}/kernel -O | mtd write - $CI_KERNPART
 	}
-	[ "$kernel_length" = 0 -o ! -z "$kernel_mtd" ] && has_kernel=
+	[ "$kernel_length" = 0 -o ! -z "$kernel_mtd" ] && has_kernel=0
 
-	nand_upgrade_prepare_ubi "$rootfs_length" "$rootfs_type" "${has_kernel:+$kernel_length}" "$has_env"
+	nand_upgrade_prepare_ubi "$rootfs_length" "$rootfs_type" "$has_kernel" "$has_env"
 
 	local ubidev="$( nand_find_ubi "$CI_UBIPART" )"
 	[ "$has_kernel" = "1" ] && {
-		local kern_ubivol="$( nand_find_volume $ubidev $CI_KERNPART )"
-		tar xf "$tar_file" ${board_dir}/kernel -O | \
+		local kern_ubivol="$(nand_find_volume $ubidev $CI_KERNPART)"
+		tar xf $tar_file ${board_dir}/kernel -O | \
 			ubiupdatevol /dev/$kern_ubivol -s $kernel_length -
 	}
 
-	[ "$has_rootfs" = "1" ] && {
-		local root_ubivol="$( nand_find_volume $ubidev $CI_ROOTPART )"
-		tar xf "$tar_file" ${board_dir}/root -O | \
-			ubiupdatevol /dev/$root_ubivol -s $rootfs_length -
-	}
+	local root_ubivol="$(nand_find_volume $ubidev $CI_ROOTPART)"
+	tar xf $tar_file ${board_dir}/root -O | \
+		ubiupdatevol /dev/$root_ubivol -s $rootfs_length -
+
 	nand_do_upgrade_success
 }
 
 # Recognize type of passed file and start the upgrade process
 nand_do_upgrade() {
-	if [ -n "$IS_PRE_UPGRADE" ]; then
-		# Previously, nand_do_upgrade was called from the platform_pre_upgrade
-		# hook; this piece of code handles scripts that haven't been
-		# updated. All scripts should gradually move to call nand_do_upgrade
-		# from platform_do_upgrade instead.
-		export do_upgrade="nand_do_upgrade '$1'"
-		return
-	fi
-
 	local file_type=$(identify $1)
-
-	if type 'platform_nand_pre_upgrade' >/dev/null 2>/dev/null; then
-		platform_nand_pre_upgrade "$1"
-	fi
 
 	[ ! "$(find_mtd_index "$CI_UBIPART")" ] && CI_UBIPART="rootfs"
 
 	case "$file_type" in
-		"fit")		nand_upgrade_fit $1;;
 		"ubi")		nand_upgrade_ubinized $1;;
 		"ubifs")	nand_upgrade_ubifs $1;;
 		*)		nand_upgrade_tar $1;;
@@ -356,10 +307,10 @@ nand_do_upgrade() {
 nand_do_platform_check() {
 	local board_name="$1"
 	local tar_file="$2"
-	local control_length=$( (tar xf $tar_file sysupgrade-$board_name/CONTROL -O | wc -c) 2> /dev/null)
+	local control_length=`(tar xf $tar_file sysupgrade-$board_name/CONTROL -O | wc -c) 2> /dev/null`
 	local file_type="$(identify $2)"
 
-	[ "$control_length" = 0 -a "$file_type" != "ubi" -a "$file_type" != "ubifs" -a "$file_type" != "fit" ] && {
+	[ "$control_length" = 0 -a "$file_type" != "ubi" -a "$file_type" != "ubifs" ] && {
 		echo "Invalid sysupgrade file."
 		return 1
 	}

@@ -21,19 +21,19 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "zbt-we826:green:power";
 			gpios = <&gpio1 14 GPIO_ACTIVE_HIGH>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "zbt-we826:green:usb";
 			gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
 			trigger-sources = <&ohci_port1>, <&ehci_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		air {
-			label = "green:wifi";
+			label = "zbt-we826:green:wifi";
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -47,6 +47,10 @@
 			linux,code = <KEY_RESTART>;
 		};
 	};
+};
+
+&gpio0 {
+	status = "okay";
 };
 
 &gpio1 {
@@ -72,7 +76,7 @@
 &ethernet {
 	mtd-mac-address = <&factory 0x4>;
 
-	mediatek,portmap = "llllw";
+	mediatek,portmap = "wllll";
 };
 
 &wmac {

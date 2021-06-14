@@ -1,7 +1,9 @@
-# SPDX-License-Identifier: GPL-2.0-only
 #
 # Copyright (C) 2017-2019 Tomasz Maciej Nowak <tmn505@gmail.com>
-
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
 include $(TOPDIR)/rules.mk
 
 ARCH := arm
@@ -10,10 +12,9 @@ BOARDNAME := NVIDIA Tegra
 FEATURES := audio boot-part display ext4 fpu gpio pci pcie rootfs-part rtc squashfs usb
 CPU_TYPE := cortex-a9
 CPU_SUBTYPE := vfpv3-d16
-MAINTAINER := Tomasz Maciej Nowak <tomek_n@o2.pl>
 
 KERNEL_PATCHVER := 5.4
-KERNEL_TESTING_PATCHVER := 5.10
+KERNEL_TESTING_PATCHVER := 5.4
 
 include $(INCLUDE_DIR)/target.mk
 

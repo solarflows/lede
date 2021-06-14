@@ -44,47 +44,47 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "netgear:green:power";
 			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_amber: power_amber {
-			label = "amber:power";
+			label = "netgear:amber:power";
 			gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
 		};
 
 		left_blue {
-			label = "blue:left";
+			label = "netgear:blue:left";
 			gpios = <&led_gpio 7 GPIO_ACTIVE_LOW>;
 		};
 
 		right_blue {
-			label = "blue:right";
+			label = "netgear:blue:right";
 			gpios = <&led_gpio 6 GPIO_ACTIVE_LOW>;
 		};
 
 		wps_green {
-			label = "green:wps";
+			label = "netgear:green:wps";
 			gpios = <&led_gpio 5 GPIO_ACTIVE_LOW>;
 		};
 
 		client_red {
-			label = "red:client";
+			label = "netgear:red:client";
 			gpios = <&led_gpio 3 GPIO_ACTIVE_LOW>;
 		};
 
 		client_green {
-			label = "green:client";
+			label = "netgear:green:client";
 			gpios = <&led_gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		router_red {
-			label = "red:router";
+			label = "netgear:red:router";
 			gpios = <&led_gpio 1 GPIO_ACTIVE_LOW>;
 		};
 
 		router_green {
-			label = "green:router";
+			label = "netgear:green:router";
 			gpios = <&led_gpio 0 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -120,12 +120,18 @@
 	status = "okay";
 };
 
+&uart {
+	status = "okay";
+};
+
 &pll {
 	clocks = <&extosc>;
 };
 
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";

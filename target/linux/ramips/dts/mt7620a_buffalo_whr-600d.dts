@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,37 +20,37 @@
 		compatible = "gpio-leds";
 
 		power {
-			label = "red:power";
+			label = "whr-600d:red:power";
 			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi {
-			label = "green:wifi";
+			label = "whr-600d:green:wifi";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_green: power2 {
-			label = "green:power";
+			label = "whr-600d:green:power";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi2 {
-			label = "orange:wifi";
+			label = "whr-600d:orange:wifi";
 			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
 		};
 
 		internet {
-			label = "green:internet";
+			label = "whr-600d:green:internet";
 			gpios = <&gpio2 17 GPIO_ACTIVE_LOW>;
 		};
 
 		router {
-			label = "green:router";
+			label = "whr-600d:green:router";
 			gpios = <&gpio2 18 GPIO_ACTIVE_LOW>;
 		};
 
 		router2 {
-			label = "orange:router";
+			label = "whr-600d:orange:router";
 			gpios = <&gpio2 19 GPIO_ACTIVE_LOW>;
 		};
 	};

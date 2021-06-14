@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6328.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -43,24 +45,24 @@
 		compatible = "gpio-leds";
 
 		inet_red {
-			label = "red:inet";
+			label = "A4001N:red:inet";
 			gpios = <&pinctrl 1 0>;
 		};
 		power_red {
-			label = "red:power";
+			label = "A4001N:red:power";
 			gpios = <&pinctrl 4 0>;
 		};
 		led_power_green: power_green {
-			label = "green:power";
+			label = "A4001N:green:power";
 			gpios = <&pinctrl 8 0>;
 			default-state = "on";
 		};
 		usb_green {
-			label = "green:usb";
+			label = "A4001N:green:usb";
 			gpios = <&pinctrl 10 1>;
 		};
 		dsl_green {
-			label = "green:dsl";
+			label = "A4001N:green:dsl";
 			gpios = <&pinctrl 11 1>;
 		};
 	};

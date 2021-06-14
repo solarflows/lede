@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -23,17 +25,17 @@
 		compatible = "gpio-leds";
 
 		status-red {
-			label = "red:status";
+			label = "newifi-d1:red:status";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		status-green {
-			label = "green:status";
+			label = "newifi-d1:green:status";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		led_blue: status-blue {
-			label = "blue:status";
+			label = "newifi-d1:blue:status";
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};

@@ -9,7 +9,7 @@
 
 &leds {
 	function {
-		label = "green:function";
+		label = "iodata:green:function";
 		gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 	};
 };

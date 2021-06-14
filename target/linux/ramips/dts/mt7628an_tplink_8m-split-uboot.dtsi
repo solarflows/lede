@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-
 #include "mt7628an.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -70,6 +69,14 @@
 			};
 		};
 	};
+};
+
+&ehci {
+	status = "disabled";
+};
+
+&ohci {
+	status = "disabled";
 };
 
 &wmac {

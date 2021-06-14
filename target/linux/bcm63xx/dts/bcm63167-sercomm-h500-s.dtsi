@@ -52,58 +52,58 @@
 
 	mobile_red {
 		reg = <0>;
-		label = "red:mobile";
+		label = "h500-s:red:mobile";
 	};
 
 	mobile_green {
 		reg = <1>;
-		label = "green:mobile";
+		label = "h500-s:green:mobile";
 	};
 
 	led_power_red: power_red {
 		reg = <8>;
-		label = "red:power";
+		label = "h500-s:red:power";
 	};
 
 	wifi_green {
 		reg = <9>;
-		label = "green:wifi";
+		label = "h500-s:green:wifi";
 	};
 
 	phone_red {
 		reg = <12>;
-		label = "red:phone";
+		label = "h500-s:red:phone";
 	};
 
 	wifi_red {
 		reg = <13>;
-		label = "red:wifi";
+		label = "h500-s:red:wifi";
 	};
 
 	internet_red {
 		reg = <14>;
-		label = "red:internet";
+		label = "h500-s:red:internet";
 	};
 
 	internet_green {
 		reg = <15>;
-		label = "green:internet";
+		label = "h500-s:green:internet";
 	};
 
 	phone_green {
 		reg = <16>;
-		label = "green:phone";
+		label = "h500-s:green:phone";
 	};
 
 	led_power_green: power_green {
 		reg = <17>;
-		label = "green:power";
+		label = "h500-s:green:power";
 		default-state = "on";
 	};
 
 	mobile_blue {
 		reg = <23>;
-		label = "blue:mobile";
+		label = "h500-s:blue:mobile";
 	};
 };
 

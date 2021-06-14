@@ -1,5 +1,7 @@
-# SPDX-License-Identifier: GPL-2.0-only
-
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
@@ -34,6 +36,10 @@ endef
 
 define Build/dtb
 	$(call Image/BuildDTB,../dts/$(DEVICE_DTS).dts,$@.dtb,,--space $(DTB_SIZE))
+endef
+
+define Build/export-dtb
+	cp $(IMAGE_KERNEL).dtb $@
 endef
 
 define Build/MuImage-initramfs
@@ -82,6 +88,7 @@ define Device/Default
   KERNEL_LOADADDR := 0x00000000
   DEVICE_DTS_DIR := ../dts
   DEVICE_DTS = $(subst _,-,$(1))
+  SUPPORTED_DEVICES = $(subst _,$(comma),$(1))
 endef
 
 include $(SUBTARGET).mk

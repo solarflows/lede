@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7628an.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,7 +20,7 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
-			label = "green:status";
+			label = "mac1200rv2:green:status";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 	};

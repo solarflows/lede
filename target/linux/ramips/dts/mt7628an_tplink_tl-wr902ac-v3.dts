@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7628an_tplink_8m.dtsi"
 
 / {
@@ -43,34 +45,34 @@
 		compatible = "gpio-leds";
 
 		lan {
-			label = "green:lan";
+			label = "tl-wr902ac-v3:green:lan";
 			gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
 		};
 
 		led_power: power {
-			label = "green:power";
+			label = "tl-wr902ac-v3:green:power";
 			gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
-			label = "green:usb";
+			label = "tl-wr902ac-v3:green:usb";
 			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ohci_port1>, <&ehci_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		wan {
-			label = "green:wan";
+			label = "tl-wr902ac-v3:green:wan";
 			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "tl-wr902ac-v3:green:wlan";
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "tl-wr902ac-v3:green:wps";
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -81,6 +83,14 @@
 		groups = "i2c", "i2s", "p0led_an", "p2led_an", "p4led_an", "uart1", "wdt", "wled_an";
 		function = "gpio";
 	};
+};
+
+&ehci {
+	status = "okay";
+};
+
+&ohci {
+	status = "okay";
 };
 
 &pcie {

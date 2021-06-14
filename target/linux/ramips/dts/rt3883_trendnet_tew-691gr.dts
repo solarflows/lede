@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3883.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -77,7 +79,7 @@
 		compatible = "gpio-leds";
 
 		led_wps: wps {
-			label = "green:wps";
+			label = "tew-691gr:green:wps";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 	};

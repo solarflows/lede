@@ -10,6 +10,7 @@
 	compatible = "pcs,cap324", "qca,ar9344";
 
 	aliases {
+		serial0 = &uart;
 		led-boot = &led_power_amber;
 		led-failsafe = &led_power_amber;
 		led-running = &led_power_green;
@@ -34,35 +35,35 @@
 		compatible = "gpio-leds";
 
 		led_power_amber: power_amber {
-			label = "amber:power";
+			label = "pcs:amber:power";
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "pcs:green:power";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		wlan_amber {
-			label = "amber:wlan";
+			label = "pcs:amber:wlan";
 			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
 
 		wlan_green {
-			label = "green:wlan";
+			label = "pcs:green:wlan";
 			gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		lan_amber {
-			label = "amber:lan";
+			label = "pcs:amber:lan";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
 		lan_green {
-			label = "green:lan";
+			label = "pcs:green:lan";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -72,8 +73,14 @@
 	clock-frequency = <25000000>;
 };
 
+&uart {
+	status = "okay";
+};
+
 &spi {
 	status = "okay";
+
+	num-cs = <1>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";

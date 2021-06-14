@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7628an_tplink_8m.dtsi"
 
 / {
@@ -31,48 +33,40 @@
 		compatible = "gpio-leds";
 
 		lan {
-			label = "green:lan";
+			label = "archer-c50-v3:green:lan";
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
-			label = "green:power";
+			label = "archer-c50-v3:green:power";
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
-			label = "green:wan";
+			label = "archer-c50-v3:green:wan";
 			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_orange {
-			label = "orange:wan";
+			label = "archer-c50-v3:orange:wan";
 			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan2g";
+			label = "archer-c50-v3:green:wlan2g";
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan5 {
-			label = "green:wlan5g";
+			label = "archer-c50-v3:green:wlan5g";
 			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "archer-c50-v3:green:wps";
 			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 	};
-};
-
-&ehci {
-	status = "disabled";
-};
-
-&ohci {
-	status = "disabled";
 };
 
 &state_default {

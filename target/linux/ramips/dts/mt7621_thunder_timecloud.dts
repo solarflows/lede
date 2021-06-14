@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -22,12 +24,12 @@
 		compatible = "gpio-leds";
 
 		statw {
-			label = "white:status";
+			label = "timecloud:white:status";
 			gpios = <&gpio 7 GPIO_ACTIVE_HIGH>;
 		};
 
 		led_statuso: stato {
-			label = "orange:status";
+			label = "timecloud:orange:status";
 			gpios = <&gpio 8 GPIO_ACTIVE_HIGH>;
 		};
 	};

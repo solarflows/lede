@@ -23,12 +23,12 @@
 		compatible = "gpio-leds";
 
 		led_power_blue: power {
-			label = "blue:power";
+			/* Name is set device-specific */
 			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
 		};
 
-		wlan {
-			label = "white:wlan";
+		led_wlan_white: wlan {
+			/* Name is set device-specific */
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};

@@ -24,23 +24,23 @@
 		compatible = "gpio-leds";
 
 		led_system: system {
-			label = "green:system";
+			label = "tp-link:green:system";
 			gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		qss {
-			label = "green:qss";
+			label = "tp-link:green:qss";
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
-			label = "green:lan";
+			label = "tp-link:green:lan";
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "tp-link:green:wlan";
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};

@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "bcm6318.dtsi"
 
 #include <dt-bindings/input/input.h>
@@ -50,39 +52,39 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "dsl-275xb:green:power";
 			gpios = <&pinctrl 3 1>;
 			default-state = "on";
 		};
 
 		inet_green {
-			label = "green:inet";
+			label = "dsl-275xb:green:inet";
 			gpios = <&pinctrl 8 1>;
 		};
 
 		inet_red {
-			label = "red:inet-fail";
+			label = "dsl-275xb:red:inet-fail";
 			gpios = <&pinctrl 9 1>;
 		};
 
 		power_red {
-			label = "red:post-failed";
+			label = "dsl-275xb:red:post-failed";
 			gpios = <&pinctrl 11 1>;
 		};
 
 		wps_blue {
-			label = "blue:wps";
+			label = "dsl-275xb:blue:wps";
 			gpios = <&pinctrl 16 1>;
 		};
 
 		dsl_green {
-			label = "green:dsl";
+			label = "dsl-275xb:green:dsl";
 			gpios = <&pinctrl 17 1>;
 		};
 
 		usb_green {
 			/* not user controllable? */
-			label = "green:usb";
+			label = "dsl-275xb:green:usb";
 			gpios = <&pinctrl 49 1>;
 		};
 	};

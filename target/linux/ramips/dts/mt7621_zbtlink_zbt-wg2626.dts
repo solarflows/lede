@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -32,7 +34,7 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
-			label = "green:status";
+			label = "zbt-wg2626:green:status";
 			gpios = <&gpio 24 GPIO_ACTIVE_LOW>;
 		};
 	};

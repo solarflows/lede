@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,7 +20,7 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "red:power";
+			label = "cs-qr10:red:power";
 			gpios = <&gpio1 4 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -40,7 +42,19 @@
 	};
 };
 
+&gpio0 {
+	status = "okay";
+};
+
 &gpio1 {
+	status = "okay";
+};
+
+&gpio2 {
+	status = "okay";
+};
+
+&gpio3 {
 	status = "okay";
 };
 

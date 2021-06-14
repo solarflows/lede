@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3050.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -60,17 +62,17 @@
 		compatible = "gpio-leds";
 
 		led_diag: diag {
-			label = "red:diag";
+			label = "whr-g300n:red:diag";
 			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
 		};
 
 		router {
-			label = "green:router";
+			label = "whr-g300n:green:router";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		security {
-			label = "amber:security";
+			label = "whr-g300n:amber:security";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 	};

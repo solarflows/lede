@@ -1,7 +1,9 @@
-# SPDX-License-Identifier: GPL-2.0-only
 #
 # Copyright (C) 2013 OpenWrt.org
-
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
@@ -115,7 +117,7 @@ IEEE8021X := wpad-basic
 B43 := $(IEEE8021X) kmod-b43
 BRCMFMAC_43602A1 := $(IEEE8021X) kmod-brcmfmac brcmfmac-firmware-43602a1-pcie
 BRCMFMAC_4366B1 := $(IEEE8021X) kmod-brcmfmac brcmfmac-firmware-4366b1-pcie
-BRCMFMAC_4366C0 := $(IEEE8021X) kmod-brcmfmac brcmfmac-firmware-4366c0-pcie-vendor
+BRCMFMAC_4366C0 := $(IEEE8021X) kmod-brcmfmac brcmfmac-firmware-4366c0-pcie
 USB2_PACKAGES := kmod-usb-ohci kmod-usb2 kmod-phy-bcm-ns-usb2
 USB2_PACKAGES += kmod-usb-ledtrig-usbport
 USB3_PACKAGES := $(USB2_PACKAGES) kmod-usb3 kmod-phy-bcm-ns-usb3
@@ -385,24 +387,10 @@ TARGET_DEVICES += smartrg-sr400ac
 define Device/phicomm-k3
   DEVICE_VENDOR := PHICOMM
   DEVICE_MODEL := K3
-  DEVICE_PACKAGES := $(USB3_PACKAGES) wpad kmod-brcmfmac k3wifi luci-app-k3screenctrl
+  DEVICE_PACKAGES := $(IEEE8021X) kmod-brcmfmac k3wifi $(USB3_PACKAGES) k3screenctrl
   IMAGES := trx
 endef
 TARGET_DEVICES += phicomm-k3
-
-define Device/arris-sbr-ac1900p
-  DEVICE_VENDOR := ARRIS
-  DEVICE_MODEL := SBR-AC1900P
-  DEVICE_PACKAGES := $(USB3_PACKAGES)
-endef
-TARGET_DEVICES += arris-sbr-ac1900p
-
-define Device/arris-sbr-ac3200p
-  DEVICE_VENDOR := ARRIS
-  DEVICE_MODEL := SBR-AC3200P
-  DEVICE_PACKAGES := $(BRCMFMAC_43602A1) $(USB3_PACKAGES)
-endef
-TARGET_DEVICES += arris-sbr-ac3200p
 
 define Device/tenda-ac9
   DEVICE_VENDOR := Tenda
@@ -414,7 +402,7 @@ endef
 TARGET_DEVICES += tenda-ac9
 
 define Device/tplink-archer-c5-v2
-  DEVICE_VENDOR := TP-Link
+  DEVICE_VENDOR := TP-LINK
   DEVICE_MODEL := Archer C5
   DEVICE_VARIANT := v2
   DEVICE_PACKAGES := $(B43) $(USB2_PACKAGES)
@@ -425,7 +413,7 @@ endef
 #TARGET_DEVICES += tplink-archer-c5-v2
 
 define Device/tplink-archer-c9-v1
-  DEVICE_VENDOR := TP-Link
+  DEVICE_VENDOR := TP-LINK
   DEVICE_MODEL := Archer C9
   DEVICE_VARIANT := v1
   DEVICE_PACKAGES := $(USB3_PACKAGES)

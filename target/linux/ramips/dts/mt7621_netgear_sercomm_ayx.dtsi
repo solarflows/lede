@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0-only
+// SPDX-License-Identifier: GPL-2.0
 
 #include "mt7621.dtsi"
 
@@ -14,6 +14,10 @@
 		led-running = &led_power;
 		led-upgrade = &led_power;
 		label-mac-device = &gmac0;
+	};
+
+	chosen {
+		bootargs = "console=ttyS0,57600";
 	};
 
 	keys {
@@ -42,30 +46,25 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
 			gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
 		};
 
-		usb {
-			label = "green:usb";
+		led_usb: usb {
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&xhci_ehci_port1>, <&ehci_port2>;
 			linux,default-trigger = "usbport";
 		};
 
-		internet {
-			label = "green:wan";
+		led_internet: internet {
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
-		wifi {
-			label = "green:wifi";
+		led_wifi: wifi {
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
-		wps {
-			label = "green:wps";
+		led_wps: wps {
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 	};

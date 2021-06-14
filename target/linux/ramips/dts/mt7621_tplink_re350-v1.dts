@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7621.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -14,41 +16,45 @@
 		led-upgrade = &led_power;
 	};
 
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "blue:power";
+			label = "re350-v1:blue:power";
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi2g {
-			label = "blue:wifi2G";
+			label = "re350-v1:blue:wifi2G";
 			gpios = <&gpio 23 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi5g {
-			label = "blue:wifi5G";
+			label = "re350-v1:blue:wifi5G";
 			gpios = <&gpio 24 GPIO_ACTIVE_LOW>;
 		};
 
 		wps_r {
-			label = "red:wps";
+			label = "re350-v1:red:wps";
 			gpios = <&gpio 25 GPIO_ACTIVE_HIGH>;
 		};
 
 		wps_b {
-			label = "blue:wps";
+			label = "re350-v1:blue:wps";
 			gpios = <&gpio 26 GPIO_ACTIVE_HIGH>;
 		};
 
 		eth {
-			label = "green:eth_act";
+			label = "re350-v1:green:eth_act";
 			gpios = <&gpio 28 GPIO_ACTIVE_LOW>;
 		};
 
 		eth2 {
-			label = "green:eth_link";
+			label = "re350-v1:green:eth_link";
 			gpios = <&gpio 29 GPIO_ACTIVE_LOW>;
 		};
 	};

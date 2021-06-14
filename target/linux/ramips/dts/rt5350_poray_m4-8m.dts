@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt5350_poray_m4.dtsi"
 
 / {

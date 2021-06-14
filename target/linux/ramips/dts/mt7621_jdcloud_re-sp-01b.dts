@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+/dts-v1/;
 
 #include "mt7621.dtsi"
 
@@ -35,18 +36,18 @@
 		compatible = "gpio-leds";
 
 		led_red: red {
-			label = "red:sys";
+			label = "jdcloud:red:sys";
 			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
 			panic-indicator;
 		};
 
 		led_green: green {
-			label = "green:sys";
+			label = "jdcloud:green:sys";
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_blue: blue {
-			label = "blue:sys";
+			label = "jdcloud:blue:sys";
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 	};

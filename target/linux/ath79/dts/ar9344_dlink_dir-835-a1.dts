@@ -11,33 +11,34 @@
 		led-failsafe = &led_power_orange;
 		led-running = &led_power_green;
 		led-upgrade = &led_power_orange;
+		serial0 = &uart;
 	};
 
 	leds {
 		compatible = "gpio-leds";
 
 		led_power_green: power_green {
-			label = "green:power";
+			label = "d-link:green:power";
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_green {
-			label = "green:wan";
+			label = "d-link:green:wan";
 			gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
-			label = "green:wps";
+			label = "d-link:green:wps";
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_orange: power_orange {
-			label = "orange:power";
+			label = "d-link:orange:power";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_orange {
-			label = "orange:wan";
+			label = "d-link:orange:wan";
 			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 		};
 	};

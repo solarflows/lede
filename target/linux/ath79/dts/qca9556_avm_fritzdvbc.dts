@@ -48,43 +48,43 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "fritzdvbc:green:power";
 			gpios = <&spi_gpio 6 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
-			label = "green:wlan";
+			label = "fritzdvbc:green:wlan";
 			gpios = <&spi_gpio 7 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
 
 		tv {
-			label = "green:tv";
+			label = "fritzdvbc:green:tv";
 			gpios = <&spi_gpio 5 GPIO_ACTIVE_LOW>;
 		};
 
 		rssihigh {
-			label = "green:rssihigh";
+			label = "fritzdvbc:green:rssihigh";
 			gpios = <&spi_gpio 1 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimediumhigh {
-			label = "green:rssimediumhigh";
+			label = "fritzdvbc:green:rssimediumhigh";
 			gpios = <&spi_gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimedium {
-			label = "green:rssimedium";
+			label = "fritzdvbc:green:rssimedium";
 			gpios = <&spi_gpio 3 GPIO_ACTIVE_LOW>;
 		};
 
 		rssimediumlow {
-			label = "green:rssimediumlow";
+			label = "fritzdvbc:green:rssimediumlow";
 			gpios = <&spi_gpio 4 GPIO_ACTIVE_LOW>;
 		};
 
 		rssilow {
-			label = "green:rssilow";
+			label = "fritzdvbc:green:rssilow";
 			gpios = <&spi_gpio 0 GPIO_ACTIVE_LOW>;
 		};
 	};

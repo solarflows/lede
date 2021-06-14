@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# Licensed under the terms of the GNU GPL License version 2 or later.
 #
 # Author: Jason Wu <jason.hy.wu@gmail.com>
 # with modifications for multi-DTB-same-image by:

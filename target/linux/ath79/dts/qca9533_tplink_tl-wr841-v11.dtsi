@@ -13,12 +13,12 @@
 
 &leds {
 	led_system: system {
-		label = "green:system";
+		label = "tp-link:green:system";
 		gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 	};
 
 	wan_orange {
-		label = "orange:wan";
+		label = "tp-link:orange:wan";
 		gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 	};
 };

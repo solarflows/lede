@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -34,13 +36,13 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
-			label = "green:power";
+			label = "dch-m225:green:power";
 			gpios = <&gpio1 5 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		status {
-			label = "red:status";
+			label = "dch-m225:red:status";
 			gpios = <&gpio1 0 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -67,6 +69,10 @@
 			sound-dai = <&codec>;
 		};
 	};
+};
+
+&gpio0 {
+	status = "okay";
 };
 
 &gpio1 {

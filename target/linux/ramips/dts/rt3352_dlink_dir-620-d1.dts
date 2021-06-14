@@ -1,3 +1,5 @@
+/dts-v1/;
+
 #include "rt3352.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -18,12 +20,12 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
-			label = "green:status";
+			label = "dir-620-d1:green:status";
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		wifi {
-			label = "green:wifi";
+			label = "dir-620-d1:green:wifi";
 			gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
 		};
 	};
