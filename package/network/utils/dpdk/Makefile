@@ -13,8 +13,8 @@ PKG_MD5SUM := a78bba290b11d9717d1272cc6bfaf7c3
 PKG_BUILD_DEPENDS:= meson/host ninja/host
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
-include ../../../feeds/packages/devel/meson/meson.mk
-include ../../../feeds/packages/devel/ninja/ninja.mk
+include ../../../feeds/packages/meson/meson.mk
+include ../../../feeds/packages/ninja/ninja.mk
 
 ifeq ($(CONFIG_LIBC),"glibc")
 	PKG_CONFIG := $(PKG_BUILD_DIR)/config/arm/arm_armv7a_linux_glibc_gcc
@@ -27,13 +27,13 @@ TARGET_CFLAGS += -D_GNU_SOURCE -Wno-unused-result -Wno-format-nonliteral
 define Package/dpdk
   SECTION    := net
   CATEGORY   := Network
-  TITLE      := Data Plane Development Kit (DPDK)
-  DEPENDS    := @(arm) +librt +libpthread +libbpf +libpcap
+  TITLE      := Data Plane Development Kit (DPDK) 
+  DEPENDS    := @(arm) +librt +libpthread +libbpf +libpcap	
 endef
 
 define Package/dpdk/description
-  DPDK consists of libraries to accelerate packet processing
-  workloads running on a wide variety of CPU architectures.
+  DPDK consists of libraries to accelerate packet processing 
+  workloads running on a wide variety of CPU architectures. 
 endef
 
 define Build/Configure
