@@ -21,7 +21,7 @@ msgid "Not running"
 msgstr "未运行"
 
 msgid "qBittorrent-Enhanced-Edition Run Status"
-msgstr "qBittorrent-Enhanced-Edition运行状态"
+msgstr "qBittorrent 增强版 运行状态"
 
 msgid "Basic Settings"
 msgstr "基本设置"
@@ -30,7 +30,7 @@ msgid "Enable"
 msgstr "启用"
 
 msgid "qBittorrent-Enhanced-Edition is a cross-platform free and open-source BitTorrent client"
-msgstr "qBittorrent-Enhanced-Edition是一个基于 QT 的跨平台的开源 BitTorrent 客户端"
+msgstr "qBittorrent 增强版 是一个基于 QT 的跨平台的开源 BitTorrent 客户端"
 
 msgid "profile_dir"
 msgstr "配置文件目录"

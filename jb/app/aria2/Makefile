@@ -3,6 +3,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=aria2
 PKG_VERSION:=1.35.0
 PKG_RELEASE:=2021.02.19
+PKG_INSTALL:=1
 STRIP:=true
 
 include $(INCLUDE_DIR)/package.mk
@@ -18,8 +19,8 @@ define Package/$(PKG_NAME)
 endef
 
 define Package/$(PKG_NAME)/description
-aria2 static builds for GNU/Linux with custom patches.
-utility
+	aria2 static builds for GNU/Linux with custom patches.
+	utility
 endef
 
 ifeq ($(ARCH),i386)
@@ -36,7 +37,6 @@ endif
 
 
 PKG_SOURCE:=aria2-$(PKG_VERSION)-static-linux-$(PKG_ARCH_ARIA2).tar.gz
-
 PKG_SOURCE_URL:=https://github.com/P3TERX/aria2-builder/releases/download/$(PKG_VERSION)_$(PKG_RELEASE)/
 UNTAR_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 PKG_HASH:=skip
@@ -46,10 +46,8 @@ define Build/Prepare
 	tar -zxvf $(DL_DIR)/$(PKG_SOURCE) -C $(UNTAR_DIR)
 endef
 
-define Build/Configure
-endef
-
-define Build/Compile
+define Package/aria2/conffiles
+/etc/config/aria2
 endef
 
 define Package/$(PKG_NAME)/install
