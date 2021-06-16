@@ -6,18 +6,18 @@ function showMsg()
  }
 
 function getdir(){
-    for element in `ls $1`
+    for element in $(ls $1)
     do
         dir_or_file=$1"/"$element
-        if [ -d $dir_or_file ]
+        if [ -d "$dir_or_file" ]
         then
-            cd $1"/"$element
-            showMsg 'git pull '$element
+            cd "$1""/""$element" || exit
+            showMsg 'git pull '"$element"
             git pull
         else
-            echo $dir_or_file
+            echo "$dir_or_file"
         fi
     done
 }
 
-getdir $1
+getdir "$1"
