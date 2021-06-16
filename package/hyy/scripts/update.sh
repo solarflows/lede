@@ -21,7 +21,6 @@ if [ -e $work_dis ]; then
 elif [ ! -d $work_dis ]; then
   # 创建目录
   mkdir -vp "$work_dir"
-  mkdir -vp "$work_dir"/app
   # 克隆需要修改的插件到临时目录中
   git clone https://github.com/kenzok8/openwrt-packages.git $work_dis/kenzok8
   git clone https://github.com/Lienol/openwrt-package.git $work_dis/lienol
