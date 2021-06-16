@@ -22,7 +22,7 @@ fi
 if [ $RUNTIMES -eq 0 ]; then
   cat "$s_dir"/newfeeds >>feeds.conf.default
   if [ $? ]; then
-    cat feeds.conf.default >$s_dir/tmp/feeds.modify
+    cat feeds.conf.default >"$s_dir"/tmp/feeds.modify
     echo -e "\033[32m Add Feeds To Feeds.conf.default Success \033[0m"
     echo -e "\033[32m Start Update.sh\033[0m"
     "$s_dir"/update.sh
