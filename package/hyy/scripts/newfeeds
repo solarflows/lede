@@ -1,0 +1,9 @@
+
+src-git helloworld https://github.com/fw876/helloworld
+src-git OpenAppFilter https://github.com/destan19/OpenAppFilter.git
+src-git rosytheme https://github.com/rosywrt/luci-theme-rosy.git
+src-git darkmatter https://github.com/apollo-ng/luci-theme-darkmatter.git
+src-git passwall https://github.com/xiaorouji/openwrt-passwall.git
+src-git jerrykuku https://github.com/jerrykuku/openwrt-package.git
+src-git hyy https://github.com/hyy-666/openwrt-packages.git
+src-git cups https://github.com/hyy-666/lede-cups.git
