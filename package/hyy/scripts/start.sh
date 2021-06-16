@@ -32,7 +32,7 @@ if [ $RUNTIMES -eq 0 ]; then
   fi
 else
   echo -e "\033[31m Start $0 ！ \033[0m"
-  git pull
+  echo -e "\033[31m Update root file！ \033[0m" && git pull
   "$s_dir"/update.sh
 fi
 exit 0
