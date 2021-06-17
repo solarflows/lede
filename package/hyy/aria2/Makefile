@@ -56,7 +56,7 @@ endef
 define Build/Compile
 endef
 
-define Package/$(PKG_NAME)/install
+define Package/aria2/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(UNTAR_DIR)/aria2c $(1)/usr/bin
 	chmod 755 $(1)/usr/bin/aria2c
