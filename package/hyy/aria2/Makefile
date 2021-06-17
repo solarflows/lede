@@ -50,6 +50,12 @@ define Package/aria2/conffiles
 /etc/config/aria2
 endef
 
+define Build/Configure
+endef
+
+define Build/Compile
+endef
+
 define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(UNTAR_DIR)/aria2c $(1)/usr/bin

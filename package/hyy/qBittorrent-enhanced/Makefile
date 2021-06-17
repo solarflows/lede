@@ -38,6 +38,12 @@ define Build/Prepare
 	mv -f $(UNTAR_DIR)/qbittorrent-nox $(UNTAR_DIR)/qBittorrentEE-nox
 endef
 
+define Build/Configure
+endef
+
+define Build/Compile
+endef
+
 define Package/qBittorrent-enhanced/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(UNTAR_DIR)/qBittorrentEE-nox $(1)/usr/bin
