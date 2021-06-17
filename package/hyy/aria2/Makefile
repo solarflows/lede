@@ -35,7 +35,6 @@ ifeq ($(ARCH),aarch64)
 	PKG_ARCH_ARIA2:=arm64
 endif
 
-
 PKG_SOURCE:=aria2-$(PKG_VERSION)-static-linux-$(PKG_ARCH_ARIA2).tar.gz
 PKG_SOURCE_URL:=https://github.com/P3TERX/aria2-builder/releases/download/$(PKG_VERSION)_$(PKG_RELEASE)/
 UNTAR_DIR:=$(BUILD_DIR)/$(PKG_NAME)
@@ -46,15 +45,10 @@ define Build/Prepare
 	tar -zxvf $(DL_DIR)/$(PKG_SOURCE) -C $(UNTAR_DIR)
 endef
 
-
 define Build/Configure
 endef
 
 define Build/Compile
-endef
-
-define Package/aria2/conffiles
-/etc/config/aria2
 endef
 
 define Package/aria2/install

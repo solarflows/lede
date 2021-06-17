@@ -7,10 +7,11 @@ PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/qBittorrent-enhanced
+define Package/$(PKG_NAME)
   SUBMENU:=BitTorrent
   SECTION:=net
   CATEGORY:=Network
+  DEPENDS:=@(x86_64||mipsel||mips||mips64||aarch64)
   TITLE:=bittorrent client programmed in C++ / Qt
 endef
 
@@ -18,9 +19,25 @@ ifeq ($(ARCH),x86_64)
 	PKG_ARCH_qBittorrent-enhanced:=x86_64
 endif
 
+
 ifeq ($(ARCH),aarch64)
 	PKG_ARCH_qBittorrent-enhanced:=aarch64
 endif
+
+ifeq ($(ARCH),mips)
+	PKG_ARCH_qBittorrent-enhanced:=mips
+endif
+
+ifeq ($(ARCH),mipsel)
+	PKG_ARCH_qBittorrent-enhanced:=mipsel
+endif
+
+ifeq ($(ARCH),mips64)
+	PKG_ARCH_qBittorrent-enhanced:=mips64
+endif
+
+
+
 
 PKG_SOURCE:=qBittorrent-nox_$(PKG_ARCH_qBittorrent-enhanced)-linux-musl_static.zip
 PKG_SOURCE_URL:=https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-$(PKG_VERSION)/
