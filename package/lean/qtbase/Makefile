@@ -109,8 +109,6 @@ CONFIGURE_ARGS = \
 		-ltcg \
 		-mimetype-database \
 		-openssl-linked \
-		-sql-sqlite \
-		-sqlite \
 		-qt-doubleconversion \
 		-system-pcre \
 		-system-zlib \
@@ -147,7 +145,9 @@ CONFIGURE_ARGS = \
 		-no-sql-oci \
 		-no-sql-odbc \
 		-no-sql-psql \
+		-no-sql-sqlite \
 		-no-sql-sqlite2 \
+		-no-sqlite \
 		-no-sql-tds \
 		-no-trace \
 		-no-tslib \
