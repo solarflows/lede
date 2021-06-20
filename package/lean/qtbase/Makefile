@@ -58,6 +58,7 @@ define Package/qtbase
 	DEPENDS+=$(QTBASE_DEPENDS)
 endef
 
+
 define Package/qtbase/install
 	true
 endef
@@ -195,21 +196,23 @@ define DefineQtbaseLibrary
     This package contains the qt5 $(1) library.
   endef
 
-  define Package/qt5-$(1)/install
-    $(call Package/qtbase/Default/install,$$(1),$(1))
-  endef
+  ifeq ($(1),sql)
+	define Package/qt5-sql/install
+		$(INSTALL_DIR) $(1)/usr/lib/Qt/plugins/sqldrivers
+		$(CP) $(PKG_BUILD_DIR)/lib/libQt5Sql.so* $(1)/usr/lib/
+		$(CP) $(PKG_BUILD_DIR)/plugins/sqldrivers/*.so $(1)/usr/lib/Qt/plugins/sqldrivers/
+	endef
+  else
+	define Package/qt5-$(1)/install
+		$(call Package/qtbase/Default/install,$$(1),$(1))
+	endef
 endef
 
-define Package/qt5-sql/install
-	$(INSTALL_DIR) $(1)/usr/lib/Qt/plugins/sqldrivers
-	$(CP) $(PKG_BUILD_DIR)/lib/libQt5Sql.so* $(1)/usr/lib/
-	$(CP) $(PKG_BUILD_DIR)/plugins/sqldrivers/*.so $(1)/usr/lib/Qt/plugins/sqldrivers/
-endef
 
 $(eval $(call DefineQtbaseLibrary,core,,+QT5_INCLUDE_ATOMIC:libatomic +libpcre2-16 +zlib))
 $(eval $(call DefineQtbaseLibrary,network,core,+libopenssl +zlib))
 $(eval $(call DefineQtbaseLibrary,xml,core,))
+$(eval $(call DefineQtbaseLibrary,sql,core,libsqlite3))
 
 $(foreach lib,$(QTBASE_LIBS),$(eval $(call BuildPackage,qt5-$(lib))))
 $(eval $(call BuildPackage,qtbase))
-$(eval $(call BuildPackage,qt5-sql))
