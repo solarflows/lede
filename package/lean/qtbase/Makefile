@@ -195,16 +195,16 @@ define DefineQtbaseLibrary
     This package contains the qt5 $(1) library.
   endef
     ifneq ($(1),sql)
-      define Package/qt5-$(1)/install
-		$(call Package/qtbase/Default/install,$$(1),$(1))
-      endef
+  define Package/qt5-$(1)/install
+    $(call Package/qtbase/Default/install,$$(1),$(1))
+  endef
     endif
     ifeq ($(1),sql)
-      define Package/qt5-$(1)/install
-		$(INSTALL_DIR) $$(1)/usr/lib/Qt/plugins/sqldrivers
-		$(CP) $(PKG_BUILD_DIR)/lib/libQt5Sql.so* $$(1)/usr/lib/
-		$(CP) $(PKG_BUILD_DIR)/plugins/sqldrivers/*.so $$(1)/usr/lib/Qt/plugins/sqldrivers/
-      endef
+  define Package/qt5-$(1)/install
+    $(INSTALL_DIR) $$(1)/usr/lib/Qt/plugins/sqldrivers
+    $(CP) $(PKG_BUILD_DIR)/lib/libQt5Sql.so* $$(1)/usr/lib/
+    $(CP) $(PKG_BUILD_DIR)/plugins/sqldrivers/*.so $$(1)/usr/lib/Qt/plugins/sqldrivers/
+  endef
     endif
 endef
 
