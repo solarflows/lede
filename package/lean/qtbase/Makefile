@@ -211,6 +211,7 @@ endef
 $(eval $(call DefineQtbaseLibrary,core,,+QT5_INCLUDE_ATOMIC:libatomic +libpcre2-16 +zlib))
 $(eval $(call DefineQtbaseLibrary,network,core,+libopenssl +zlib))
 $(eval $(call DefineQtbaseLibrary,xml,core,))
+$(eval $(call DefineQtbaseLibrary,sql,core,+libsqlite3))
 
 $(foreach lib,$(QTBASE_LIBS),$(eval $(call BuildPackage,qt5-$(lib))))
 $(eval $(call BuildPackage,qtbase))
