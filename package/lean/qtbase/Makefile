@@ -206,6 +206,7 @@ define DefineQtbaseLibrary
 	define Package/qt5-$(1)/install
 		$(call Package/qtbase/Default/install,$$(1),$(1))
 	endef
+  endif
 endef
 
 
