@@ -109,6 +109,8 @@ CONFIGURE_ARGS = \
 		-ltcg \
 		-mimetype-database \
 		-openssl-linked \
+		-sql-sqlite \
+		-sqlite \
 		-qt-doubleconversion \
 		-system-pcre \
 		-system-zlib \
@@ -145,10 +147,8 @@ CONFIGURE_ARGS = \
 		-no-sql-oci \
 		-no-sql-odbc \
 		-no-sql-psql \
-		-no-sql-sqlite \
 		-no-sql-sqlite2 \
 		-no-sql-tds \
-		-no-sqlite \
 		-no-trace \
 		-no-tslib \
 		-no-vulkan \
@@ -159,7 +159,6 @@ CONFIGURE_ARGS = \
 		-no-compile-examples \
 		-no-feature-concurrent \
 		-no-feature-gssapi \
-		-no-feature-sql \
 		-no-feature-testlib \
 		-make libs \
 		-nomake examples \
@@ -201,9 +200,16 @@ define DefineQtbaseLibrary
   endef
 endef
 
+define Package/qt5-sql/install
+	$(INSTALL_DIR) $(1)/usr/lib/Qt/plugins/sqldrivers
+	$(CP) $(PKG_BUILD_DIR)/lib/libQt5Sql.so* $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/plugins/sqldrivers/*.so $(1)/usr/lib/Qt/plugins/sqldrivers/
+endef
+
 $(eval $(call DefineQtbaseLibrary,core,,+QT5_INCLUDE_ATOMIC:libatomic +libpcre2-16 +zlib))
 $(eval $(call DefineQtbaseLibrary,network,core,+libopenssl +zlib))
 $(eval $(call DefineQtbaseLibrary,xml,core,))
 
 $(foreach lib,$(QTBASE_LIBS),$(eval $(call BuildPackage,qt5-$(lib))))
 $(eval $(call BuildPackage,qtbase))
+$(eval $(call BuildPackage,qt5-sql))
