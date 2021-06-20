@@ -175,8 +175,15 @@ define Build/InstallDev
 endef
 
 define Package/qtbase/Default/install
+ifneq ($(2),sql)
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_BUILD_DIR)/lib/libQt5$(shell echo $(2) | sed -e 's/\b[[:alpha:]]/\u&/g').so* $(1)/usr/lib
+endif
+ifeq ($(2),sql)
+	$(INSTALL_DIR) $(1)/usr/lib/Qt/plugins/sqldrivers
+	$(CP) $(PKG_BUILD_DIR)/lib/libQt5$(shell echo $(2) | sed -e 's/\b[[:alpha:]]/\u&/g').so* $(1)/usr/lib
+	$(CP) $(PKG_BUILD_DIR)/plugins/sqldrivers/*.so $(1)/usr/lib/Qt/plugins/sqldrivers/
+endif
 endef
 
 define DefineQtbaseLibrary
@@ -194,24 +201,16 @@ define DefineQtbaseLibrary
   define Package/qt5-$(1)/description
     This package contains the qt5 $(1) library.
   endef
-    ifneq ($(1),sql)
+
   define Package/qt5-$(1)/install
     $(call Package/qtbase/Default/install,$$(1),$(1))
   endef
-    endif
-    ifeq ($(1),sql)
-  define Package/qt5-$(1)/install
-    $(INSTALL_DIR) $$(1)/usr/lib/Qt/plugins/sqldrivers
-    $(CP) $(PKG_BUILD_DIR)/lib/libQt5Sql.so* $$(1)/usr/lib/
-    $(CP) $(PKG_BUILD_DIR)/plugins/sqldrivers/*.so $$(1)/usr/lib/Qt/plugins/sqldrivers/
-  endef
-    endif
 endef
 
 $(eval $(call DefineQtbaseLibrary,core,,+QT5_INCLUDE_ATOMIC:libatomic +libpcre2-16 +zlib))
 $(eval $(call DefineQtbaseLibrary,network,core,+libopenssl +zlib))
 $(eval $(call DefineQtbaseLibrary,xml,core,))
-$(eval $(call DefineQtbaseLibrary,sql,core,+libsqlite3))
+$(eval $(call DefineQtbaseLibrary,sql,core,))
 
 $(foreach lib,$(QTBASE_LIBS),$(eval $(call BuildPackage,qt5-$(lib))))
 $(eval $(call BuildPackage,qtbase))
