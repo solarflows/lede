@@ -175,15 +175,8 @@ define Build/InstallDev
 endef
 
 define Package/qtbase/Default/install
-ifneq ($(2),sql)
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_BUILD_DIR)/lib/libQt5$(shell echo $(2) | sed -e 's/\b[[:alpha:]]/\u&/g').so* $(1)/usr/lib
-endif
-ifeq ($(2),sql)
-	$(INSTALL_DIR) $(1)/usr/lib/Qt/plugins/sqldrivers
-	$(CP) $(PKG_BUILD_DIR)/lib/libQt5$(shell echo $(2) | sed -e 's/\b[[:alpha:]]/\u&/g').so* $(1)/usr/lib
-	$(CP) $(PKG_BUILD_DIR)/plugins/sqldrivers/*.so $(1)/usr/lib/Qt/plugins/sqldrivers/
-endif
 endef
 
 define DefineQtbaseLibrary
