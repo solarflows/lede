@@ -449,8 +449,8 @@ zbtlink,zbt-wd323)
 	ucidef_set_led_switch "lan2" "LAN2" "orange:lan2" "switch0" "0x08"
 	;;
 csac,iii)
-	ucidef_set_led_wlan "wlan5g" "WLAN5G" "yellow:wlan5g" "phy0tpt"
-	ucidef_set_led_wlan "wlan2g" "WLAN2G" "yellow:wlan2g" "phy0tpt"
+	ucidef_set_led_wlan "wlan5g" "WLAN5G" "blue:wlan5g" "phy0tpt"
+	ucidef_set_led_wlan "wlan2g" "WLAN2G" "blue:wlan2g" "phy0tpt"
 	;;
 esac
 

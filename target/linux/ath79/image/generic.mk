@@ -39,6 +39,34 @@ define Build/append-md5sum-bin
 		xargs echo -ne >> $@
 endef
 
+define Build/csac_csac10-factory
+  -[ -f "$@" ] && \
+  mkdir -p "$@.tmp" && \
+  mv "$@" "$@.tmp/UploadBrush-bin.img" && \
+  binmd5=$$($(STAGING_DIR_HOST)/bin/mkhash md5 "$@.tmp/UploadBrush-bin.img" | head -c32) && \
+  oemmd5=$$(echo -n TB-CSAC10-QCA9563_9886-ROUTE-CSAC10 | $(STAGING_DIR_HOST)/bin/mkhash md5 | head -c32) && \
+  echo -n $${binmd5}$${oemmd5} | $(STAGING_DIR_HOST)/bin/mkhash md5 | head -c32 >"$@.tmp/bin_random_oem.txt" && \
+  echo -n V4.4-201910201745 >"$@.tmp/version.txt" && \
+  $(TAR) -czf $@.tmp.tgz -C "$@.tmp" UploadBrush-bin.img bin_random_oem.txt version.txt && \
+  $(STAGING_DIR_HOST)/bin/openssl aes-256-cbc -md md5 -salt -in $@.tmp.tgz -out "$@" -k QiLunSmartWL && \
+  printf %32s CSAC10 >>"$@" && \
+  rm -rf "$@.tmp"
+endef
+
+define Build/csac_csac05-factory
+  -[ -f "$@" ] && \
+  mkdir -p "$@.tmp" && \
+  mv "$@" "$@.tmp/UploadBrush-bin.img" && \
+  binmd5=$$($(STAGING_DIR_HOST)/bin/mkhash md5 "$@.tmp/UploadBrush-bin.img" | head -c32) && \
+  oemmd5=$$(echo -n TB-CSAC05-QCA9563_9886-ROUTE-CSAC05 | $(STAGING_DIR_HOST)/bin/mkhash md5 | head -c32) && \
+  echo -n $${binmd5}$${oemmd5} | $(STAGING_DIR_HOST)/bin/mkhash md5 | head -c32 >"$@.tmp/bin_random_oem.txt" && \
+  echo -n V4.4-201910201745 >"$@.tmp/version.txt" && \
+  $(TAR) -czf $@.tmp.tgz -C "$@.tmp" UploadBrush-bin.img bin_random_oem.txt version.txt && \
+  $(STAGING_DIR_HOST)/bin/openssl aes-256-cbc -md md5 -salt -in $@.tmp.tgz -out "$@" -k QiLunSmartWL && \
+  printf %32s CSAC05 >>"$@" && \
+  rm -rf "$@.tmp"
+endef
+
 define Build/cybertan-trx
 	@echo -n '' > $@-empty.bin
 	-$(STAGING_DIR_HOST)/bin/trx -o $@.new \
@@ -159,7 +187,6 @@ endef
 define Build/wrgg-pad-rootfs
 	$(STAGING_DIR_HOST)/bin/padjffs2 $(IMAGE_ROOTFS) -c 64 >>$@
 endef
-
 
 define Device/seama
   KERNEL := kernel-bin | append-dtb | relocate-kernel | lzma
@@ -672,6 +699,26 @@ define Device/compex_wpj563
   IMAGE/cpximg-7a02.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | mkmylofw_16m 0x694 2
 endef
 TARGET_DEVICES += compex_wpj563
+
+define Device/csac_iii
+  SOC := qca9563
+  DEVICE_VENDOR := CSAC
+  DEVICE_MODEL := III
+  IMAGE_SIZE := 14464k
+  LOADER_TYPE := bin
+  LOADER_FLASH_OFFS := 0x60000
+  COMPILE := loader-$(1).bin loader-$(1).uImage
+  COMPILE/loader-$(1).bin := loader-okli-compile
+  COMPILE/loader-$(1).uImage := append-loader-okli $(1) | pad-to 64k | lzma | uImage lzma
+  KERNEL := kernel-bin | append-dtb | lzma | uImage lzma -M 0x4f4b4c49
+  IMAGES += breed-factory.bin factory-10.bin factory-05.bin
+  IMAGE/breed-factory.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | \
+			     prepad-okli-kernel $(1) | pad-to 14528k | append-okli-kernel $(1)
+  IMAGE/factory-10.bin := $$(IMAGE/breed-factory.bin) | csac_csac10-factory $(1)
+  IMAGE/factory-05.bin := $$(IMAGE/breed-factory.bin) | csac_csac05-factory $(1)
+  DEVICE_PACKAGES := kmod-leds-reset kmod-ath10k-ct ath10k-firmware-qca9888-ct kmod-usb-core kmod-usb2
+endef
+TARGET_DEVICES += csac_iii
 
 define Device/devolo_dlan-pro-1200plus-ac
   SOC := ar9344
@@ -1868,26 +1915,6 @@ define Device/phicomm_k2t
   DEVICE_PACKAGES := kmod-leds-reset kmod-ath10k-ct-smallbuffers ath10k-firmware-qca9888-ct
 endef
 TARGET_DEVICES += phicomm_k2t
-
-define Device/csac_iii
-  SOC := qca9563
-  DEVICE_VENDOR := CSAC
-  DEVICE_MODEL := III
-  IMAGE_SIZE := 14464k
-  LOADER_TYPE := bin
-  LOADER_FLASH_OFFS := 0x60000
-  COMPILE := loader-$(1).bin loader-$(1).uImage
-  COMPILE/loader-$(1).bin := loader-okli-compile
-  COMPILE/loader-$(1).uImage := append-loader-okli $(1) | pad-to 64k | lzma | uImage lzma
-  KERNEL := kernel-bin | append-dtb | lzma | uImage lzma -M 0x4f4b4c49
-  IMAGES += breed-factory.bin factory-10.bin factory-05.bin
-  IMAGE/breed-factory.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | \
-			     prepad-okli-kernel $(1) | pad-to 14528k | append-okli-kernel $(1)
-  IMAGE/factory-10.bin := $$(IMAGE/breed-factory.bin) | xwrt_csac10-factory $(1)
-  IMAGE/factory-05.bin := $$(IMAGE/breed-factory.bin) | xwrt_csac05-factory $(1)
-  DEVICE_PACKAGES := kmod-leds-reset kmod-ath10k-ct ath10k-firmware-qca9888-ct kmod-usb-core kmod-usb2 lte-modem-xwrt-csac
-endef
-TARGET_DEVICES += csac_iii
 
 define Device/pisen_ts-d084
   $(Device/tplink-8mlzma)
