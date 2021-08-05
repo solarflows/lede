@@ -968,10 +968,10 @@ define Device/motorola_mr2600
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := Motorola
   DEVICE_MODEL := MR2600
-  DEVICE_PACKAGES := kmod-mt7615d kmod-usb3 kmod-usb-ledtrig-usbport \
-	luci-app-mtwifi -wpad-openssl uboot-envtools
+  DEVICE_PACKAGES := kmod-mt7615e kmod-mt7615-firmware kmod-usb3 kmod-usb-ledtrig-usbport
 endef
 TARGET_DEVICES += motorola_mr2600
+
 
 define Device/mtc_wr1201
   $(Device/dsa-migration)
