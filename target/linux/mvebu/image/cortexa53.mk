@@ -1,3 +1,12 @@
+define Device/catdrive_catdrive
+  $(call Device/Default-arm64)
+  DEVICE_VENDOR := CATDRIVE
+  DEVICE_MODEL := CatDrive
+  SOC := armada-3720
+  BOOT_SCRIPT := espressobin
+endef
+TARGET_DEVICES += catdrive_catdrive
+
 define Device/glinet_gl-mv1000
   $(call Device/Default-arm64)
   DEVICE_VENDOR := GL.iNet
