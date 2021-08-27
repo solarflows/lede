@@ -1,10 +1,8 @@
 define Device/catdrive_catdrive
-  $(call Device/Default)
+  $(call Device/Default-arm64)
   DEVICE_VENDOR := CATDRIVE
   DEVICE_MODEL := CatDrive
   SOC := armada-3720
-  IMAGE/sdcard.img.gz := boot-scr | boot-img-ext4 | sdcard-img-ext4 | gzip | append-metadata
-  IMAGES += sdcard.img.gz
 endef
 TARGET_DEVICES += catdrive_catdrive
 
