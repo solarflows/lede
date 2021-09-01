@@ -28,25 +28,41 @@
 		enable-active-high;
 		gpio = <&gpiosb 0 GPIO_ACTIVE_HIGH>;
 	};
+
+	gpio_fan {
+		compatible = "gpio-fan";
+		gpios = <&gpiosb 4 GPIO_ACTIVE_HIGH>;
+		gpio-fan,speed-map = <0    0
+				      1000 1>;
+	};
 };
 
 &sata {
 	status = "okay";
 };
 
-&sdhci0 {
+&sdhci1 {
 	non-removable;
 	bus-width = <8>;
 	mmc-ddr-1_8v;
 	mmc-hs200-1_8v;
 	marvell,pad-type = "fixed-1-8v";
+	pinctrl-names = "default";
+	pinctrl-0 = <&mmc_pins>;
 	status = "okay";
+
+	#address-cells = <1>;
+	#size-cells = <0>;
+	mmccard: mmccard@0 {
+		compatible = "mmc-card";
+		reg = <0>;
+	};
 };
 
 &spi0 {
 	status = "okay";
 
-	flash@0 {
+	m25p80@0 {
 		reg = <0>;
 		compatible = "jedec,spi-nor";
 		spi-max-frequency = <104000000>;
@@ -72,7 +88,6 @@
 				label = "reserve";
 				reg = <0x200000 0x600000>;
 			};
-
 		};
 	};
 };
@@ -88,13 +103,58 @@
 };
 
 &mdio {
-	ethphy0: ethernet-phy@0 {
+	status = "okay";
+	phy0: ethernet-phy@0 {
 		reg = <0>;
 	};
 };
 
 &eth0 {
 	phy-mode = "sgmii";
-	phy = <&ethphy0>;
+	phy = <&phy0>;
 	status = "okay";
+};
+
+&i2c0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c1_pins>;
+	status = "okay";
+	aw2013@45 {
+		compatible = "awinic,aw2013";
+		reg = <0x45>;
+		leds_num = <3>;
+		aw2013,red {
+			aw2013,name = "red";
+			aw2013,id = <0>;
+			aw2013,max-brightness = <255>;
+			aw2013,max-current = <3>;
+			aw2013,rise-time-ms = <2>;
+			aw2013,hold-time-ms = <1>;
+			aw2013,fall-time-ms = <2>;
+			aw2013,off-time-ms = <1>;
+		};
+
+		aw2013,green {
+			aw2013,name = "green";
+			aw2013,id = <1>;
+			aw2013,max-brightness = <255>;
+			aw2013,max-current = <3>;
+			aw2013,rise-time-ms = <2>;
+			aw2013,hold-time-ms = <1>;
+			aw2013,fall-time-ms = <2>;
+			aw2013,off-time-ms = <1>;
+			default-state = "on";
+		};
+
+		aw2013,blue {
+			aw2013,name = "blue";
+			aw2013,id = <2>;
+			aw2013,max-brightness = <255>;
+			aw2013,max-current = <3>;
+			aw2013,rise-time-ms = <2>;
+			aw2013,hold-time-ms = <1>;
+			aw2013,fall-time-ms = <2>;
+			aw2013,off-time-ms = <1>;
+		};
+	};
 };

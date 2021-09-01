@@ -1,0 +1,25 @@
+From b91d7e93db9d794909b6cd67d5547bcbd1918c00 Mon Sep 17 00:00:00 2001
+From: hanwckf <my375229675@gmail.com>
+Date: Sat, 27 Jul 2019 16:41:57 +0800
+Subject: [PATCH 03/19] phy: configure 88e1512 leds
+
+---
+ drivers/net/phy/marvell.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/phy/marvell.c b/drivers/net/phy/marvell.c
+index 028a04065..e3099b104 100644
+--- a/drivers/net/phy/marvell.c
++++ b/drivers/net/phy/marvell.c
+@@ -132,7 +132,7 @@
+
+ #define MII_PHY_LED_CTRL	        16
+ #define MII_88E1121_PHY_LED_DEF		0x0030
+-#define MII_88E1510_PHY_LED_DEF		0x1177
++#define MII_88E1510_PHY_LED_DEF		0x1040
+
+ #define MII_M1011_PHY_STATUS		0x11
+ #define MII_M1011_PHY_STATUS_1000	0x8000
+--
+2.25.1
+
