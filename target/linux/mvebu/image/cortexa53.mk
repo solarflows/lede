@@ -3,6 +3,8 @@ define Device/catdrive_catdrive
   DEVICE_VENDOR := CATDRIVE
   DEVICE_MODEL := CatDrive
   SOC := armada-3720
+  IMAGES += sysupgrade.bin
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += catdrive_catdrive
 
