@@ -1,7 +1,7 @@
-define Device/marvel_catdrive
+define Device/catdrive_catdrive
   $(call Device/Default-arm64)
   DEVICE_VENDOR := CatDrive
-  DEVICE_MODEL := marvel
+  DEVICE_MODEL := CatDrive
   SOC := armada-3720
 endef
 TARGET_DEVICES += catdrive_catdrive
