@@ -6,8 +6,8 @@
 #include "armada-372x.dtsi"
 
 / {
-	model = "Catdrive Marvell Armada 3720 Catdrive";
-	compatible = "Catdrive,Catdrive", "marvell,armada3720", "marvell,armada3710";
+	model = "Catdrive C1";
+	compatible = "Catdrive,C1", "marvell,armada3720";
 
 	chosen {
 		stdout-path = "serial0:115200n8";
@@ -41,17 +41,28 @@
 	status = "okay";
 };
 
-&sdhci0 {
+&sdhci1 {
 	non-removable;
 	bus-width = <8>;
 	mmc-ddr-1_8v;
 	mmc-hs200-1_8v;
 	marvell,pad-type = "fixed-1-8v";
+	pinctrl-names = "default";
+	pinctrl-0 = <&mmc_pins>;
 	status = "okay";
+
+	#address-cells = <1>;
+	#size-cells = <0>;
+	mmccard: mmccard@0 {
+		compatible = "mmc-card";
+		reg = <0>;
+	};
 };
+
 &spi0 {
 	status = "okay";
-	flash@0 {
+
+	m25p80@0 {
 		reg = <0>;
 		compatible = "jedec,spi-nor";
 		spi-max-frequency = <104000000>;
@@ -66,6 +77,7 @@
 			partition@0 {
 				label = "uboot";
 				reg = <0 0x1f0000>;
+				read-only;
 			};
 
 			partition@1f0000 {
