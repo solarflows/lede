@@ -10,6 +10,7 @@ define Device/catdrive_catdrive
   kmod-crypto-pcbc kmod-crypto-rng kmod-crypto-seqiv kmod-crypto-sha1 kmod-crypto-sha256 \
   kmod-crypto-sha512 kmod-crypto-xts
   SOC := armada-3720
+  BOOT_SCRIPT := espressobin
 endef
 TARGET_DEVICES += catdrive_catdrive
 
