@@ -7,7 +7,7 @@
 
 / {
 	model = "Catdrive C1";
-	compatible = "marvell,catdrive", "marvell,armada3720";
+	compatible = "marvell,catdrive", "marvell,armada3720", "marvell,armada3710";
 
 	chosen {
 		stdout-path = "serial0:115200n8";
@@ -53,7 +53,7 @@
 &spi0 {
 	status = "okay";
 
-	m25p80@0 {
+	flash@0 {
 		reg = <0>;
 		compatible = "jedec,spi-nor";
 		spi-max-frequency = <104000000>;
@@ -68,7 +68,6 @@
 			partition@0 {
 				label = "uboot";
 				reg = <0 0x1f0000>;
-				read-only;
 			};
 
 			partition@1f0000 {
@@ -80,6 +79,7 @@
 				label = "reserve";
 				reg = <0x200000 0x600000>;
 			};
+
 		};
 	};
 };
