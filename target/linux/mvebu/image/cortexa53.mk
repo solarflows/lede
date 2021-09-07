@@ -9,7 +9,6 @@ define Device/catdrive_catdrive
   kmod-crypto-kpp kmod-crypto-manager kmod-crypto-md4 kmod-crypto-md5 kmod-crypto-null \
   kmod-crypto-pcbc kmod-crypto-rng kmod-crypto-seqiv kmod-crypto-sha1 kmod-crypto-sha256 \
   kmod-crypto-sha512 kmod-crypto-xts
-
   SOC := armada-3720
 endef
 TARGET_DEVICES += catdrive_catdrive

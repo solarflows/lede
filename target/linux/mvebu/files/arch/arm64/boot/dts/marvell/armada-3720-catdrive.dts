@@ -7,7 +7,7 @@
 
 / {
 	model = "Catdrive C1";
-	compatible = "Catdrive,C1", "marvell,armada3720";
+	compatible = "marvell,catdrive", "marvell,armada3720";
 
 	chosen {
 		stdout-path = "serial0:115200n8";
