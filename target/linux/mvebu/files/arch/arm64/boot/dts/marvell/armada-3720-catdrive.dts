@@ -68,6 +68,7 @@
 			partition@0 {
 				label = "uboot";
 				reg = <0 0x1f0000>;
+				read-only;
 			};
 
 			partition@1f0000 {
