@@ -2,13 +2,6 @@ define Device/catdrive_catdrive
   $(call Device/Default-arm64)
   DEVICE_VENDOR := CatDrive
   DEVICE_MODEL := CatDrive
-  DEVICE_PACKAGES +=kmod-crypto-aead kmod-crypto-arc4 kmod-crypto-authenc kmod-crypto-cbc \
-  kmod-crypto-ccm kmod-crypto-cmac kmod-crypto-crc32c kmod-crypto-ctr kmod-crypto-cts \
-  kmod-crypto-deflate kmod-crypto-des kmod-crypto-ecb kmod-crypto-ecdh kmod-crypto-echainiv \
-  kmod-crypto-fcrypt kmod-crypto-gcm kmod-crypto-ghash kmod-crypto-hash kmod-crypto-hmac \
-  kmod-crypto-kpp kmod-crypto-manager kmod-crypto-md4 kmod-crypto-md5 kmod-crypto-null \
-  kmod-crypto-pcbc kmod-crypto-rng kmod-crypto-seqiv kmod-crypto-sha1 kmod-crypto-sha256 \
-  kmod-crypto-sha512 kmod-crypto-xts
   SOC := armada-3720
 endef
 TARGET_DEVICES += catdrive_catdrive
