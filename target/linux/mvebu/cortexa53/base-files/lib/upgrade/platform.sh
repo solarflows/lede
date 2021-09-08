@@ -15,10 +15,10 @@ platform_check_image() {
 	globalscale,espressobin-ultra|\
 	globalscale,espressobin-v7|\
 	globalscale,espressobin-v7-emmc)
-		legacy_sdcard_check_image "$1"
+		platform_check_image_sdcard "$1"
 		;;
 	*)
-		return 0
+		platform_check_image_sdcard "$1"
 		;;
 	esac
 }
@@ -31,13 +31,13 @@ platform_do_upgrade() {
 	globalscale,espressobin-ultra|\
 	globalscale,espressobin-v7|\
 	globalscale,espressobin-v7-emmc)
-		legacy_sdcard_do_upgrade "$1"
+		platform_do_upgrade_sdcard "$1"
 		;;
 	methode,udpu)
 		platform_do_upgrade_uDPU "$1"
 		;;
 	*)
-		default_do_upgrade "$1"
+		platform_do_upgrade_sdcard "$1"
 		;;
 	esac
 }
@@ -49,10 +49,13 @@ platform_copy_config() {
 	globalscale,espressobin-ultra|\
 	globalscale,espressobin-v7|\
 	globalscale,espressobin-v7-emmc)
-		legacy_sdcard_copy_config
+		platform_copy_config_sdcard
 		;;
 	methode,udpu)
 		platform_copy_config_uDPU
+		;;
+	*)
+		platform_copy_config_sdcard
 		;;
 	esac
 }
