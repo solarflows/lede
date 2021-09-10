@@ -18,7 +18,7 @@ platform_check_image() {
 		platform_check_image_sdcard "$1"
 		;;
 	*)
-		platform_check_image_sdcard "$1"
+		return 0
 		;;
 	esac
 }
@@ -37,7 +37,7 @@ platform_do_upgrade() {
 		platform_do_upgrade_uDPU "$1"
 		;;
 	*)
-		platform_do_upgrade_sdcard "$1"
+		default_do_upgrade "$1"
 		;;
 	esac
 }
@@ -53,9 +53,6 @@ platform_copy_config() {
 		;;
 	methode,udpu)
 		platform_copy_config_uDPU
-		;;
-	*)
-		platform_copy_config_sdcard
 		;;
 	esac
 }

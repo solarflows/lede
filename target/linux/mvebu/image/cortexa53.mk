@@ -1,7 +1,7 @@
-define Device/catdrive_catdrive
+define Device/catdrive_c1
   $(call Device/Default-arm64)
   DEVICE_VENDOR := CatDrive
-  DEVICE_MODEL := CatDrive
+  DEVICE_MODEL := C1
   DEVICE_PACKAGES +=kmod-crypto-aead kmod-crypto-arc4 kmod-crypto-authenc kmod-crypto-cbc \
   kmod-crypto-ccm kmod-crypto-cmac kmod-crypto-crc32c kmod-crypto-ctr kmod-crypto-cts \
   kmod-crypto-deflate kmod-crypto-des kmod-crypto-ecb kmod-crypto-ecdh kmod-crypto-echainiv \
