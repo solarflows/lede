@@ -12,7 +12,7 @@ define Device/catdrive_c1
   SOC := armada-3720
   BOOT_SCRIPT := catdrive
 endef
-TARGET_DEVICES += catdrive_catdrive
+TARGET_DEVICES += catdrive_c1
 
 define Device/glinet_gl-mv1000
   $(call Device/Default-arm64)
