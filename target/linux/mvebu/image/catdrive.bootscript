@@ -1,11 +1,5 @@
 setenv bootargs "root=PARTUUID=@ROOT@-02 rw rootwait ${console}"
 
-if test -e "${boot_interface} ${devnum}:1 ${scriptaddr} ${prefix}uEnv.txt"; then
-	load ${boot_interface} ${devnum}:1 ${scriptaddr} ${prefix}uEnv.txt
-	env import -t ${scriptaddr} ${filesize}
-	setenv bootargs "root=${rootdev} rw rootwait"
-fi
-
 if test -z "${devtype}"; then
 	setenv devtype mmc
 fi
@@ -24,6 +18,12 @@ fi
 
 if test -n "${kernel_addr_r}"; then
        setenv kernel_addr ${kernel_addr_r}
+fi
+
+if test -e "${boot_interface} ${devnum}:1 ${scriptaddr} ${prefix}uEnv.txt"; then
+	load ${boot_interface} ${devnum}:1 ${scriptaddr} ${prefix}uEnv.txt
+	env import -t ${scriptaddr} ${filesize}
+	setenv bootargs "root=${rootdev} rw rootwait"
 fi
 
 echo "Booting Linux from ${devtype} ${devnum} with args: ${bootargs}"
