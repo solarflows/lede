@@ -14,7 +14,8 @@ platform_check_image() {
 	globalscale,espressobin-emmc|\
 	globalscale,espressobin-ultra|\
 	globalscale,espressobin-v7|\
-	globalscale,espressobin-v7-emmc)
+	globalscale,espressobin-v7-emmc|\
+	catdrive,c1)
 		platform_check_image_sdcard "$1"
 		;;
 	*)
@@ -30,7 +31,8 @@ platform_do_upgrade() {
 	globalscale,espressobin-emmc|\
 	globalscale,espressobin-ultra|\
 	globalscale,espressobin-v7|\
-	globalscale,espressobin-v7-emmc)
+	globalscale,espressobin-v7-emmc|\
+	catdrive,c1)
 		platform_do_upgrade_sdcard "$1"
 		;;
 	methode,udpu)
@@ -48,7 +50,8 @@ platform_copy_config() {
 	globalscale,espressobin-emmc|\
 	globalscale,espressobin-ultra|\
 	globalscale,espressobin-v7|\
-	globalscale,espressobin-v7-emmc)
+	globalscale,espressobin-v7-emmc|\
+	catdrive,c1)
 		platform_copy_config_sdcard
 		;;
 	methode,udpu)
