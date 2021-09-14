@@ -2,7 +2,9 @@ define Device/catdrive_c1
   $(call Device/Default-arm64)
   DEVICE_VENDOR := CatDrive
   DEVICE_MODEL := C1
-  DEVICE_PACKAGES +=i2c-tools
+  DEVICE_PACKAGES += i2c-tools
+  IMAGE += boot.img
+  IMAGE/boot.img := boot-scr | boot-img-ext4 | sdcard-img-ext4
   SOC := armada-3720
 endef
 TARGET_DEVICES += catdrive_c1
