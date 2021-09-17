@@ -37,18 +37,6 @@ define Build/boot-img-ext4
 	make_ext4fs -J -L kernel -l $(CONFIG_TARGET_KERNEL_PARTSIZE)M $@.bootimg $@.boot
 endef
 
-define Build/boot-img-catdrive
-	rm -fR $@.boot
-	mkdir -p $@.boot
-	$(foreach dts,$(DEVICE_DTS), $(CP) $(KDIR)/image-$(dts).dtb $@.boot/$(dts).dtb;)
-	$(CP) $(IMAGE_KERNEL) $@.boot/$(KERNEL_NAME)
-	-$(CP) $@-boot.scr $@.boot/boot.scr
-	cat << EOF > $@.boot/uEnv.txt
-	rootdev=/dev/mmcblk0p2
-	EOF
-	make_ext4fs -J -L kernel -l $(CONFIG_TARGET_KERNEL_PARTSIZE)M $@.bootimg $@.boot
-endef
-
 define Build/buffalo-kernel-jffs2
 	rm -rf $(KDIR)/kernel_jffs2 $@.fakerd
 	mkdir -p $(KDIR)/kernel_jffs2
