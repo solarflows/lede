@@ -1,5 +1,5 @@
 define Device/catdrive_c1
-  $(call Device/Default-arm64)
+  $(call Device/Default-catdrive)
   DEVICE_VENDOR := CatDrive
   DEVICE_MODEL := C1
   DEVICE_PACKAGES += i2c-tools
