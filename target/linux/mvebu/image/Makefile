@@ -128,15 +128,6 @@ define Device/Default-arm64
   KERNEL := kernel-bin
 endef
 
-define Device/Default-catdrive
-  BOOT_SCRIPT := generic-arm64
-  DEVICE_DTS_DIR := $(DTS_DIR)/marvell
-  IMAGES := sdcard.img.gz
-  IMAGE/sdcard.img.gz := boot-scr | boot-img-catdrive | sdcard-img-ext4 | gzip | append-metadata
-  KERNEL_NAME := Image
-  KERNEL := kernel-bin
-endef
-
 define Device/NAND-128K
   BLOCKSIZE := 128k
   PAGESIZE := 2048
