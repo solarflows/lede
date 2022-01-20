@@ -704,9 +704,9 @@ define Device/csac_iii
   SOC := qca9563
   DEVICE_VENDOR := CSAC
   DEVICE_MODEL := III
-  KERNEL_SIZE := 1472k
+  KERNEL_SIZE := 2048k
   IMAGE_SIZE := 16000k
-  IMAGE/sysupgrade.bin := append-rootfs | pad-rootfs | pad-to 14528k | append-kernel | append-metadata | check-size
+  IMAGE/sysupgrade.bin := append-rootfs | pad-rootfs | pad-to 13952k | append-kernel | append-metadata | check-size
   DEVICE_PACKAGES := kmod-leds-reset kmod-ath10k-ct ath10k-firmware-qca9888-ct kmod-usb-core kmod-usb2
 endef
 TARGET_DEVICES += csac_iii
