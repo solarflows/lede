@@ -9,7 +9,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cups
-PKG_VERSION:=v2.3.3op2
+PKG_VERSION:=2.3.3op2
 PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-source.tar.gz
 PKG_SOURCE_URL:=https://github.com/OpenPrinting/cups/releases/download/v$(PKG_VERSION)
@@ -105,7 +105,7 @@ endef
 define Package/libcups/description
 	Common UNIX Printing System - Core library
 endef
-  
+
   define Package/libcupscgi
 $(call Package/cups/Default)
   SECTION:=libs
