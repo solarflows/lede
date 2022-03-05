@@ -7,10 +7,8 @@
 
 / {
 	model = "Catdrive C1";
-	compatible = "catdrive,c1", "marvell,armada3720", "marvell,armada3710";
-	aliases {
-		ethernet0 = &eth0;
-	};
+	compatible = "catdrive,c1", "marvell,armada3720",
+		     "marvell,armada3710";
 
 	chosen {
 		stdout-path = "serial0:115200n8";
@@ -114,7 +112,6 @@
 	phy-mode = "rgmii-id";
 	phy = <&phy0>;
 	status = "okay";
-	mac-address = [ 00 00 00 00 00 00 ];
 };
 
 &i2c0 {
