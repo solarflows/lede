@@ -114,6 +114,7 @@
 	phy-mode = "rgmii-id";
 	phy = <&phy0>;
 	status = "okay";
+	mac-address = [ 00 00 00 00 00 00 ]
 };
 
 &i2c0 {
