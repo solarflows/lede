@@ -1,4 +1,4 @@
-setenv bootargs "root=PARTUUID=@ROOT@-02 rw rootwait"
+setenv bootargs "root=PARTUUID=@ROOT@-01 rw rootwait"
 
 if test -n "${console}"; then
 	setenv bootargs "${bootargs} ${console}"
@@ -16,14 +16,6 @@ fi
 
 if test -n "${kernel_addr_r}"; then
        setenv kernel_addr ${kernel_addr_r}
-fi
-
-if test -e "mmc ${mmcdev}:1 ${kernel_addr} ${prefix}uEnv.txt"; then
-	load mmc ${mmcdev}:1 ${kernel_addr} ${prefix}uEnv.txt
-	env import -t ${kernel_addr} ${filesize}
-	setenv bootargs "root=${rootdev} rw rootwait"
-else
-	echo "unable to find uEnv.txt,start general booting "
 fi
 
 load mmc ${mmcdev}:1 ${fdt_addr} @DTB@.dtb
