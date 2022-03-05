@@ -4,7 +4,7 @@ define Device/catdrive_c1
   DEVICE_MODEL := C1
   DEVICE_PACKAGES += i2c-tools
   SOC := armada-3720
-  BOOT_SCRIPT := catdrive
+  BOOT_SCRIPT := espressobin
 endef
 TARGET_DEVICES += catdrive_c1
 
