@@ -9,7 +9,9 @@
 	model = "Catdrive C1";
 	compatible = "catdrive,c1", "marvell,armada3720",
 			 "marvell,armada3710";
-
+	aliases {
+		ethernet0 = &eth0;
+	};
 	chosen {
 		stdout-path = "serial0:115200n8";
 	};
