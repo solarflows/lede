@@ -43,32 +43,25 @@
 };
 
 &sdhci1 {
+	status = "okay";
 	non-removable;
 	bus-width = <8>;
 	mmc-ddr-1_8v;
 	mmc-hs200-1_8v;
 	marvell,pad-type = "fixed-1-8v";
-	pinctrl-names = "default";
-	pinctrl-0 = <&mmc_pins>;
-	status = "okay";
-
-	#address-cells = <1>;
-	#size-cells = <0>;
-	mmccard: mmccard@0 {
-		compatible = "mmc-card";
-		reg = <0>;
-	};
 };
 
 &spi0 {
 	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi_quad_pins>;
 
 	m25p80@0 {
+		status = "okay";
 		reg = <0>;
 		compatible = "jedec,spi-nor";
 		spi-max-frequency = <104000000>;
 		m25p,fast-read;
-		status = "okay";
 
 		partitions {
 			compatible = "fixed-partitions";
@@ -91,9 +84,9 @@
 };
 
 &uart0 {
+	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&uart1_pins>;
-	status = "okay";
 };
 
 &usb2 {
@@ -109,9 +102,9 @@
 };
 
 &eth0 {
+	status = "okay";
 	phy-mode = "rgmii-id";
 	phy = <&phy0>;
-	status = "okay";
 };
 
 &i2c0 {
