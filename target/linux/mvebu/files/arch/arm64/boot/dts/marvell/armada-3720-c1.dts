@@ -8,11 +8,7 @@
 / {
 	model = "Catdrive C1";
 	compatible = "catdrive,c1", "marvell,armada3720",
-		     "marvell,armada3710";
-
-	aliases {
-		ethernet0 = &eth0;
-	};
+			 "marvell,armada3710";
 
 	chosen {
 		stdout-path = "serial0:115200n8";
@@ -46,7 +42,7 @@
 	status = "okay";
 };
 
-&sdhci1 {
+&sdhci0 {
 	status = "okay";
 	non-removable;
 	bus-width = <8>;
@@ -57,8 +53,6 @@
 
 &spi0 {
 	status = "okay";
-	pinctrl-names = "default";
-	pinctrl-0 = <&spi_quad_pins>;
 
 	m25p80@0 {
 		status = "okay";
@@ -81,6 +75,12 @@
 			partition@1f0000 {
 				label = "ubootenv";
 				reg = <0x1f0000 0x10000>;
+				read-only;
+			};
+
+			partition@200000 {
+				label = "reserve";
+				reg = <0x200000 0x600000>;
 				read-only;
 			};
 		};
