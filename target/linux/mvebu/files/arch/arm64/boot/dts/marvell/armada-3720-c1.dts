@@ -9,9 +9,11 @@
 	model = "Catdrive C1";
 	compatible = "catdrive,c1", "marvell,armada3720",
 		     "marvell,armada3710";
+
 	aliases {
 		ethernet0 = &eth0;
 	};
+
 	chosen {
 		stdout-path = "serial0:115200n8";
 	};
@@ -58,7 +60,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&spi_quad_pins>;
 
-	flash@0@0 {
+	m25p80@0 {
 		status = "okay";
 		reg = <0>;
 		compatible = "jedec,spi-nor";
@@ -107,6 +109,7 @@
 	status = "okay";
 	phy-mode = "rgmii-id";
 	phy = <&phy0>;
+	mac-address = [ 00 00 00 00 00 00 ];
 };
 
 &i2c0 {
