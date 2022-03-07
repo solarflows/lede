@@ -109,7 +109,7 @@
 
 &eth0 {
 	status = "okay";
-	phy-mode = "rgmii-id";
+	phy-mode = "sgmii";
 	phy = <&phy0>;
 	mac-address = [ 00 00 00 00 00 00 ];
 };
