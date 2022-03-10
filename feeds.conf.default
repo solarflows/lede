@@ -1,3 +1,4 @@
+src-git hyy https://github.com/hyy-666/openwrt-packages.git
 src-git packages https://github.com/hyy-666/packages
 src-git luci https://github.com/hyy-666/luci
 src-git routing https://git.openwrt.org/feed/routing.git
@@ -6,4 +7,3 @@ src-git telephony https://git.openwrt.org/feed/telephony.git
 #src-git targets https://github.com/openwrt/targets.git
 #src-git oldpackages http://git.openwrt.org/packages.git
 #src-link custom /usr/src/openwrt/custom-feed
-src-git hyy https://github.com/hyy-666/openwrt-packages.git
