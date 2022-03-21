@@ -118,10 +118,9 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&i2c1_pins>;
 	status = "okay";
-	aw2013@45 {
+	led-controller@45 {
 		compatible = "awinic,aw2013";
 		reg = <0x45>;
-		leds_num = <3>;
 		aw2013,red {
 			aw2013,name = "red";
 			aw2013,id = <0>;
@@ -142,7 +141,6 @@
 			aw2013,hold-time-ms = <1>;
 			aw2013,fall-time-ms = <2>;
 			aw2013,off-time-ms = <1>;
-			default-state = "on";
 		};
 
 		aw2013,blue {
