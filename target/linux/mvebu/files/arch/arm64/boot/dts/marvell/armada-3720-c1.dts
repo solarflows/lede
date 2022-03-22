@@ -121,7 +121,6 @@
 	aw2013@45 {
 		compatible = "awinic,aw2013";
 		reg = <0x45>;
-		leds_num = <3>;
 		aw2013,red {
 			aw2013,name = "red";
 			aw2013,id = <0>;
