@@ -22,21 +22,6 @@ endef
 
 $(eval $(call KernelPackage,leds-gpio))
 
-define KernelPackage/leds-aw2013
-  SUBMENU:=$(LEDS_MENU)
-  TITLE:=aw2013 LED support
-  DEPENDS:= @aw2013_SUPPORT @!LINUX_5_4
-  KCONFIG:=CONFIG_LEDS_aw2013
-  FILES:=$(LINUX_DIR)/drivers/leds/leds-aw2013.ko
-  AUTOLOAD:=$(call AutoLoad,60,leds-aw2013,1)
-endef
-
-define KernelPackage/leds-aw2013/description
-  Kernel module for aw2013 leds
-endef
-
-$(eval $(call KernelPackage,leds-aw2013))
-
 LED_TRIGGER_DIR=$(LINUX_DIR)/drivers/leds/trigger
 
 define KernelPackage/ledtrig-activity
