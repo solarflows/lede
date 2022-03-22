@@ -2,7 +2,7 @@ define Device/catdrive_c1
   $(call Device/Default-arm64)
   DEVICE_VENDOR := CatDrive
   DEVICE_MODEL := C1
-  DEVICE_PACKAGES += hwmon-gpiofan i2c-gpio leds-aw2013 i2c-tools
+  DEVICE_PACKAGES += komd-hwmon-gpiofan komd-i2c-gpio komd-leds-aw2013 i2c-tools
   SOC := armada-3720
 endef
 TARGET_DEVICES += catdrive_c1
