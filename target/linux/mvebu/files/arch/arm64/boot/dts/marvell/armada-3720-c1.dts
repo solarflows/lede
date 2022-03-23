@@ -127,19 +127,19 @@
         #size-cells = <0>;
         led@0 {
             reg = <0>;
-            led-max-microamp = <15000>;
+            led-max-microamp = <20000>;
             function = LED_FUNCTION_INDICATOR;
             color = <LED_COLOR_ID_RED>;
         };
         led@1 {
             reg = <1>;
-            led-max-microamp = <15000>;
+            led-max-microamp = <20000>;
             function = LED_FUNCTION_INDICATOR;
             color = <LED_COLOR_ID_GREEN>;
         };
         led@2 {
             reg = <2>;
-            led-max-microamp = <15000>;
+            led-max-microamp = <20000>;
             function = LED_FUNCTION_INDICATOR;
             color = <LED_COLOR_ID_BLUE>;
         };
