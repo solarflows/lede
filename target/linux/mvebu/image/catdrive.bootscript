@@ -1,8 +1,0 @@
-setenv rootdev "/dev/mmcblk0p1"
-
-setenv bootargs "${console} root=${rootdev} rw rootwait"
-
-load $boot_interface 0:1 ${kernel_addr} ${prefix}Image
-load $boot_interface 0:1 ${fdt_addr} ${prefix}@DTB@.dtb
-
-booti ${kernel_addr} - ${fdt_addr}
