@@ -16,7 +16,7 @@ endef
 
 $(eval $(call KernelPackage,linkstation-poweroff))
 
-define KernelPackage/led-aw2013
+define KernelPackage/leds-aw2013
   SUBMENU:=$(LEDS_MENU)
   DEPENDS:=@TARGET_mvebu_cortexa53_DEVICE_catdrive_c1 @!LINUX_5_4 @GPIO_SUPPORT
   TITLE:=aw2013 led support
@@ -25,8 +25,8 @@ define KernelPackage/led-aw2013
   AUTOLOAD:=$(call AutoLoad,60,leds-aw2013,1)
 endef
 
-define KernelPackage/led-aw2013/description
+define KernelPackage/leds-aw2013/description
   Catdirve C1's 3 channle led controller driver
 endef
 
-$(eval $(call KernelPackage,led-aw2013))
+$(eval $(call KernelPackage,leds-aw2013))
