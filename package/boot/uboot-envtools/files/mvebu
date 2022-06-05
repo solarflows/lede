@@ -16,9 +16,6 @@ case "$board" in
 buffalo,ls421de)
 	ubootenv_add_uci_config "/dev/mtd3" "0x0" "0x10000"
 	;;
-catdrive,c1)
-	ubootenv_add_uci_config "/dev/mtd0" "0x1f0000" "0x10000" "0x10000" "1"
-	;;
 cznic,turris-omnia)
 	if grep -q 'U-Boot 2015.10-rc2' /dev/mtd0; then
 		ubootenv_add_uci_config "/dev/mtd0" "0xc0000" "0x10000" "0x40000"

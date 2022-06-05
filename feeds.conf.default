@@ -1,4 +1,3 @@
-src-git hyy https://github.com/hyy-666/openwrt-packages.git
 src-git packages https://github.com/coolsnowwolf/packages
 src-git luci https://github.com/coolsnowwolf/luci
 src-git routing https://github.com/coolsnowwolf/routing

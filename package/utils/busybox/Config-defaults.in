@@ -570,7 +570,7 @@ config BUSYBOX_DEFAULT_DF
 	default y
 config BUSYBOX_DEFAULT_FEATURE_DF_FANCY
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_FEATURE_SKIP_ROOTFS
 	bool
 	default n

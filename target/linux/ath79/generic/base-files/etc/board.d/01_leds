@@ -480,11 +480,6 @@ zbtlink,zbt-wd323)
 	ucidef_set_led_switch "lan1" "LAN1" "orange:lan1" "switch0" "0x10"
 	ucidef_set_led_switch "lan2" "LAN2" "orange:lan2" "switch0" "0x08"
 	;;
-csac,iii)
-	ucidef_set_led_netdev "wan data" "WAN Data" "yellow:sys" "eth0.2" "tx rx"
-	ucidef_set_led_wlan "wlan2g" "WLAN2G" "yellow:wlan2g" "phy1tpt"
-	ucidef_set_led_wlan "wlan5g" "WLAN5G" "yellow:wlan5g" "phy0tpt"
-	;;
 esac
 
 board_config_flush
