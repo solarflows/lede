@@ -45,8 +45,9 @@ dlink,dir-860l-b1|\
 dlink,dir-867-a1|\
 dlink,dir-878-a1|\
 dlink,dir-882-a1|\
-dlink,dir-882-r1)
-	ucidef_set_led_netdev "wan" "wan" "green:net" "wan"
+dlink,dir-882-r1|\
+motorola,mr2600)
+	ucidef_set_led_switch "wan" "wan" "green:net" "switch0" "0x10"
 	;;
 gehua,ghl-r-001)
 	ucidef_set_led_switch "internet" "internet" "blue:internet" "switch0" "0x10"

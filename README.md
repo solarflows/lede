@@ -76,6 +76,14 @@ make V=s -j$(nproc)
 ```bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
+对于猫盘在5.10内核下要使用原机MAC地址的话需要添加
+aliases {
+		ethernet0 = &eth0;
+	};
+------
+macOS 原生系统进行编译：
+------
+1.在 AppStore 中安装 Xcode
 
 ### macOS 原生系统进行编译
 
