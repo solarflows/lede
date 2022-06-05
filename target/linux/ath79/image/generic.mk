@@ -160,7 +160,6 @@ define Build/wrgg-pad-rootfs
 	$(STAGING_DIR_HOST)/bin/padjffs2 $(IMAGE_ROOTFS) -c 64 >>$@
 endef
 
-
 define Device/seama
   KERNEL := kernel-bin | append-dtb | relocate-kernel | lzma
   KERNEL_INITRAMFS := $$(KERNEL) | seama
@@ -757,6 +756,17 @@ define Device/compex_wpj563
   IMAGE/cpximg-7a02.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | mkmylofw_16m 0x694 2
 endef
 TARGET_DEVICES += compex_wpj563
+
+define Device/csac_iii
+  SOC := qca9563
+  DEVICE_VENDOR := CSAC
+  DEVICE_MODEL := III
+  KERNEL_SIZE := 2048k
+  IMAGE_SIZE := 16000k
+  IMAGE/sysupgrade.bin := append-rootfs | pad-rootfs | pad-to 13952k | append-kernel | append-metadata | check-size
+  DEVICE_PACKAGES := kmod-leds-reset kmod-ath10k-ct ath10k-firmware-qca9888-ct kmod-usb-core kmod-usb2
+endef
+TARGET_DEVICES += csac_iii
 
 define Device/devolo_dlan-pro-1200plus-ac
   SOC := ar9344
