@@ -1,11 +1,10 @@
 # 欢迎来到 Lean 的 Openwrt 源码仓库
 
-如何编译自己需要的 OpenWrt 固件 [English](./README_EN.md)
+如何编译自己需要的 OpenWrt 固件
 
 ## 官方讨论群
-如有技术问题需要讨论或者交流，欢迎加入以下群：
-1. QQ 讨论群： Op固件技术研究群 ,号码 891659613 ，加群链接：[点击加入](https://jq.qq.com/?_wv=1027&k=XL8SK5aC "Op固件技术研究群")
-2. TG 讨论群： OP 编译官方大群 ，加群链接：[点击加入](https://t.me/JhKgAA6Hx1 "OP 编译官方大群")
+
+1. TG 讨论群： OP 编译官方大群 ，加群链接：[点击加入](https://t.me/JhKgAA6Hx1 "OP 编译官方大群")
 
 ## 注意
 
@@ -33,7 +32,7 @@
 3. 下载源代码，更新 feeds 并选择配置
 
    ```bash
-   git clone https://github.com/coolsnowwolf/lede
+   git clone https://github.com/hyy-666/lede
    cd lede
    ./scripts/feeds update -a
    ./scripts/feeds install -a
@@ -81,13 +80,13 @@ make V=s -j$(nproc)
 ```bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
-对于猫盘在5.10内核下要使用原机MAC地址的话需要添加
-aliases {
-		ethernet0 = &eth0;
-	};
+
 ------
-macOS 原生系统进行编译：
+
+macOS 原生系统进行编译
+
 ------
+
 1.在 AppStore 中安装 Xcode
 
 ### macOS 原生系统进行编译
@@ -133,15 +132,49 @@ macOS 原生系统进行编译：
 
 4. 存档版本仓库地址：<https://github.com/coolsnowwolf/openwrt>
 
-## 软路由介绍
+## 一点提示
 
-友情推荐不恰饭：如果你在寻找一个低功耗小体积性能不错的 x86 / x64 路由器，我个人建议可以考虑小马v1 的铝合金版本
-(N3710 4千兆)：[页面介绍](https://item.taobao.com/item.htm?spm=a230r.1.14.20.144c763fRkK0VZ&id=561126544764)
+------
 
-![xm1](doc/xm5.jpg) ![xm2](doc/xm6.jpg)
+### 对于猫盘在5.10内核下要使用原机MAC地址的话需要在dts中添加
 
-## 捐贈
+------
 
-如果你觉得此项目对你有帮助，可以捐助我们，以鼓励项目能持续发展，更加完善
+```bash
+aliases {
+   ethernet0 = &eth0;
+};
+```
 
-支付宝 ![alipay](doc/alipay_donate.jpg) 微信 ![wechat](doc/wechat_donate.jpg)
+### git设置socks5代理
+
+------
+
+1. 为所有git链接设置代理
+
+   支持：[http,https,socks5,socks5h]
+
+   ```bash
+   git config --global https.proxy http://127.0.0.1:1080
+   git config --global https.proxy https://127.0.0.1:1080
+   ```
+
+2. 单独为github设置代理
+
+   ```bash
+   git config --global http.https://github.com.proxy socks5://127.0.0.1:1080
+   ```
+
+### ssh设置socks5代理
+
+------
+
+需要修改~/.ssh/config文件, 没有的话新建一个.
+
+同样仅为github.com设置代理:
+
+   ```bash
+   Host github.com
+      User git
+      ProxyCommand nc -v -x 127.0.0.1:1086 %h %p
+   ```
