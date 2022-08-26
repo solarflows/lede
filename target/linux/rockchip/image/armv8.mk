@@ -106,7 +106,7 @@ define Device/friendlyelec_nanopc-t4
   DEVICE_MODEL := NanoPC T4
   SOC := rk3399
   UBOOT_DEVICE_NAME := nanopc-t4-rk3399
-  IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r5s | pine64-img | gzip | append-metadata
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r4s | pine64-img | gzip | append-metadata
   DEVICE_PACKAGES := kmod-r8168 -urngd
 endef
 TARGET_DEVICES += friendlyelec_nanopc-t4
