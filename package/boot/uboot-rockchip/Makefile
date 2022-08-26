@@ -104,6 +104,17 @@ define U-Boot/guangmiao-g4c-rk3399
   ATF:=rk3399_bl31.elf
 endef
 
+define U-Boot/nanopc-t4-rk3399
+  BUILD_SUBTARGET:=armv8
+  NAME:=NanoPC T4
+  BUILD_DEVICES:= \
+    friendlyarm_nanopc-t4
+  DEPENDS:=+PACKAGE_u-boot-nanopc-t4-rk3399:arm-trusted-firmware-rk3399
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3399_bl31_v1.35.elf
+  USE_RKBIN:=1
+endef
+
 define U-Boot/nanopi-r4s-rk3399
   BUILD_SUBTARGET:=armv8
   NAME:=NanoPi R4S
