@@ -126,6 +126,17 @@ define U-Boot/nanopi-r4se-rk3399
   USE_RKBIN:=1
 endef
 
+define U-Boot/nanopc-t4-rk3399
+  BUILD_SUBTARGET:=armv8
+  NAME:=NanoPC T4
+  BUILD_DEVICES:= \
+    friendlyelec_nanopc-t4
+  DEPENDS:=+PACKAGE_u-boot-nanopc-t4-rk3399:arm-trusted-firmware-rk3399
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3399_bl31_v1.35.elf
+  USE_RKBIN:=1
+endef
+
 define U-Boot/rock-pi-4-rk3399
   BUILD_SUBTARGET:=armv8
   NAME:=Rock Pi 4
@@ -210,6 +221,7 @@ UBOOT_TARGETS := \
   guangmiao-g4c-rk3399 \
   nanopi-r4s-rk3399 \
   nanopi-r4se-rk3399 \
+  nanopc-t4-rk3399 \
   nanopi-r5s-rk3568 \
   rock-3a-rk3568 \
   rock-pi-4-rk3399 \
