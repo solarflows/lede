@@ -72,8 +72,7 @@ rockchip_setup_macs()
 		lan_mac=$(macaddr_setbit_la "$wan_mac")
 		;;
 	friendlyelec,nanopc-t4)
-		lan_mac=$(nanopi_r2s_generate_mac)
-		wan_mac=$(macaddr_add "$lan_mac" -1)
+		lan_mac=$(cat /sys/class/net/eth0/address)
 	;;
 	xunlong,orangepi-r1-plus|\
 	xunlong,orangepi-r1-plus-lts)
