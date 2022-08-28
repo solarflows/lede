@@ -130,7 +130,7 @@ define U-Boot/nanopc-t4-rk3399
   BUILD_SUBTARGET:=armv8
   NAME:=NanoPC T4
   BUILD_DEVICES:= \
-    friendlyelec_nanopc-t4
+    friendlyarm_nanopc-t4
   DEPENDS:=+PACKAGE_u-boot-nanopc-t4-rk3399:arm-trusted-firmware-rk3399
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
   ATF:=rk3399_bl31_v1.35.elf
