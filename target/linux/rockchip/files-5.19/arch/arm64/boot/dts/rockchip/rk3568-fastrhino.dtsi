@@ -5,19 +5,15 @@
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/pinctrl/rockchip.h>
+#include <dt-bindings/soc/rockchip,vop2.h>
 #include "rk3568.dtsi"
 
 / {
-	compatible = "rockchip,rk3568";
-
 	aliases {
-		ethernet0 = &rtl8125_1;
-		ethernet1 = &rtl8125_2;
 		led-boot = &power_led;
 		led-failsafe = &power_led;
 		led-running = &power_led;
 		led-upgrade = &power_led;
-		mmc0 = &sdmmc0;
 	};
 
 	chosen: chosen {
@@ -57,7 +53,7 @@
 		regulator-max-microvolt = <12000000>;
 	};
 
-	vcc3v3_pcie: gpio-regulator {
+	vcc3v3_pcie: vcc3v3-pcie-regulator {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc3v3_pcie";
 		regulator-always-on;
@@ -463,21 +459,6 @@
 	status = "okay";
 };
 
-&sdmmc0 {
-	max-frequency = <150000000>;
-	no-sdio;
-	no-mmc;
-	bus-width = <4>;
-	cap-mmc-highspeed;
-	cap-sd-highspeed;
-	disable-wp;
-	vmmc-supply = <&vcc3v3_sd>;
-	vqmmc-supply = <&vccio_sd>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&sdmmc0_bus4 &sdmmc0_clk &sdmmc0_cmd &sdmmc0_det>;
-	status = "okay";
-};
-
 &tsadc {
 	rockchip,hw-tshut-mode = <1>;
 	rockchip,hw-tshut-polarity = <0>;
@@ -525,5 +506,15 @@
 
 &usb2phy0_otg {
 	phy-supply = <&vcc5v0_usb_otg>;
+	status = "okay";
+};
+
+&vop {
+	assigned-clocks = <&cru DCLK_VOP0>, <&cru DCLK_VOP1>;
+	assigned-clock-parents = <&pmucru PLL_HPLL>, <&cru PLL_VPLL>;
+	status = "okay";
+};
+
+&vop_mmu {
 	status = "okay";
 };

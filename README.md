@@ -1,10 +1,11 @@
 # 欢迎来到 Lean 的 Openwrt 源码仓库
 
-如何编译自己需要的 OpenWrt 固件
+如何编译自己需要的 OpenWrt 固件 [How to build your Openwrt firmware](./README_EN.md)
 
 ## 官方讨论群
-
-1. TG 讨论群： OP 编译官方大群 ，加群链接：[点击加入](https://t.me/JhKgAA6Hx1 "OP 编译官方大群")
+如有技术问题需要讨论或者交流，欢迎加入以下群：
+1. QQ 讨论群： Op固件技术研究群 ,号码 891659613 ，加群链接：[点击加入](https://jq.qq.com/?_wv=1027&k=XL8SK5aC "Op固件技术研究群")
+2. TG 讨论群： OP 编译官方大群 ，加群链接：[点击加入](https://t.me/JhKgAA6Hx1 "OP 编译官方大群")
 
 ## 注意
 
@@ -32,7 +33,7 @@
 3. 下载源代码，更新 feeds 并选择配置
 
    ```bash
-   git clone https://github.com/hyy-666/lede
+   git clone https://github.com/coolsnowwolf/lede
    cd lede
    ./scripts/feeds update -a
    ./scripts/feeds install -a
@@ -47,7 +48,7 @@
    make V=s -j1
    ```
 
-本套代码保证肯定可以编译成功。里面包括了 R21 所有源代码，包括 IPK 的。
+本套代码保证肯定可以编译成功。里面包括了 R22 所有源代码，包括 IPK 的。
 
 你可以自由使用，但源码编译二次发布请注明我的 GitHub 仓库链接。谢谢合作！
 
@@ -80,14 +81,6 @@ make V=s -j$(nproc)
 ```bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
-
-------
-
-macOS 原生系统进行编译
-
-------
-
-1.在 AppStore 中安装 Xcode
 
 ### macOS 原生系统进行编译
 
@@ -132,49 +125,23 @@ macOS 原生系统进行编译
 
 4. 存档版本仓库地址：<https://github.com/coolsnowwolf/openwrt>
 
-## 一点提示
+## 软路由介绍
 
-------
+iKOOLCORE 硬酷R1 多网口小主机 - N5105/N6005 : Cube box, rest fun. 方寸之间，尽是乐趣
 
-### 对于猫盘在5.10内核下要使用原机MAC地址的话需要在dts中添加
+(商品介绍页面 - 深圳市硬酷科技)：
+[Lean用户R1专属券](https://taoquan.taobao.com/coupon/unify_apply.htm?sellerId=1981117776&activityId=3eb8a2ad3c8945ed831b203f44dc218b)
+[N5105下单链接](https://item.taobao.com/item.htm?ft=t&id=682987219699)
+[N6005下单链接](https://item.taobao.com/item.htm?ft=t&id=682672722483)  
 
-------
+(商品介绍页面 - 硬酷科技（支持花呗）)：
+[Lean用户R1专属券](https://taoquan.taobao.com/coupon/unify_apply.htm?sellerId=2208215115814&activityId=e013790422b849edb3a71e4e6aa46ff3)
+[下单链接](https://item.taobao.com/item.htm?ft=t&id=682987219699)
 
-```bash
-aliases {
-   ethernet0 = &eth0;
-};
-```
+[![r1](doc/r1.jpg)](https://item.taobao.com/item.htm?ft=t&id=682025492099)
 
-### git设置socks5代理
+## 捐贈
 
-------
+如果你觉得此项目对你有帮助，可以捐助我们，以鼓励项目能持续发展，更加完善
 
-1. 为所有git链接设置代理
-
-   支持：[http,https,socks5,socks5h]
-
-   ```bash
-   git config --global https.proxy http://127.0.0.1:1080
-   git config --global https.proxy https://127.0.0.1:1080
-   ```
-
-2. 单独为github设置代理
-
-   ```bash
-   git config --global http.https://github.com.proxy socks5://127.0.0.1:1080
-   ```
-
-### ssh设置socks5代理
-
-------
-
-需要修改~/.ssh/config文件, 没有的话新建一个.
-
-同样仅为github.com设置代理:
-
-   ```bash
-   Host github.com
-      User git
-      ProxyCommand nc -v -x 127.0.0.1:1086 %h %p
-   ```
+ ![star](doc/star.png) 
