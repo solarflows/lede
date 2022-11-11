@@ -1118,6 +1118,16 @@ define Device/mikrotik_routerboard-760igs
 endef
 TARGET_DEVICES += mikrotik_routerboard-760igs
 
+define Device/jdcloud_luban
+  $(Device/dsa-migration)
+  $(Device/uimage-lzma-loader)
+  IMAGE_SIZE := 15808k
+  DEVICE_VENDOR := jdcloud
+  DEVICE_MODEL := Luban
+  DEVICE_PACKAGES += kmod-mt7915e wpad-openssl uboot-envtools
+endef
+TARGET_DEVICES += jdcloud_luban
+
 define Device/mikrotik_routerboard-m11g
   $(Device/MikroTik)
   DEVICE_MODEL := RouterBOARD M11G
