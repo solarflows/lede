@@ -104,6 +104,9 @@ config NAND_SUPPORT
 config EMMC_SUPPORT
 	bool
 
+config LEGACY_SDCARD_SUPPORT
+	bool
+
 config ARCH_64BIT
 	bool
 
