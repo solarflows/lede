@@ -128,27 +128,14 @@ CMAKE_OPTIONS += \
 	-DENABLE_TESTING:Bool=OFF \
 	-DENABLE_PROGRAMS:Bool=ON
 
-define Build/Configure
-	$(Build/Configure/Default)
+define Build/Prepare
+       $(call Build/Prepare/Default)
 
-	awk 'BEGIN { rc = 1 } \
-	     /#define MBEDTLS_DEBUG_C/ { $$$$0 = "$(if $(CONFIG_LIBMBEDTLS_DEBUG_C),,// )#define MBEDTLS_DEBUG_C"; rc = 0 } \
-	     /#define MBEDTLS_ARMV8CE_AES_C/ { $$$$0 = "$(if $(CONFIG_LIBMBEDTLS_HAVE_ARMV8CE_AES),,// )#define MBEDTLS_ARMV8CE_AES_C"; rc = 0 } \
-	     /#define MBEDTLS_HAVE_SSE2/ { $$$$0 = "$(if $(CONFIG_LIBMBEDTLS_HAVE_SSE2),,// )#define MBEDTLS_HAVE_SSE2"; rc = 0 } \
-	     { print } \
-	     END { exit(rc) }' $(PKG_BUILD_DIR)/include/mbedtls/config.h \
-	     >$(PKG_BUILD_DIR)/include/mbedtls/config.h.new && \
-	mv $(PKG_BUILD_DIR)/include/mbedtls/config.h.new $(PKG_BUILD_DIR)/include/mbedtls/config.h
-
-	awk 'BEGIN { rc = 1 } \
-	     /#define MBEDTLS_HKDF_C/ { $$$$0 = "$(if $(CONFIG_LIBMBEDTLS_HKDF_C),,// )#define MBEDTLS_HKDF_C"; rc = 0 } \
-	     { print } \
-	     END { exit(rc) }' $(PKG_BUILD_DIR)/include/mbedtls/config.h \
-	     >$(PKG_BUILD_DIR)/include/mbedtls/config.h.new && \
-	mv $(PKG_BUILD_DIR)/include/mbedtls/config.h.new $(PKG_BUILD_DIR)/include/mbedtls/config.h
-
-	sed -i '/fuzz/d' $(PKG_BUILD_DIR)/programs/CMakeLists.txt
-	sed -i '/test/d' $(PKG_BUILD_DIR)/programs/CMakeLists.txt
+       $(if $(strip $(foreach opt,$(MBEDTLS_BUILD_OPTS),$($(opt)))),
+	 $(foreach opt,$(MBEDTLS_BUILD_OPTS),
+	 $(PKG_BUILD_DIR)/scripts/config.py \
+	 -f $(PKG_BUILD_DIR)/include/mbedtls/config.h \
+	 $(if $($(opt)),set,unset) $(patsubst CONFIG_%,%,$(opt))),)
 endef
 
 define Build/InstallDev
