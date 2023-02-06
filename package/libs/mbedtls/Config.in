@@ -140,6 +140,11 @@ config MBEDTLS_ECP_DP_CURVE448_ENABLED
 
 comment "Build Options - unselect features to reduce binary size"
 
+config MBEDTLS_ARMV8CE_AES_C
+	bool "MBEDTLS_ARMV8CE_AES_C"
+	default y
+	depends on aarch64 && !TARGET_bcm27xx
+
 config MBEDTLS_CERTS_C
 	bool "MBEDTLS_CERTS_C"
 	default n
@@ -155,6 +160,11 @@ config MBEDTLS_CIPHER_MODE_XTS
 config MBEDTLS_DEBUG_C
 	bool "MBEDTLS_DEBUG_C"
 	default n
+
+config MBEDTLS_HAVE_SSE2
+	bool "MBEDTLS_HAVE_SSE2"
+	default y
+	depends on TARGET_x86_generic || TARGET_x86_64
 
 config MBEDTLS_HKDF_C
 	bool "MBEDTLS_HKDF_C"
