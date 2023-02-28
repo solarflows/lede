@@ -701,6 +701,22 @@ endef
 
 $(eval $(call KernelPackage,igb))
 
+define KernelPackage/igb-rockchip
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Rockchips igb support.
+  DEPENDS:=@TARGET_rockchip @PCI_SUPPORT
+  KCONFIG:= \
+    CONFIG_IGB=y \
+    CONFIG_IGB_HWMON=y
+  FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/igb/igb.ko
+  AUTOLOAD:=$(call AutoLoad,35,igb,1)
+endef
+
+define KernelPackage/igb-rockchip/description
+ igb (82576/82575) supprot for Rockchip.
+endef
+
+$(eval $(call KernelPackage,igb-rockchip))
 
 define KernelPackage/igbvf
   SUBMENU:=$(NETWORK_DEVICES_MENU)

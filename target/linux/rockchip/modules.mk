@@ -68,19 +68,3 @@ define KernelPackage/saradc-rockchip/description
 endef
 
 $(eval $(call KernelPackage,saradc-rockchip))
-
-define KernelPackage/igb-rockchip
-  SUBMENU:=$(NETWORK_DEVICES_MENU)
-  TITLE:=Intel(R) 82575/82576 PCI-Express Gigabit Ethernet support(rk boards)
-  DEPENDS:=@PCI_SUPPORT
-  KCONFIG:=CONFIG_IGB \
-    CONFIG_IGB_HWMON=y
-  FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/igb/igb.ko
-  AUTOLOAD:=$(call AutoLoad,35,igb,1)
-endef
-
-define KernelPackage/igb-rockchip/description
- Kernel modules for Intel(R) 82575/82576 PCI-Express Gigabit Ethernet adapters(for rk boards).
-endef
-
-$(eval $(call KernelPackage,igb-rockchip))
