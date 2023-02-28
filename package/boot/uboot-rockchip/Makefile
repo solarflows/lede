@@ -157,6 +157,17 @@ define U-Boot/rocktech-mpc1903-rk3399
   USE_RKBIN:=1
 endef
 
+define U-Boot/scensmart-sv901-rk3399
+  BUILD_SUBTARGET:=armv8
+  NAME:=ScenSmart SV901
+  BUILD_DEVICES:= \
+    scensmart_sv901
+  DEPENDS:=+PACKAGE_u-boot-scensmart-sv901-rk3399:arm-trusted-firmware-rk3399
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3399_bl31_v1.35.elf
+  USE_RKBIN:=1
+endef
+
 # RK3568 boards
 
 define U-Boot/mrkaio-m68s-rk3568
@@ -269,7 +280,8 @@ UBOOT_TARGETS := \
   nanopi-r2c-rk3328 \
   nanopi-r2s-rk3328 \
   orangepi-r1-plus-rk3328 \
-  orangepi-r1-plus-lts-rk3328
+  orangepi-r1-plus-lts-rk3328 \
+  scensmart-sv901-rk3399
 
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 
