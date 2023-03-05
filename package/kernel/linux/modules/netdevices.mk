@@ -704,7 +704,7 @@ $(eval $(call KernelPackage,igb))
 define KernelPackage/igb-rockchip
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Rockchips igb support.
-  DEPENDS:=@TARGET_rockchip @PCI_SUPPORT
+  DEPENDS:=@TARGET_rockchip @PCI_SUPPORT +kmod-ptp +kmod-hwmon-core
   KCONFIG:= \
     CONFIG_IGB=y \
     CONFIG_IGB_HWMON=y
