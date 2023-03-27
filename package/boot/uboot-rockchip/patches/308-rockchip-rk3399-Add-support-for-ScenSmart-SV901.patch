@@ -31,7 +31,7 @@
 +};
 --- /dev/null
 +++ b/arch/arm/dts/rk3399-sv901.dts
-@@ -0,0 +1,933 @@
+@@ -0,0 +1,929 @@
 +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
 +/*
 + * Copyright (c) 2017 Fuzhou Rockchip Electronics Co., Ltd.
@@ -89,21 +89,21 @@
 +		};
 +	};
 +
-+	leds: gpio-leds {
++	leds {
 +		compatible = "gpio-leds";
 +		pinctrl-names = "default";
 +		pinctrl-0 = <&work_led_pin>, <&diy_led_pin>;
 +
 +		work_led: led-0 {
-+			label = "work_led";
++			label = "work";
 +			default-state = "on";
 +			gpios = <&gpio2 RK_PD3 GPIO_ACTIVE_HIGH>;
 +		};
 +
 +		diy_led: led-1 {
-+			label = "diy_led";
++			label = "diy";
++			default-state = "off";
 +			gpios = <&gpio0 RK_PB5 GPIO_ACTIVE_HIGH>;
-+			linux,default-trigger = "heartbeat";
 +		};
 +	};
 +
@@ -510,10 +510,8 @@
 +	vdd_cpu_b: regulator@40 {
 +		compatible = "silergy,syr827";
 +		reg = <0x40>;
-+		fcs,suspend-voltage-selector = <1>;
++		fcs,suspend-voltage-selector = <0>;
 +		regulator-name = "vdd_cpu_b";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&cpu_b_sleep>;
 +		regulator-min-microvolt = <712500>;
 +		regulator-max-microvolt = <1500000>;
 +		regulator-ramp-delay = <1000>;
@@ -531,8 +529,6 @@
 +		reg = <0x41>;
 +		fcs,suspend-voltage-selector = <1>;
 +		regulator-name = "vdd_gpu";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&gpu_sleep>;
 +		regulator-min-microvolt = <712500>;
 +		regulator-max-microvolt = <1500000>;
 +		regulator-ramp-delay = <1000>;
@@ -701,11 +697,11 @@
 +			rockchip,pins = <1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_up>;
 +		};
 +
-+		cpu_b_sleep: cpu-b-sleep {
++		vsel1_pin: vsel1-pin {
 +			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_down>;
 +		};
 +
-+		gpu_sleep: gpu-sleep {
++		vsel2_pin: vsel2-pin {
 +			rockchip,pins = <1 RK_PB6 RK_FUNC_GPIO &pcfg_pull_down>;
 +		};
 +	};
