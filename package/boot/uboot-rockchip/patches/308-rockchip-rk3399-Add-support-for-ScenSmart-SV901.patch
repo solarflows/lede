@@ -10,7 +10,7 @@
  
 --- /dev/null
 +++ b/arch/arm/dts/rk3399-sv901-u-boot-dtsi
-@@ -0,0 +1,18 @@
+@@ -0,0 +1,14 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +
 +#include "rk3399-u-boot.dtsi"
@@ -22,16 +22,12 @@
 +	};
 +};
 +
-+&sdmmc {
-+	pinctrl-0 = <&sdmmc_bus4 &sdmmc_clk &sdmmc_cmd &sdmmc_cd>;
-+};
-+
 +&vdd_log {
 +	regulator-init-microvolt = <950000>;
 +};
 --- /dev/null
 +++ b/arch/arm/dts/rk3399-sv901.dts
-@@ -0,0 +1,929 @@
+@@ -0,0 +1,930 @@
 +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
 +/*
 + * Copyright (c) 2017 Fuzhou Rockchip Electronics Co., Ltd.
@@ -89,21 +85,21 @@
 +		};
 +	};
 +
-+	leds {
++	leds: gpio-leds {
 +		compatible = "gpio-leds";
 +		pinctrl-names = "default";
 +		pinctrl-0 = <&work_led_pin>, <&diy_led_pin>;
 +
 +		work_led: led-0 {
-+			label = "work";
++			label = "work_led";
 +			default-state = "on";
 +			gpios = <&gpio2 RK_PD3 GPIO_ACTIVE_HIGH>;
 +		};
 +
 +		diy_led: led-1 {
-+			label = "diy";
-+			default-state = "off";
++			label = "diy_led";
 +			gpios = <&gpio0 RK_PB5 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "heartbeat";
 +		};
 +	};
 +
@@ -351,44 +347,48 @@
 +
 +		regulators {
 +			vdd_center: DCDC_REG1 {
-+				regulator-name = "vdd_center";
 +				regulator-always-on;
 +				regulator-boot-on;
 +				regulator-min-microvolt = <750000>;
 +				regulator-max-microvolt = <1350000>;
++				regulator-name = "vdd_center";
 +				regulator-ramp-delay = <6001>;
++
 +				regulator-state-mem {
 +					regulator-off-in-suspend;
 +				};
 +			};
 +
 +			vdd_cpu_l: DCDC_REG2 {
-+				regulator-name = "vdd_cpu_l";
 +				regulator-always-on;
 +				regulator-boot-on;
 +				regulator-min-microvolt = <750000>;
 +				regulator-max-microvolt = <1350000>;
++				regulator-name = "vdd_cpu_l";
 +				regulator-ramp-delay = <6001>;
++
 +				regulator-state-mem {
 +					regulator-off-in-suspend;
 +				};
 +			};
 +
 +			vcc_ddr: DCDC_REG3 {
-+				regulator-name = "vcc_ddr";
 +				regulator-always-on;
 +				regulator-boot-on;
++				regulator-name = "vcc_ddr";
++
 +				regulator-state-mem {
 +					regulator-on-in-suspend;
 +				};
 +			};
 +
 +			vcc_1v8: DCDC_REG4 {
-+				regulator-name = "vcc_1v8";
 +				regulator-always-on;
 +				regulator-boot-on;
 +				regulator-min-microvolt = <1800000>;
 +				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc_1v8";
++
 +				regulator-state-mem {
 +					regulator-on-in-suspend;
 +					regulator-suspend-microvolt = <1800000>;
@@ -396,11 +396,12 @@
 +			};
 +
 +			vcc1v8_dvp: LDO_REG1 {
-+				regulator-name = "vcc1v8_dvp";
 +				regulator-always-on;
 +				regulator-boot-on;
 +				regulator-min-microvolt = <1800000>;
 +				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc1v8_dvp";
++
 +				regulator-state-mem {
 +					regulator-off-in-suspend;
 +				};
@@ -510,10 +511,10 @@
 +	vdd_cpu_b: regulator@40 {
 +		compatible = "silergy,syr827";
 +		reg = <0x40>;
-+		fcs,suspend-voltage-selector = <0>;
-+		regulator-name = "vdd_cpu_b";
++		fcs,suspend-voltage-selector = <1>;
 +		regulator-min-microvolt = <712500>;
 +		regulator-max-microvolt = <1500000>;
++		regulator-name = "vdd_cpu_b";
 +		regulator-ramp-delay = <1000>;
 +		regulator-always-on;
 +		regulator-boot-on;
@@ -528,9 +529,9 @@
 +		compatible = "silergy,syr828";
 +		reg = <0x41>;
 +		fcs,suspend-voltage-selector = <1>;
-+		regulator-name = "vdd_gpu";
 +		regulator-min-microvolt = <712500>;
 +		regulator-max-microvolt = <1500000>;
++		regulator-name = "vdd_gpu";
 +		regulator-ramp-delay = <1000>;
 +		regulator-always-on;
 +		regulator-boot-on;
@@ -684,11 +685,7 @@
 +
 +	pcie {
 +		pcie_pwr_en: pcie-pwr-en {
-+			rockchip,pins = <1 RK_PC1 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		pcie_3g_drv: pcie-3g-drv {
-+			rockchip,pins = <0 RK_PA2 RK_FUNC_GPIO &pcfg_pull_up>;
++			rockchip,pins = <1 RK_PC1 RK_FUNC_GPIO &pcfg_pull_down>;
 +		};
 +	};
 +
@@ -963,7 +960,7 @@
 +};
 --- /dev/null
 +++ b/configs/scensmart-sv901-rk3399_defconfig
-@@ -0,0 +1,77 @@
+@@ -0,0 +1,78 @@
 +CONFIG_ARM=y
 +CONFIG_SKIP_LOWLEVEL_INIT=y
 +CONFIG_COUNTER_FREQUENCY=24000000
@@ -1008,6 +1005,7 @@
 +CONFIG_DM_ETH=y
 +CONFIG_ETH_DESIGNWARE=y
 +CONFIG_GMAC_ROCKCHIP=y
++CONFIG_DM_PMIC_FAN53555=y
 +CONFIG_NVME_PCI=y
 +CONFIG_PCI=y
 +CONFIG_PMIC_RK8XX=y
