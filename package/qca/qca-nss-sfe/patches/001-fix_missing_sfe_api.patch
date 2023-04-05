@@ -1,0 +1,13 @@
+Index: qca-nss-sfe-2022-11-10-ed5b7fef/sfe.c
+===================================================================
+--- a/sfe.c
++++ b/sfe.c
+@@ -31,7 +31,7 @@
+ #include <ppe_rfs.h>
+ #endif
+ #include "sfe_debug.h"
+-#include "sfe_api.h"
++#include "exports/sfe_api.h"
+ #include "sfe.h"
+ #include "sfe_pppoe.h"
+ #include "sfe_pppoe_mgr.h"
