@@ -176,13 +176,13 @@ define KernelPackage/nf-flow
   DEPENDS:=+kmod-nf-conntrack
 ifeq ($(SUBTARGET),mt7621)
   FILES:= \
-	$(LINUX_DIR)/net/netfilter/nf_flow_table.ko
-  AUTOLOAD:=$(call AutoProbe,nf_flow_table)
-else
-  FILES:= \
 	$(LINUX_DIR)/net/netfilter/nf_flow_table.ko \
 	$(LINUX_DIR)/net/netfilter/nf_flow_table_hw.ko
   AUTOLOAD:=$(call AutoProbe,nf_flow_table nf_flow_table_hw)
+else
+  FILES:= \
+	$(LINUX_DIR)/net/netfilter/nf_flow_table.ko
+  AUTOLOAD:=$(call AutoProbe,nf_flow_table)
 endif
 endef
 
