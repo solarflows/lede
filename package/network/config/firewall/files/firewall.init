@@ -42,6 +42,7 @@ validate_firewall_rule()
 service_triggers() {
 	procd_add_reload_trigger firewall
 	set_lock
+
 	procd_open_validate
 	validate_firewall_redirect
 	validate_firewall_rule
