@@ -111,7 +111,7 @@
 +
 +		work_led: led-0 {
 +			label = "work";
-+			default-state = "on";
++			default-state = "off";
 +			gpios = <&gpio2 RK_PA7 GPIO_ACTIVE_HIGH>;
 +		};
 +
