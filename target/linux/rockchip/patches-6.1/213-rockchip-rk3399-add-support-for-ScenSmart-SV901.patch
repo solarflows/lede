@@ -10,7 +10,7 @@
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-evb1-v10.dtb
 --- /dev/null
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-sv901.dts
-@@ -0,0 +1,896 @@
+@@ -0,0 +1,924 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Copyright (c) 2017 Fuzhou Rockchip Electronics Co., Ltd.
@@ -29,7 +29,7 @@
 +	compatible = "scensmart,sv901", "rockchip,rk3399";
 +
 +	aliases {
-+		ethernet0 = &gmac;
++		ethernet0 = &rtl8211e;
 +		led-boot = &diy_led;
 +		led-failsafe = &diy_led;
 +		led-running = &work_led;
@@ -126,7 +126,6 @@
 +		reset-gpios = <&gpio0 RK_PB2 GPIO_ACTIVE_LOW>;
 +	};
 +
-+
 +	/* switched by pmic_sleep */
 +	vcc1v8_s3: vcca1v8_s3: vcc1v8-s3 {
 +		compatible = "regulator-fixed";
@@ -138,7 +137,22 @@
 +		vin-supply = <&vcc_1v8>;
 +	};
 +
-+	// pcie 12v0
++	// in my board vcc3v0_sd no control by any pin.
++	vcc3v0_sd: vcc3v0-sd {
++		compatible = "regulator-fixed";
++		// enable-active-high;
++		// gpio = <&gpio0 RK_PA1 GPIO_ACTIVE_HIGH>;
++		// pinctrl-names = "default";
++		// pinctrl-0 = <&sdmmc0_pwr_h>;
++		regulator-always-on;
++		regulator-min-microvolt = <3000000>;
++		regulator-max-microvolt = <3000000>;
++		regulator-name = "vcc3v0_sd";
++		vin-supply = <&vcc3v3_sys>;
++	};
++
++   // actually vcc12v0_pcie vcc3v3_pcie control by the same gpio.
++   // pcie 12v0
 +	vcc12v0_pcie: vcc12v0-pcie-regulator {
 +		compatible = "regulator-fixed";
 +		enable-active-high;
@@ -155,13 +169,10 @@
 +	vcc3v3_pcie: vcc3v3-pcie-regulator {
 +		compatible = "regulator-fixed";
 +		enable-active-high;
-+		gpio = <&gpio0 RK_PB5 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pcie_pwr_en>;
 +		regulator-always-on;
 +		regulator-boot-on;
 +		regulator-name = "vcc3v3_pcie";
-+		vin-supply = <&dc_12v>;
++		vin-supply = <&vcc12v0_pcie>;
 +	};
 +
 +	// 3g module power supply
@@ -290,6 +301,25 @@
 +		};
 +	};
 +};
++
++
++/*
++&gmac {
++	assigned-clocks = <&cru SCLK_RMII_SRC>;
++	assigned-clock-parents = <&clkin_gmac>;
++	clock_in_out = "input";
++	phy-mode = "rgmii";
++	phy-supply = <&vcc_lan>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&rgmii_pins>;
++	snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_LOW>;
++	snps,reset-active-low;
++	snps,reset-delays-us = <0 10000 50000>;
++	tx_delay = <0x28>;
++	rx_delay = <0x11>;
++	status = "okay";
++};
++*/
 +
 +&gpu {
 +	status = "okay";
@@ -587,10 +617,8 @@
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pcie_clkreqn_cpm>;
 +	status = "okay";
-+	vpcie0v9-supply = <&vcc3v3_pcie>;
-+	vpcie1v8-supply = <&vcc3v3_pcie>;
 +	vpcie3v3-supply = <&vcc3v3_pcie>;
-+	vpcie12v-supply = <&vcc12v0_pcie>
++	vpcie12v-supply = <&vcc12v0_pcie>;
 +};
 +
 +&pmu_io_domains {
@@ -623,13 +651,13 @@
 +
 +		diy_led_pin: diy-led-pin {
 +			rockchip,pins =
-+			<0 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
++			<2 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
 +		};
 +	};
 +
 +	pcie {
 +		pcie_pwr_en: pcie-pwr-en {
-+			rockchip,pins = <1 RK_PC1 RK_FUNC_GPIO &pcfg_pull_none>;
++			rockchip,pins = <0 RK_PB5 RK_FUNC_GPIO &pcfg_pull_none>;
 +		};
 +
 +		pcie_3g_drv: pcie-3g-drv {
@@ -642,6 +670,21 @@
 +		pmic_int_l: pmic-int-l {
 +			rockchip,pins =
 +			<1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++
++		pmic_dvs2: pmic-dvs2 {
++			rockchip,pins =
++				<1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_down>;
++		};
++
++		pmic_stby: pmic-stby {
++			rockchip,pins =
++				<1 RK_PD0 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++
++		pmic_hold: pmic-hold{
++			rockchip,pins =
++				<1 RK_PB5 RK_FUNC_GPIO &pcfg_pull_up>;
 +		};
 +
 +		cpu_b_sleep: cpu-b-sleep {
@@ -763,7 +806,7 @@
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&sdmmc_bus4 &sdmmc_clk &sdmmc_cmd &sdmmc0_det_l>;
 +	status = "okay";
-+	vqmmc-supply = <&vcc_sdio>;
++	vqmmc-supply = <&vcc3v0_sd>;
 +};
 +
 +&sdhci {
@@ -776,14 +819,6 @@
 +
 +&tcphy0 {
 +    status = "okay";
-+};
-+
-+&tcphy0_usb3 {
-+	port {
-+		tcphy0_typec_ss: endpoint {
-+			remote-endpoint = <&usbc_ss>;
-+		};
-+    };
 +};
 +
 +&tcphy1 {
@@ -808,12 +843,6 @@
 +	u2phy0_host: host-port {
 +		phy-supply = <&vcc5v0_host>;
 +		status = "okay";
-+	};
-+
-+	port {
-+		u2phy0_typec_hs: endpoint {
-+			remote-endpoint = <&usbc_hs>;
-+		};
 +	};
 +};
 +
@@ -906,4 +935,3 @@
 +&vpu {
 +	status = "okay";
 +};
-+
