@@ -14,6 +14,7 @@ PKG_MAINTAINER:=Tobias Maedel <openwrt@tbspace.de>
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/host-build.mk
 
 define U-Boot/Default
   BUILD_TARGET:=rockchip
@@ -163,7 +164,7 @@ define U-Boot/scensmart-sv901-rk3399
   BUILD_DEVICES:= \
     scensmart_sv901
   DEPENDS:=+PACKAGE_u-boot-scensmart-sv901-rk3399:arm-trusted-firmware-rk3399
-  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
   ATF:=rk3399_bl31_v1.35.elf
   USE_RKBIN:=1
 endef
@@ -301,6 +302,7 @@ UBOOT_TARGETS := \
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 
 UBOOT_MAKE_FLAGS += \
+  PATH=$(STAGING_DIR_HOST)/bin:$(PATH) \
   BL31=$(STAGING_DIR_IMAGE)/$(ATF)
 
 ifeq ($(CONFIG_PACKAGE_arm-trusted-firmware-rk3568),y)
