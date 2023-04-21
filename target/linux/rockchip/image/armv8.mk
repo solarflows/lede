@@ -261,3 +261,13 @@ define Device/xunlong_orangepi-r1-plus-lts
   DEVICE_PACKAGES := kmod-usb-net-rtl8152
 endef
 TARGET_DEVICES += xunlong_orangepi-r1-plus-lts
+
+define Device/scensmart_sv901
+  DEVICE_VENDOR := ScenSmart
+  DEVICE_MODEL := SV901
+  SOC := rk3399
+  UBOOT_DEVICE_NAME := scensmart-sv901-rk3399
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
+  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-nvme
+endef
+TARGET_DEVICES += scensmart_sv901
