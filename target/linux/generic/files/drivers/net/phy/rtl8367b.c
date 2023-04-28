@@ -800,8 +800,8 @@ static int rtl8367b_init_regs(struct rtl8366_smi *smi)
 
 	if (of_device_is_compatible(smi->parent->of_node,
 				    "realtek,rtl8367s")) {
-		initvals = rtl8367s_initvals;
-		count = ARRAY_SIZE(rtl8367s_initvals);
+		initvals = rtl8367c_initvals0;
+		count = ARRAY_SIZE(rtl8367c_initvals0);
 	} else {
 	switch (rlvid) {
 	case 0:
