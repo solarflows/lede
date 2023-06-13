@@ -316,7 +316,7 @@ define Device/cosofteck_rk7089ca
   DEVICE_VENDOR := Cosofteck
   DEVICE_MODEL := RK7089CA
   SOC := rk3399
-  UBOOT_DEVICE_NAME := scensmart-sv901-rk3399
+  UBOOT_DEVICE_NAME := cosofteck-rk7089ca-rk3399
   IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
   DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware
 endef
