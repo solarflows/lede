@@ -169,6 +169,28 @@ define U-Boot/scensmart-sv901-rk3399
   USE_RKBIN:=1
 endef
 
+define U-Boot/sv901-eaio-rk3399
+  BUILD_SUBTARGET:=armv8
+  NAME:=SV901 EAIO
+  BUILD_DEVICES:= \
+    sv901_eaio
+  DEPENDS:=+PACKAGE_u-boot-sv901-eaio-rk3399:arm-trusted-firmware-rk3399
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3399_bl31_v1.35.elf
+  USE_RKBIN:=1
+endef
+
+define U-Boot/cosofteck-rk7089ca-rk3399
+  BUILD_SUBTARGET:=armv8
+  NAME:=Cosofteck RK7089CA
+  BUILD_DEVICES:= \
+    cosofteck_rk7089ca
+  DEPENDS:=+PACKAGE_u-boot-cosofteck-rk7089ca-rk3399:arm-trusted-firmware-rk3399
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3399_bl31_v1.35.elf
+  USE_RKBIN:=1
+endef
+
 define U-Boot/sharevdi-h3399pc-rk3399
   BUILD_SUBTARGET:=armv8
   NAME:=SHAREVDI H3399PC

@@ -298,6 +298,26 @@ define Device/scensmart_sv901
   SOC := rk3399
   UBOOT_DEVICE_NAME := scensmart-sv901-rk3399
   IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
-  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl
+  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware
 endef
 TARGET_DEVICES += scensmart_sv901
+
+define Device/sv901_eaio
+  DEVICE_VENDOR := SV901
+  DEVICE_MODEL := EAIO
+  SOC := rk3399
+  UBOOT_DEVICE_NAME := sv901-eaio-rk3399
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
+  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware kmod-usb-net-rtl8152 kmod-switch-rtl8367b
+endef
+TARGET_DEVICES += sv901_eaio
+
+define Device/cosofteck_rk7089ca
+  DEVICE_VENDOR := Cosofteck
+  DEVICE_MODEL := RK7089CA
+  SOC := rk3399
+  UBOOT_DEVICE_NAME := scensmart-sv901-rk3399
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
+  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware
+endef
+TARGET_DEVICES += cosofteck_rk7089ca
