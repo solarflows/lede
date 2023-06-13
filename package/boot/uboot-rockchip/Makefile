@@ -338,12 +338,14 @@ UBOOT_TARGETS := \
   rockpro64-rk3399 \
   rongpin-king3399-rk3399 \
   rocktech-mpc1903-rk3399 \
+  scensmart-sv901-rk3399 \
+  sv901-eaio-rk3399 \
+  cosofteck-rk7089ca-rk3399 \
   dilusense-dlfr100-rk3399 \
   nanopi-r2c-rk3328 \
   nanopi-r2s-rk3328 \
   orangepi-r1-plus-rk3328 \
-  orangepi-r1-plus-lts-rk3328 \
-  scensmart-sv901-rk3399
+  orangepi-r1-plus-lts-rk3328
 
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 
