@@ -1,0 +1,25 @@
+#!/bin/sh
+board=$(cat /tmp/sysinfo/board_name)
+case "$board" in
+scensmart,sv901)
+uci -q set network.lan.ipaddr="192.168.0.1"
+uci -q set network.pon=interface
+uci -q set network.pon.proto="static"
+uci -q set network.pon.ifname="eth0.2"
+uci -q set network.pon.delegate="0"
+uci -q set network.pon.ipaddr="192.168.1.254"
+uci -q set network.pon.netmask="255.255.255.0"
+uci -q set network.pon.metric="100"
+uci -q set network.pon_route=route
+uci -q set network.pon_route.interface='pon'
+uci -q set network.pon_route.target='192.168.1.10'
+uci -q set network.pon_route.netmask='255.255.255.0'
+uci -q set network.pon_route.gateway='192.168.1.254'
+uci -q set network.pon_route.metric='100'
+uci -q commit network
+;;
+*)
+exit 0
+;;
+esac
+exit 0
