@@ -600,9 +600,6 @@
 };
 
 &pcie_phy {
-	assigned-clock-parents = <&cru SCLK_PCIEPHY_REF100M>;
-	assigned-clock-rates = <100000000>;
-	assigned-clocks = <&cru SCLK_PCIEPHY_REF>;
 	status = "okay";
 };
 
