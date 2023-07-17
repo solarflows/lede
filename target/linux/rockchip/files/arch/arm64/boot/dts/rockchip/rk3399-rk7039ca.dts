@@ -12,15 +12,15 @@
 #include "rk3399-opp.dtsi"
 
 / {
-	model = "Cosofteck RK7089CA";
-	compatible = "cosofteck,rk7089ca", "rockchip,rk3399";
+	model = "Cosofteck RK7039CA";
+	compatible = "cosofteck,rk7039ca", "rockchip,rk3399";
 
 	aliases {
 		ethernet0 = &gmac;
-		led-boot = &user_led1;
-		led-failsafe = &user_led2;
-		led-running = &user_led1;
-		led-upgrade = &user_led2;
+		// led-boot = &user_led1;
+		// led-failsafe = &user_led2;
+		// led-running = &user_led1;
+		// led-upgrade = &user_led2;
 		mmc0 = &sdio0;
 		mmc1 = &sdmmc;
 		mmc2 = &sdhci;
@@ -62,13 +62,13 @@
 		regulator-max-microvolt = <12000000>;
 	};
 
-    gpio_fan {
-		compatible = "gpio-fan";
-        #cooling-cells = <2>;
-		gpios = <&gpio2 RK_PA3 GPIO_ACTIVE_HIGH>;
-		gpio-fan,speed-map = <0    0
-				      1000 1>;
-	};
+    // gpio_fan {
+	// 	compatible = "gpio-fan";
+    //     #cooling-cells = <2>;
+	// 	gpios = <&gpio2 RK_PA3 GPIO_ACTIVE_HIGH>;
+	// 	gpio-fan,speed-map = <0    0
+	// 			      1000 1>;
+	// };
 
 	gpio-keys {
 		compatible = "gpio-keys";
@@ -85,23 +85,23 @@
 		};
 	};
 
-	leds: gpio-leds {
-		compatible = "gpio-leds";
-		pinctrl-names = "default";
-		pinctrl-0 = <&user_led1>, <&user_led2>;
+	// leds: gpio-leds {
+	// 	compatible = "gpio-leds";
+	// 	pinctrl-names = "default";
+	// 	pinctrl-0 = <&user_led1>, <&user_led2>;
 
-		user_led1 {
-			label = "green:user1";
-			default-state = "off";
-			gpios = <&gpio1 RK_PC6 GPIO_ACTIVE_LOW>;
-		};
+	// 	user_led1 {
+	// 		label = "green:user1";
+	// 		default-state = "off";
+	// 		gpios = <&gpio1 RK_PC6 GPIO_ACTIVE_LOW>;
+	// 	};
 
-		user_led2 {
-			label = "blue:user2";
-			default-state = "off";
-			gpios = <&gpio1 RK_PC7 GPIO_ACTIVE_LOW>;
-		};
-	};
+	// 	user_led2 {
+	// 		label = "blue:user2";
+	// 		default-state = "off";
+	// 		gpios = <&gpio1 RK_PC7 GPIO_ACTIVE_LOW>;
+	// 	};
+	// };
 
 	sdio_pwrseq: sdio-pwrseq {
 		compatible = "mmc-pwrseq-simple";
@@ -549,26 +549,26 @@
 	status = "okay";
 };
 
-&spi1 {
-	status = "okay";
-	pinctrl-names = "default";
-	pinctrl-0 = <&spi1_clk &spi1_tx &spi1_cs0>;
-	//cs-gpios = <&gpio1 RK_PB2 GPIO_ACTIVE_HIGH>; /*SPI-CS:PC3 and PA6*/
-	st7789v@0 {
-			status = "okay";
-            compatible = "sitronix,st7789v";
-            reg = <0>;
-            spi-max-frequency = <12000000>;
-			bgr;
-            fps = <30>;
-			rotate = <90>;
-            buswidth = <8>;
-			dc-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
-            reset-gpios = <&gpio1 RK_PA3 GPIO_ACTIVE_LOW>;
-            //led-gpios = <&gpio1 RK_PC1 GPIO_ACTIVE_HIGH>;
-            debug = <0>; //等级0～7 越高信息越多
-    };
-};
+// &spi1 {
+// 	status = "okay";
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&spi1_clk &spi1_tx &spi1_cs0>;
+// 	//cs-gpios = <&gpio1 RK_PB2 GPIO_ACTIVE_HIGH>; /*SPI-CS:PC3 and PA6*/
+// 	st7789v@0 {
+// 			status = "okay";
+//             compatible = "sitronix,st7789v";
+//             reg = <0>;
+//             spi-max-frequency = <12000000>;
+// 			bgr;
+//             fps = <30>;
+// 			rotate = <90>;
+//             buswidth = <8>;
+// 			dc-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
+//             reset-gpios = <&gpio1 RK_PA3 GPIO_ACTIVE_LOW>;
+//             //led-gpios = <&gpio1 RK_PC1 GPIO_ACTIVE_HIGH>;
+//             debug = <0>; //等级0～7 越高信息越多
+//     };
+// };
 
 &io_domains {
 	status = "okay";

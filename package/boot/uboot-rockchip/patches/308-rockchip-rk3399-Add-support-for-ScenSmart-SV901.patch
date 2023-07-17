@@ -5,7 +5,7 @@
  	rk3399-rock960.dtb \
  	rk3399-mpc1903.dtb \
 +	rk3399-eaio.dtb \
-+	rk3399-rk7089ca.dtb \
++	rk3399-rk7039ca.dtb \
 +	rk3399-sv901.dtb \
  	rk3399-rockpro64.dtb \
  	rk3399pro-rock-pi-n10.dtb

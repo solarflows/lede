@@ -12,8 +12,8 @@
 #include "rk3399-opp.dtsi"
 
 / {
-	model = "Cosofteck RK7089CA";
-	compatible = "cosofteck,rk7089ca", "rockchip,rk3399";
+	model = "Cosofteck RK7039CA";
+	compatible = "cosofteck,rk7039ca", "rockchip,rk3399";
 
 	aliases {
 		ethernet0 = &gmac;

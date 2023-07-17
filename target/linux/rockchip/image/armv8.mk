@@ -342,12 +342,12 @@ define Device/sv901_eaio
 endef
 TARGET_DEVICES += sv901_eaio
 
-define Device/cosofteck_rk7089ca
+define Device/cosofteck_rk7039ca
   DEVICE_VENDOR := Cosofteck
-  DEVICE_MODEL := RK7089CA
+  DEVICE_MODEL := RK7039CA
   SOC := rk3399
-  UBOOT_DEVICE_NAME := cosofteck-rk7089ca-rk3399
+  UBOOT_DEVICE_NAME := cosofteck-rk7039ca-rk3399
   IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
   DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware
 endef
-TARGET_DEVICES += cosofteck_rk7089ca
+TARGET_DEVICES += cosofteck_rk7039ca
