@@ -192,36 +192,16 @@
 		vin-supply = <&vcc_sys>;
 	};
 
-	wireless-bluetooth {
-		compatible = "bluetooth-platdata";
-		clocks = <&rk808 1>;
-		clock-names = "ext_clock";
-		//wifi-bt-power-toggle;
-		//uart_rts_gpios = <&gpio2 RK_PC3 GPIO_ACTIVE_LOW>; /* GPIO2_C3 */
-		pinctrl-names = "default", "rts_gpio";
-		pinctrl-0 = <&uart0_rts>;
-		pinctrl-1 = <&uart0_gpios>;
-		//BT,power_gpio  = <&gpio3 19 GPIO_ACTIVE_HIGH>; /* GPIOx_xx */
-		BT,reset_gpio	= <&gpio0 RK_PB2 GPIO_ACTIVE_HIGH>; /* GPIO0_B1 */
-		//BT,wake_gpio	 = <&gpio2 RK_PD2 GPIO_ACTIVE_HIGH>; /* GPIO2_D2 */
-		//BT,wake_host_irq = <&gpio0 RK_PA4 GPIO_ACTIVE_HIGH>; /* GPIO0_A4 */
-		status = "okay";
-
-		uart0_gpios: uart0-gpios {
-				rockchip,pins =
-					<&gpio2 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-	};
-
 	wireless-wlan {
 		compatible = "wlan-platdata";
 		rockchip,grf = <&grf>;
-		wifi_chip_type = "ap6356s";
-		sdio_vref = <1800>;
-		//WIFI,host_wake_irq = <&gpio0 RK_PA3 GPIO_ACTIVE_HIGH>; /* GPIO0_a3 */
+		pinctrl-names = "default";
+		pinctrl-0 = <&wifi_host_wake_l>;
+		wifi_chip_type = "ap6275s";
+		WIFI,host_wake_irq = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
 		status = "okay";
 	};
-		rtl8367s {
+	rtl8367s {
 		compatible = "realtek,rtl8367s";
 		cpu_port = <7>;
 		mii-bus = <&mdio0>;
@@ -551,7 +531,7 @@
 &i2c1 {
 	i2c-scl-rising-time-ns = <300>;
 	i2c-scl-falling-time-ns = <15>;
-	status = "okay";
+	status = "disabled";
 };
 
 &i2c3 {
@@ -620,6 +600,8 @@
 	status = "okay";
 	vpcie0v9-supply = <&vcc0v9_pcie>;
 	vpcie1v8-supply = <&vcca1v8_s3>;
+	vpcie3v3-supply = <&vcc3v3_sys>;
+	vpcie12v-supply = <&dc_12v>;
 };
 
 &pmu_io_domains {
@@ -872,7 +854,7 @@
 		};
 
 		wifi_host_wake_l: wifi-host-wake-l {
-			rockchip,pins = <0 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
+			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 
@@ -914,7 +896,7 @@
 
 &sdio0 {
 	bus-width = <4>;
-	clock-frequency = <50000000>;
+	//clock-frequency = <50000000>;
 	cap-sdio-irq;
 	cap-sd-highspeed;
 	keep-power-in-suspend;
@@ -928,7 +910,7 @@
 	status = "okay";
 
 	brcmf: wifi@1 {
-		compatible = "brcm,bcm43455-fmac";
+		compatible = "brcm,bcm43752-fmac";
 		reg = <1>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&wifi_host_wake_l>;
@@ -941,6 +923,7 @@
 	cap-sd-highspeed;
 	cd-gpios = <&gpio0 RK_PA7 GPIO_ACTIVE_LOW>;
 	disable-wp;
+	cap-sdio-irq;
 	pinctrl-names = "default";
 	pinctrl-0 = <&sdmmc_bus4 &sdmmc_clk &sdmmc_cmd &sdmmc0_det_l>;
 	status = "okay";
@@ -1005,20 +988,6 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&uart0_xfer &uart0_rts &uart0_cts>;
 	status = "disabled";
-
-	bluetooth {
-		compatible = "brcm,bcm43438-bt";
-		clocks = <&rk808 1>;
-		clock-names = "lpo";
-		device-wakeup-gpios = <&gpio2 RK_PD2 GPIO_ACTIVE_HIGH>;
-		host-wakeup-gpios = <&gpio0 RK_PA4 GPIO_ACTIVE_HIGH>;
-		shutdown-gpios = <&gpio0 RK_PB1 GPIO_ACTIVE_HIGH>;
-		max-speed = <4000000>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&bt_reg_on_h &bt_host_wake_l &bt_wake_l>;
-		vbat-supply = <&vcc3v3_sys>;
-		vddio-supply = <&vcc_1v8>;
-	};
 };
 
 &uart2 {
