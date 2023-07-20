@@ -31,7 +31,8 @@ rockchip_setup_interfaces()
 	fastrhino,r66s|\
 	firefly,rk3568-roc-pc|\
 	friendlyarm,nanopi-r5c|\
-	radxa,e25)
+	radxa,e25|\
+	dg,nas-lite)
 		ucidef_set_interfaces_lan_wan 'eth0' 'eth1'
 		;;
 	fastrhino,r68s|\
@@ -96,7 +97,8 @@ rockchip_setup_macs()
 	sharevdi,h3399pc|\
 	sharevdi,guangmiao-g4c|\
 	rocktech,mpc1903|\
-	scensmart,sv901)
+	scensmart,sv901|\
+	dg,nas-lite)
 		wan_mac=$(generate_mac_from_mmc_cid)
 		lan_mac=$(macaddr_add "$wan_mac" +1)
 		;;
