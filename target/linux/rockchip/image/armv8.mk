@@ -332,22 +332,23 @@ define Device/scensmart_sv901
 endef
 TARGET_DEVICES += scensmart_sv901
 
-define Device/sv901_eaio
-  DEVICE_VENDOR := SV901
-  DEVICE_MODEL := EAIO
+define Device/eaio_eaio-sv901
+  DEVICE_VENDOR := EAIO
+  DEVICE_MODEL := EAIO-SV901
   SOC := rk3399
-  UBOOT_DEVICE_NAME := sv901-eaio-rk3399
+  UBOOT_DEVICE_NAME := eaio-sv901-rk3399
   IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
   DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware kmod-usb-net-rtl8152 kmod-switch-rtl8367b
 endef
-TARGET_DEVICES += sv901_eaio
+TARGET_DEVICES += eaio_eaio-sv901
 
-define Device/cosofteck_rk7039ca
-  DEVICE_VENDOR := Cosofteck
-  DEVICE_MODEL := RK7039CA
+define Device/eaio_eaio-3399j
+  DEVICE_VENDOR := EAIO
+  DEVICE_MODEL := EAIO-3399j
   SOC := rk3399
-  UBOOT_DEVICE_NAME := cosofteck-rk7039ca-rk3399
+  UBOOT_DEVICE_NAME := eaio-3399j-rk3399
   IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r4s | pine64-bin | gzip | append-metadata
-  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware
+  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware kmod-usb-net-rtl8152 kmod-switch-rtl8367b
 endef
-TARGET_DEVICES += cosofteck_rk7039ca
+TARGET_DEVICES += eaio_eaio-3399j
+

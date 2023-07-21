@@ -169,23 +169,23 @@ define U-Boot/scensmart-sv901-rk3399
   USE_RKBIN:=1
 endef
 
-define U-Boot/sv901-eaio-rk3399
+define U-Boot/eaio-sv901-rk3399
   BUILD_SUBTARGET:=armv8
-  NAME:=SV901 EAIO
+  NAME:=EAIO-SV901
   BUILD_DEVICES:= \
-    sv901_eaio
-  DEPENDS:=+PACKAGE_u-boot-sv901-eaio-rk3399:arm-trusted-firmware-rk3399
+    eaio_eaio-sv901
+  DEPENDS:=+PACKAGE_u-boot-eaio-sv901-rk3399:arm-trusted-firmware-rk3399
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
   ATF:=rk3399_bl31_v1.35.elf
   USE_RKBIN:=1
 endef
 
-define U-Boot/cosofteck-rk7039ca-rk3399
+define U-Boot/eaio-3399j-rk3399
   BUILD_SUBTARGET:=armv8
-  NAME:=Cosofteck RK7039CA
+  NAME:=EAIO 3399J
   BUILD_DEVICES:= \
-    cosofteck_rk7039ca
-  DEPENDS:=+PACKAGE_u-boot-cosofteck-rk7039ca-rk3399:arm-trusted-firmware-rk3399
+    eaio_eaio-3399j
+  DEPENDS:=+PACKAGE_u-boot-eaio-3399j-rk3399:arm-trusted-firmware-rk3399
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
   ATF:=rk3399_bl31_v1.35.elf
   USE_RKBIN:=1
@@ -376,7 +376,8 @@ UBOOT_TARGETS := \
   rongpin-king3399-rk3399 \
   rocktech-mpc1903-rk3399 \
   scensmart-sv901-rk3399 \
-  sv901-eaio-rk3399 \
+  eaio-sv901-rk3399 \
+  eaio-3399j-rk3399 \
   cosofteck-rk7039ca-rk3399 \
   dilusense-dlfr100-rk3399 \
   xiaobao-nas-v1-rk3399 \

@@ -4,8 +4,8 @@
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-rockpro64.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-sapphire.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-sapphire-excavator.dtb
-+dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-eaio.dtb
-+dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-rk7039ca.dtb
++dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-eaio-sv901.dtb
++dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-eaio-3399j.dtb
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-sv901.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399pro-rock-pi-n10.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-king3399.dtb
