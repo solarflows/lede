@@ -301,3 +301,23 @@ define Device/xunlong_orangepi-r1-plus-lts
   DEVICE_PACKAGES := kmod-usb-net-rtl8152
 endef
 TARGET_DEVICES += xunlong_orangepi-r1-plus-lts
+
+define Device/scensmart_sv901
+  DEVICE_VENDOR := ScenSmart
+  DEVICE_MODEL := SV901
+  SOC := rk3399
+  UBOOT_DEVICE_NAME := scensmart-sv901-rk3399
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
+  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-nvme cypress-firmware-4356-sdio scensmart-sv901-firmware kmod-usb-net-rtl8152 kmod-switch-rtl8367b
+endef
+TARGET_DEVICES += scensmart_sv901
+
+define Device/dg_nas-lite
+  DEVICE_VENDOR := DG
+  DEVICE_MODEL := NAS-LITE
+  DEVICE_DTS := rockchip/rk3568-dg-nas-lite
+  UBOOT_DEVICE_NAME := station-p2-rk3568
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r5s | pine64-img | gzip | append-metadata
+  DEVICE_PACKAGES := kmod-ikconfig kmod-ata-ahci-platform wpad-openssl kmod-nvme
+endef
+TARGET_DEVICES += dg_nas-lite
