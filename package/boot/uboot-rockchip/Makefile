@@ -378,7 +378,6 @@ UBOOT_TARGETS := \
   scensmart-sv901-rk3399 \
   eaio-sv901-rk3399 \
   eaio-3399j-rk3399 \
-  cosofteck-rk7039ca-rk3399 \
   dilusense-dlfr100-rk3399 \
   xiaobao-nas-v1-rk3399 \
   nanopi-r2c-rk3328 \
