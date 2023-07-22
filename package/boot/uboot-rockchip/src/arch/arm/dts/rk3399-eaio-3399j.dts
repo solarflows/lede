@@ -54,12 +54,12 @@
 		regulator-max-microvolt = <12000000>;
 	};
 
-	gpio_fan {
+	gpio_fan_cool: gpio_fan {
 		compatible = "gpio-fan";
-		#cooling-cells = <2>;
+		#cooling-cells = <2>; /* min followed by max */
 		gpios = <&gpio2 RK_PA3 GPIO_ACTIVE_HIGH>;
-		gpio-fan,speed-map = <0	0
-					  1000 1>;
+		gpio-fan,speed-map =	<0	0>,
+								<1000 1>;
 	};
 
 	gpio-keys {
@@ -106,30 +106,35 @@
 		reset-gpios = <&gpio0 RK_PB2 GPIO_ACTIVE_LOW>;
 	};
 
-	vcc0v9_pcie: vcc0v9-pcie {
+	vcc3v3_sys: vcc3v3-sys {
 		compatible = "regulator-fixed";
-		regulator-min-microvolt = <900000>;
-		regulator-max-microvolt = <900000>;
-		regulator-name = "vcc0v9_pcie";
-		vin-supply = <&vcc1v8_s3>;
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-name = "vcc3v3_sys";
+		vin-supply = <&vcc5v0_sys>;
 	};
 
-	vcc1v8_s3: vcca1v8_s3: vcc1v8-s3 {
+	vcc5v0_sys: vcc5v0-sys {
 		compatible = "regulator-fixed";
-		regulator-name = "vcc1v8_s3";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		regulator-name = "vcc5v0_sys";
+		vin-supply = <&dc_12v>;
+	};
+
+	/* switched by pmic_sleep */
+	vcc1v8_s3: vcc1v8-s3 {
+		compatible = "regulator-fixed";
 		regulator-always-on;
 		regulator-boot-on;
 		regulator-min-microvolt = <1800000>;
 		regulator-max-microvolt = <1800000>;
+		regulator-name = "vcc1v8_s3";
 		vin-supply = <&vcc_1v8>;
-	};
-
-	vcc3v3_pcie: vcc3v3-pcie-regulator {
-		compatible = "regulator-fixed";
-		regulator-min-microvolt = <3300000>;
-		regulator-max-microvolt = <3300000>;
-		regulator-name = "vcc3v3_pcie";
-		vin-supply = <&dc_12v>;
 	};
 
 	vcc3v3_sd: vcc3v3-sd {
@@ -145,17 +150,6 @@
 		vin-supply = <&vcc3v3_sys>;
 	};
 
-
-	vcc3v3_sys: vcc3v3-sys {
-		compatible = "regulator-fixed";
-		regulator-always-on;
-		regulator-boot-on;
-		regulator-min-microvolt = <3300000>;
-		regulator-max-microvolt = <3300000>;
-		regulator-name = "vcc3v3_sys";
-		vin-supply = <&vcc5v0_sys>;
-	};
-
 	vcc5v0_host: vcc5v0-host-regulator {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc5v0_host";
@@ -163,31 +157,25 @@
 		vin-supply = <&vcc5v0_sys>;
 	};
 
-	vcc5v0_typec: vcc5v0-typec-regulator {
+	/*
+	 * Really, this is supplied by vcc_1v8, and vcc1v8_s3 only
+	 * drives the enable pin, but we can't quite model that.
+	 */
+	vcca0v9_s3: vcca0v9-s3 {
 		compatible = "regulator-fixed";
-		regulator-always-on;
-		vin-supply = <&vcc5v0_sys>;
+		regulator-min-microvolt = <900000>;
+		regulator-max-microvolt = <900000>;
+		regulator-name = "vcca0v9_s3";
+		vin-supply = <&vcc1v8_s3>;
 	};
 
-	vcc5v0_sys: vcc5v0-sys {
+	/* As above, actually supplied by vcc3v3_sys */
+	vcca1v8_s3: vcca1v8-s3 {
 		compatible = "regulator-fixed";
-		regulator-always-on;
-		regulator-boot-on;
-		regulator-min-microvolt = <5000000>;
-		regulator-max-microvolt = <5000000>;
-		regulator-name = "vcc5v0_sys";
-		vin-supply = <&dc_12v>;
-	};
-
-	vdd_log: vdd-log {
-		compatible = "pwm-regulator";
-		pwms = <&pwm2 0 25000 1>;
-		regulator-name = "vdd_log";
-		regulator-always-on;
-		regulator-boot-on;
-		regulator-min-microvolt = <430000>;
-		regulator-max-microvolt = <1400000>;
-		vin-supply = <&vcc5v0_sys>;
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-name = "vcca1v8_s3";
+		vin-supply = <&vcc1v8_s3>;
 	};
 
 	wireless-wlan {
@@ -209,6 +197,14 @@
 	};
 };
 
+&cpu_b0 {
+	cpu-supply = <&vdd_cpu_b>;
+};
+
+&cpu_b1 {
+	cpu-supply = <&vdd_cpu_b>;
+};
+
 &cpu_l0 {
 	cpu-supply = <&vdd_cpu_l>;
 };
@@ -225,21 +221,12 @@
 	cpu-supply = <&vdd_cpu_l>;
 };
 
-&cpu_b0 {
-	cpu-supply = <&vdd_cpu_b>;
-};
-
-&cpu_b1 {
-	cpu-supply = <&vdd_cpu_b>;
-};
-
 &emmc_phy {
 	status = "okay";
 };
 
 &gmac {
 	assigned-clocks = <&cru SCLK_RMII_SRC>;
-	//assigned-clock-parents = <&clkin_gmac>;
 	assigned-clock-parents = <&cru SCLK_MAC>;
 	assigned-clock-rates = <125000000>;
 	clock_in_out = "output";
@@ -410,9 +397,8 @@
 			vcc_sdio: LDO_REG4 {
 				regulator-always-on;
 				regulator-boot-on;
-				regulator-init-microvolt = <3000000>;
 				regulator-min-microvolt = <1800000>;
-				regulator-max-microvolt = <3300000>;
+				regulator-max-microvolt = <3000000>;
 				regulator-name = "vcc_sdio";
 
 				regulator-state-mem {
@@ -580,7 +566,7 @@
 &pcie0 {
 	ep-gpios = <&gpio4 RK_PD1 GPIO_ACTIVE_HIGH>;
 	num-lanes = <4>;
-	vpcie0v9-supply = <&vcc0v9_pcie>;
+	vpcie0v9-supply = <&vcca0v9_s3>;
 	vpcie1v8-supply = <&vcca1v8_s3>;
 	vpcie3v3-supply = <&vcc3v3_sys>;
 	status = "okay";
@@ -760,7 +746,7 @@
 	pmic {
 		cpu_b_sleep: cpu-b-sleep {
 			rockchip,pins =
-				<1 RK_PC1 RK_FUNC_GPIO &pcfg_pull_down>;
+				<1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_down>;
 		};
 
 		gpu_sleep: gpu-sleep {
