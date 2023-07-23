@@ -157,6 +157,28 @@ define U-Boot/scensmart-sv901-rk3399
   USE_RKBIN:=1
 endef
 
+define U-Boot/eaio-sv901-rk3399
+  BUILD_SUBTARGET:=armv8
+  NAME:=EAIO-SV901
+  BUILD_DEVICES:= \
+    eaio_eaio-sv901
+  DEPENDS:=+PACKAGE_u-boot-eaio-sv901-rk3399:arm-trusted-firmware-rk3399
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3399_bl31_v1.35.elf
+  USE_RKBIN:=1
+endef
+
+define U-Boot/eaio-3399j-rk3399
+  BUILD_SUBTARGET:=armv8
+  NAME:=EAIO 3399J
+  BUILD_DEVICES:= \
+    eaio_eaio-3399j
+  DEPENDS:=+PACKAGE_u-boot-eaio-3399j-rk3399:arm-trusted-firmware-rk3399
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3399_bl31_v1.35.elf
+  USE_RKBIN:=1
+endef
+
 define U-Boot/sharevdi-h3399pc-rk3399
   BUILD_SUBTARGET:=armv8
   NAME:=SHAREVDI H3399PC
@@ -328,13 +350,15 @@ UBOOT_TARGETS := \
   rockpro64-rk3399 \
   rongpin-king3399-rk3399 \
   rocktech-mpc1903-rk3399 \
+  scensmart-sv901-rk3399 \
+  eaio-sv901-rk3399 \
+  eaio-3399j-rk3399 \
   dilusense-dlfr100-rk3399 \
   xiaobao-nas-v1-rk3399 \
   nanopi-r2c-rk3328 \
   nanopi-r2s-rk3328 \
   orangepi-r1-plus-rk3328 \
-  orangepi-r1-plus-lts-rk3328 \
-  scensmart-sv901-rk3399
+  orangepi-r1-plus-lts-rk3328
 
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 

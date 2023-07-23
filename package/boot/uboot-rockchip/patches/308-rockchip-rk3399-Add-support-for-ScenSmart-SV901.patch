@@ -1,0 +1,12 @@
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -166,5 +166,8 @@ dtb-$(CONFIG_ROCKCHIP_RK3399) += \
+ 	rk3399-rock-pi-4c.dtb \
+ 	rk3399-rock960.dtb \
+ 	rk3399-mpc1903.dtb \
++	rk3399-eaio-sv901.dtb \
++	rk3399-eaio-3399j.dtb \
++	rk3399-sv901.dtb \
+ 	rk3399-rockpro64.dtb \
+ 	rk3399pro-rock-pi-n10.dtb
+
