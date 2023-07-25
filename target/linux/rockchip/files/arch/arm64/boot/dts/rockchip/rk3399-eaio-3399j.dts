@@ -10,6 +10,7 @@
 	compatible = "eaio,eaio-3399j", "rockchip,rk3399";
 
 	aliases {
+		ethernet0 = &gmac;
 		led-boot = &user_led1;
 		led-failsafe = &user_led2;
 		led-running = &user_led1;
@@ -231,7 +232,7 @@
 	assigned-clock-rates = <125000000>;
 	clock_in_out = "output";
 	phy-mode = "rgmii";
-	phy-supply = <&vcc3v3_s3>;
+	//phy-supply = <&vcc3v3_s3>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&rgmii_pins>;
 	snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_LOW>;
@@ -542,7 +543,7 @@
 			buswidth = <8>;
 			dc-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 			reset-gpios = <&gpio1 RK_PA3 GPIO_ACTIVE_LOW>;
-			//led-gpios = <&gpio1 RK_PC1 GPIO_ACTIVE_HIGH>;
+			led-gpios = <&gpio1 RK_PC4 GPIO_ACTIVE_LOW>;
 			debug = <0>; //等级0～7 越高信息越多
 	};
 };
@@ -607,7 +608,7 @@
 		rgmii_pins: rgmii-pins {
 			rockchip,pins =
 				/* mac_txclk */
-				<3 RK_PC1 1 &pcfg_pull_none_19ma>,
+				<3 RK_PC1 1 &pcfg_pull_none_26ma>,
 				/* mac_rxclk */
 				<3 RK_PB6 1 &pcfg_pull_none>,
 				/* mac_mdio */
