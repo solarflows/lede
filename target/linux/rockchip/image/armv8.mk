@@ -335,8 +335,8 @@ TARGET_DEVICES += eaio_eaio-3399j
 define Device/dg_nas-lite
   DEVICE_VENDOR := DG
   DEVICE_MODEL := NAS-LITE
-  DEVICE_DTS := rockchip/rk3568-dg-nas-lite
-  UBOOT_DEVICE_NAME := station-p2-rk3568
+  DEVICE_DTS := rockchip/rk3568-nas-lite
+  UBOOT_DEVICE_NAME := nas-lite-rk3568
   IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r5s | pine64-img | gzip | append-metadata
   DEVICE_PACKAGES := kmod-ikconfig kmod-ata-ahci-platform wpad-openssl kmod-nvme
 endef

@@ -331,6 +331,17 @@ define U-Boot/station-p2-rk3568
   DDR:=rk3568_ddr_1560MHz_v1.13.bin
 endef
 
+define U-Boot/nas-lite-rk3568
+  BUILD_SUBTARGET:=armv8
+  NAME:=nas-lite
+  BUILD_DEVICES:= \
+       dg_nas-lite
+  DEPENDS:=+PACKAGE_u-boot-nas-lite-rk3568:arm-trusted-firmware-rk3568
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3568_bl31_v1.34.elf
+  DDR:=rk3568_ddr_1560MHz_v1.13.bin
+endef
+
 UBOOT_TARGETS := \
   lyt-t68m-rk3568 \
   mrkaio-m68s-rk3568 \
@@ -340,6 +351,7 @@ UBOOT_TARGETS := \
   rock-3a-rk3568 \
   r66s-rk3568 \
   station-p2-rk3568 \
+  nas-lite-rk3568 \
   panther-x2-rk3566 \
   sharevdi-h3399pc-rk3399 \
   guangmiao-g4c-rk3399 \
