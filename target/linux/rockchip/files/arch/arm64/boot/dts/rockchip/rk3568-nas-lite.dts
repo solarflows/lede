@@ -7,7 +7,7 @@
 #include <dt-bindings/soc/rockchip,vop2.h>
 #include "rk3568.dtsi"
 
-/ { 
+/ {
 	model = "DG NAS LITE";
 	compatible = "DG,nas-lite", "rockchip,rk3568";
 
@@ -65,16 +65,6 @@
 		};
 	};
 
-	sdio_pwrseq: sdio-pwrseq {
-		compatible = "mmc-pwrseq-simple";
-		clocks = <&rk809 1>;
-		clock-names = "ext_clock";
-		pinctrl-names = "default";
-		pinctrl-0 = <&wifi_enable_h>;
-		reset-gpios = <&gpio3 RK_PD4 GPIO_ACTIVE_LOW>;
-		post-power-on-delay-ms = <100>;
-	};
-
 	dc_12v: dc-12v {
 		compatible = "regulator-fixed";
 		regulator-name = "dc_12v";
@@ -82,16 +72,6 @@
 		regulator-boot-on;
 		regulator-min-microvolt = <12000000>;
 		regulator-max-microvolt = <12000000>;
-	};
-
-	vcc3v3_sys: vcc3v3-sys {
-		compatible = "regulator-fixed";
-		regulator-name = "vcc3v3_sys";
-		regulator-always-on;
-		regulator-boot-on;
-		regulator-min-microvolt = <3300000>;
-		regulator-max-microvolt = <3300000>;
-		vin-supply = <&dc_12v>;
 	};
 
 	vcc5v0_sys: vcc5v0-sys {
@@ -104,14 +84,14 @@
 		vin-supply = <&dc_12v>;
 	};
 
-	pcie30_avdd0v9: pcie30-avdd0v9 {
+	vcc3v3_sys: vcc3v3-sys {
 		compatible = "regulator-fixed";
-		regulator-name = "pcie30_avdd0v9";
+		regulator-name = "vcc3v3_sys";
 		regulator-always-on;
 		regulator-boot-on;
-		regulator-min-microvolt = <900000>;
-		regulator-max-microvolt = <900000>;
-		vin-supply = <&vcc3v3_sys>;
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		vin-supply = <&dc_12v>;
 	};
 
 	pcie30_avdd1v8: pcie30-avdd1v8 {
@@ -124,14 +104,14 @@
 		vin-supply = <&vcc3v3_sys>;
 	};
 
-	vcc3v3_pcie: vcc3v3_pi6c: vcc3v3-pcie {
+	pcie30_avdd0v9: pcie30-avdd0v9 {
 		compatible = "regulator-fixed";
+		regulator-name = "pcie30_avdd0v9";
 		regulator-always-on;
 		regulator-boot-on;
-		regulator-name = "vcc3v3_pcie";
-		regulator-min-microvolt = <3300000>;
-		regulator-max-microvolt = <3300000>;
-		vin-supply = <&vcc5v0_sys>;
+		regulator-min-microvolt = <900000>;
+		regulator-max-microvolt = <900000>;
+		vin-supply = <&vcc3v3_sys>;
 	};
 
 	vcc5v0_host: vcc5v0-host {
@@ -142,6 +122,20 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 		vin-supply = <&vcc5v0_sys>;
+	};
+
+	vcc3v3_wifi: vcc3v3-wifi {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc3v3_wifi";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		enable-active-high;
+		gpio = <&gpio3 RK_PD4 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&wifi_enable_h>;
+		vin-supply = <&vcc3v3_sys>;
 	};
 
 };
@@ -488,7 +482,7 @@
 			dc-gpios = <&gpio0 RK_PB5 GPIO_ACTIVE_HIGH>;  
             reset-gpios = <&gpio0 RK_PC0 GPIO_ACTIVE_LOW>; 
             led-gpios = <&gpio3 RK_PC4 GPIO_ACTIVE_LOW>;           
-            debug = <1>; //等级0～7 越高信息越多
+            debug = <0>; //等级0～7 越高信息越多
        };
 };
 
@@ -528,7 +522,7 @@
 		};
 	};
 
-	sdio-pwrseq {
+	wifi {
 		wifi_enable_h: wifi-enable-h {
 			rockchip,pins = <3 RK_PD4 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
@@ -546,11 +540,13 @@
 		};
 	};
 };
+
 &pcie2x1 {
 	num-lanes = <1>;
 	num-viewport = <4>;
 	status = "okay";
 };
+
 &pcie30phy {
 	status = "okay";
 };
@@ -559,7 +555,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pcie_reset_h>;
 	reset-gpios = <&gpio0 RK_PC6 GPIO_ACTIVE_HIGH>;
-	vpcie3v3-supply = <&vcc3v3_pcie>;
+	vpcie3v3-supply = <&vcc3v3_sys>;
 	status = "okay";
 };
 
@@ -639,7 +635,7 @@
 
 &usb_host0_xhci {
 	extcon = <&usb2phy0>;
-	status = "okay";
+	status = "disabled";
 };
 
 &usb_host1_ehci {
