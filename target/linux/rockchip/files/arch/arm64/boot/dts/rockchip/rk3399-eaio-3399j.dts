@@ -236,7 +236,7 @@
 	pinctrl-0 = <&rgmii_pins>;
 	snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_LOW>;
 	snps,reset-active-low;
-	snps,reset-delays-us = <0 20000 100000>;
+	snps,reset-delays-us = <0 10000 10000>;
 	tx_delay = <0x28>;
 	rx_delay = <0x11>;
 	status = "okay";

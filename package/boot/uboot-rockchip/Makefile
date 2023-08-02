@@ -162,19 +162,9 @@ define U-Boot/scensmart-sv901-rk3399
   BUILD_SUBTARGET:=armv8
   NAME:=ScenSmart SV901
   BUILD_DEVICES:= \
-    scensmart_sv901
-  DEPENDS:=+PACKAGE_u-boot-scensmart-sv901-rk3399:arm-trusted-firmware-rk3399
-  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
-  ATF:=rk3399_bl31_v1.35.elf
-  USE_RKBIN:=1
-endef
-
-define U-Boot/eaio-sv901-rk3399
-  BUILD_SUBTARGET:=armv8
-  NAME:=EAIO-SV901
-  BUILD_DEVICES:= \
+    scensmart_sv901 \
     eaio_eaio-sv901
-  DEPENDS:=+PACKAGE_u-boot-eaio-sv901-rk3399:arm-trusted-firmware-rk3399
+  DEPENDS:=+PACKAGE_u-boot-scensmart-sv901-rk3399:arm-trusted-firmware-rk3399
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
   ATF:=rk3399_bl31_v1.35.elf
   USE_RKBIN:=1
@@ -376,7 +366,6 @@ UBOOT_TARGETS := \
   rongpin-king3399-rk3399 \
   rocktech-mpc1903-rk3399 \
   scensmart-sv901-rk3399 \
-  eaio-sv901-rk3399 \
   eaio-3399j-rk3399 \
   dilusense-dlfr100-rk3399 \
   xiaobao-nas-v1-rk3399 \

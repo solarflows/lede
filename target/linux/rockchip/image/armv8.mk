@@ -322,33 +322,34 @@ define Device/xunlong_orangepi-r1-plus-lts
 endef
 TARGET_DEVICES += xunlong_orangepi-r1-plus-lts
 
-define Device/scensmart_sv901
-  DEVICE_VENDOR := ScenSmart
-  DEVICE_MODEL := SV901
+define Device/eaio_common
+  DEVICE_VENDOR := EAIO
   SOC := rk3399
   UBOOT_DEVICE_NAME := scensmart-sv901-rk3399
   IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
-  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware
+  DEVICE_PACKAGES := -urngd
+endef
+
+define Device/scensmart_sv901
+$(call Device/eaio_common)
+  DEVICE_VENDOR := ScenSmart
+  DEVICE_MODEL := SV901
+  DEVICE_PACKAGES += kmod-r8168 kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware
 endef
 TARGET_DEVICES += scensmart_sv901
 
 define Device/eaio_eaio-sv901
-  DEVICE_VENDOR := EAIO
+$(call Device/eaio_common)
   DEVICE_MODEL := EAIO-SV901
-  SOC := rk3399
-  UBOOT_DEVICE_NAME := eaio-sv901-rk3399
-  IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
-  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware kmod-usb-net-rtl8152 kmod-switch-rtl8367b
+  DEVICE_PACKAGES := kmod-brcmfmac kmod-ata-ahci-platform eaio-sv901-firmware kmod-switch-rtl8367b swconfig
 endef
 TARGET_DEVICES += eaio_eaio-sv901
 
 define Device/eaio_eaio-3399j
-  DEVICE_VENDOR := EAIO
+$(call Device/eaio_common)
   DEVICE_MODEL := EAIO-3399j
-  SOC := rk3399
   UBOOT_DEVICE_NAME := eaio-3399j-rk3399
   IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r4s | pine64-bin | gzip | append-metadata
-  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-igb-rockchip kmod-brcmfmac cypress-firmware-4356-sdio wpad-openssl scensmart-sv901-firmware kmod-usb-net-rtl8152 kmod-switch-rtl8367b
+  DEVICE_PACKAGES += kmod-brcmfmac kmod-ata-ahci-platform eaio-3399j-firmware kmod-switch-rtl8367b swconfig
 endef
 TARGET_DEVICES += eaio_eaio-3399j
-
