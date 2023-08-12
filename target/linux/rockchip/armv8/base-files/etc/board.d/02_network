@@ -41,9 +41,8 @@ rockchip_setup_interfaces()
 		;;
 	eaio,eaio-3399j|\
 	eaio,eaio-sv901)
-		# ucidef_set_interfaces_lan_wan 'eth0' 'eth1'
 		ucidef_add_switch "switch0" \
-			"1:lan:0" "2:lan:1" "3:lan:2" "4:lan:3" "6:wan:sfp" "7@eth0"
+			"7@eth0" "0:lan" "1:lan" "2:lan" "3:lan" "4:lan" "5:lan" "6:wan"
 		;;
 	*)
 		ucidef_set_interface_lan 'eth0'
@@ -94,10 +93,7 @@ rockchip_setup_macs()
 	hinlink,opc-h68k|\
 	hinlink,opc-h69k|\
 	rocktech,mpc1903|\
-	sharevdi,h3399pc|\
-	scensmart,sv901|\
-	eaio,eaio-3399j|\
-	eaio,eaio-sv901)
+	sharevdi,h3399pc)
 		wan_mac=$(macaddr_generate_from_mmc_cid mmcblk0)
 		lan_mac=$(macaddr_add "$wan_mac" +1)
 		;;
@@ -110,7 +106,10 @@ rockchip_setup_macs()
 	friendlyarm,nanopi-r5c|\
 	friendlyarm,nanopi-r5s|\
 	panther,x2|\
-	sharevdi,guangmiao-g4c)
+	sharevdi,guangmiao-g4c|\
+	scensmart,sv901|\
+	eaio,eaio-3399j|\
+	eaio,eaio-sv901)
 		wan_mac=$(macaddr_generate_from_mmc_cid mmcblk1)
 		lan_mac=$(macaddr_add "$wan_mac" +1)
 		;;
