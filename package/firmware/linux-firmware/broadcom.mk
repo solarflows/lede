@@ -170,8 +170,8 @@ define Package/eaio-3399j-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/brcm
 	$(INSTALL_DATA) ./brcm_firmware/ap6275s/BCM4362A2.hcd $(1)/lib/firmware/brcm/BCM4362A2.hcd
 	$(INSTALL_DATA) ./brcm_firmware/ap6275s/clm_bcm43752a2_ag.blob $(1)/lib/firmware/brcm/brcmfmac43752-sdio.clm_blob
-	$(INSTALL_DATA) ./brcm_firmware/ap6275s/fw_bcm43752a2_ag_apsta.bin $(1)/lib/firmware/brcm/brcmfmac43752-sdio.eaio,eaio-sv901.bin
-	$(INSTALL_DATA) ./brcm_firmware/ap6275s/nvram_ap6275s.txt $(1)/lib/firmware/brcm/brcmfmac43752-sdio.eaio,eaio-sv901.txt
+	$(INSTALL_DATA) ./brcm_firmware/ap6275s/fw_bcm43752a2_ag_apsta.bin $(1)/lib/firmware/brcm/brcmfmac43752-sdio.eaio,eaio-3399j.bin
+	$(INSTALL_DATA) ./brcm_firmware/ap6275s/nvram_ap6275s.txt $(1)/lib/firmware/brcm/brcmfmac43752-sdio.eaio,eaio-3399j.txt
 endef
 $(eval $(call BuildPackage,eaio-3399j-firmware))
 
