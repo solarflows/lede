@@ -4,8 +4,8 @@
 # SSID generated using Alberto's boardssid.py script:
 # ********************SUMMARY********************
 # Board Name: AP6275S_V00
-#SSID: 0x086d
-#macmid: 0x02df
+# SSID: 0x086d
+# macmid: 0x02df
 # Successfully made SSID entry in sromdefs.tcl.
 # Successfully made macmid entry in sromdefs.tcl.
 # Successfully made SSID entry in tblssid.py.
@@ -148,7 +148,7 @@ pa5ga0=-175,5735,-699,-194,5574,-689,-160,6066,-727,-176,5834,-714
 pa5ga1=-163,5928,-712,-193,5622,-695,-188,5523,-688,-170,6097,-749
 
 # Max power and offsets
-maxp2ga0=94
+maxp2ga0=86
 maxp2ga1=86
 maxp5ga0=69,68,68,69
 maxp5ga1=69,68,68,69

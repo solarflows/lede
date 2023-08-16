@@ -14,6 +14,7 @@
 		led-failsafe = &user_led2;
 		led-running = &user_led1;
 		led-upgrade = &user_led2;
+		mmc0 = &sdhci;
 		spi1 = &spi1;
 	};
 
@@ -202,8 +203,10 @@
 		vin-supply = <&vcc5v0_sys>;
 	};
 
-	wireless-wlan {
+	wireless_wlan: wireless-wlan {
 		compatible = "wlan-platdata";
+		clocks = <&rk808 1>;
+		clock-names = "ext_clock";
 		rockchip,grf = <&grf>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&wifi_host_wake_l>;
