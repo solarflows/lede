@@ -113,16 +113,16 @@
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
 		regulator-name = "vcc3v3_sys";
-		vin-supply = <&vcc_sys>;
+		vin-supply = <&vcc5v0_sys>;
 	};
 
-	vcc_sys: vcc5v0-sys {
+	vcc5v0_sys: vcc5v0-sys {
 		compatible = "regulator-fixed";
 		regulator-always-on;
 		regulator-boot-on;
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
-		regulator-name = "vcc_sys";
+		regulator-name = "vcc5v0_sys";
 		vin-supply = <&dc_12v>;
 	};
 
@@ -154,7 +154,7 @@
 		compatible = "regulator-fixed";
 		regulator-name = "vcc5v0_host";
 		regulator-always-on;
-		vin-supply = <&vcc_sys>;
+		vin-supply = <&vcc5v0_sys>;
 	};
 
 	/*
@@ -186,7 +186,7 @@
 		regulator-boot-on;
 		regulator-min-microvolt = <430000>;
 		regulator-max-microvolt = <1400000>;
-		vin-supply = <&vcc_sys>;
+		vin-supply = <&vcc5v0_sys>;
 	};
 
 	wireless-wlan {
@@ -305,16 +305,16 @@
 		rockchip,system-power-controller;
 		wakeup-source;
 
-		vcc1-supply = <&vcc_sys>;
-		vcc2-supply = <&vcc_sys>;
-		vcc3-supply = <&vcc_sys>;
-		vcc4-supply = <&vcc_sys>;
-		vcc6-supply = <&vcc_sys>;
-		vcc7-supply = <&vcc_sys>;
+		vcc1-supply = <&vcc5v0_sys>;
+		vcc2-supply = <&vcc5v0_sys>;
+		vcc3-supply = <&vcc5v0_sys>;
+		vcc4-supply = <&vcc5v0_sys>;
+		vcc6-supply = <&vcc5v0_sys>;
+		vcc7-supply = <&vcc5v0_sys>;
 		vcc8-supply = <&vcc3v3_sys>;
-		vcc9-supply = <&vcc_sys>;
-		vcc10-supply = <&vcc_sys>;
-		vcc11-supply = <&vcc_sys>;
+		vcc9-supply = <&vcc5v0_sys>;
+		vcc10-supply = <&vcc5v0_sys>;
+		vcc11-supply = <&vcc5v0_sys>;
 		vcc12-supply = <&vcc3v3_sys>;
 		vddio-supply = <&vcc1v8_pmu>;
 
@@ -502,7 +502,7 @@
 		regulator-max-microvolt = <1500000>;
 		regulator-name = "vdd_cpu_b";
 		regulator-ramp-delay = <1000>;
-		vin-supply = <&vcc_sys>;
+		vin-supply = <&vcc5v0_sys>;
 
 		regulator-state-mem {
 			regulator-off-in-suspend;
@@ -521,7 +521,7 @@
 		regulator-max-microvolt = <1500000>;
 		regulator-name = "vdd_gpu";
 		regulator-ramp-delay = <1000>;
-		vin-supply = <&vcc_sys>;
+		vin-supply = <&vcc5v0_sys>;
 
 		regulator-state-mem {
 			regulator-off-in-suspend;
@@ -553,7 +553,7 @@
             buswidth = <8>;
 			dc-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
             reset-gpios = <&gpio1 RK_PA3 GPIO_ACTIVE_LOW>;
-            //led-gpios = <&gpio1 RK_PC1 GPIO_ACTIVE_HIGH>;
+            led-gpios = <&gpio1 RK_PC4 GPIO_ACTIVE_LOW>;
             debug = <0>; //等级0～7 越高信息越多
     };
 };
@@ -618,7 +618,7 @@
 		rgmii_pins: rgmii-pins {
 			rockchip,pins =
 				/* mac_txclk */
-				<3 RK_PC1 1 &pcfg_pull_none_19ma>,
+				<3 RK_PC1 1 &pcfg_pull_none_26ma>,
 				/* mac_rxclk */
 				<3 RK_PB6 1 &pcfg_pull_none>,
 				/* mac_mdio */
