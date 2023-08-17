@@ -1,10 +1,14 @@
 // SPDX-License-Identifier: GPL-2.0
 
 #include "rk3399-u-boot.dtsi"
-#include "rk3399-sdram-lpddr3-samsung-4GB-1866.dtsi"
+#include "rk3399-sdram-ddr3-1600.dtsi"
 
 / {
 	chosen {
 		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
 	};
+};
+
+&vdd_log {
+	regulator-init-microvolt = <950000>;
 };
