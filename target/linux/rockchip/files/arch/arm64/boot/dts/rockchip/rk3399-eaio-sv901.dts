@@ -191,6 +191,28 @@
 		vin-supply = <&vcc5v0_sys>;
 	};
 
+	/*
+	 * Really, this is supplied by vcc_1v8, and vcc1v8_s3 only
+	 * drives the enable pin, but we can't quite model that.
+	 */
+	vcca0v9_s3: vcca0v9-s3 {
+		compatible = "regulator-fixed";
+		regulator-min-microvolt = <900000>;
+		regulator-max-microvolt = <900000>;
+		regulator-name = "vcca0v9_s3";
+		vin-supply = <&vcc1v8_s3>;
+	};
+
+	/* As above, actually supplied by vcc3v3_sys */
+	vcca1v8_s3: vcca1v8-s3 {
+		compatible = "regulator-fixed";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-name = "vcca1v8_s3";
+		vin-supply = <&vcc1v8_s3>;
+
+	};
+
 	vdd_log: vdd-log {
 		compatible = "pwm-regulator";
 		pwms = <&pwm2 0 25000 1>;
@@ -567,7 +589,7 @@
             buswidth = <8>;
 			dc-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
             reset-gpios = <&gpio1 RK_PA3 GPIO_ACTIVE_LOW>;
-		led-gpios = <&gpio1 RK_PC4 GPIO_ACTIVE_HIGH>;
+		        led-gpios = <&gpio1 RK_PC4 GPIO_ACTIVE_HIGH>;
             debug = <0>; //等级0～7 越高信息越多
     };
 };
@@ -609,7 +631,7 @@
 		rgmii_pins: rgmii-pins {
 			rockchip,pins =
 				/* mac_txclk */
-				<3 RK_PC1 1 &pcfg_pull_none_19ma>,
+				<3 RK_PC1 1 &pcfg_pull_none_26ma>,
 				/* mac_rxclk */
 				<3 RK_PB6 1 &pcfg_pull_none>,
 				/* mac_mdio */

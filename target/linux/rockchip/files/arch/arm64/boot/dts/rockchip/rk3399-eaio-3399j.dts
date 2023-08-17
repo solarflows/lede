@@ -217,7 +217,7 @@
 		cpu_port = <7>;
 		mii-bus = <&mdio0>;
 		realtek,extif1 = <1 0 12 1 1 1 1 1 4>;	//rtl8367b_extif_init_of
-		realtek,extif2 = <1 3 1 1 1 1 1 1 2>;
+		realtek,extif2 = <0 2 1 1 1 1 1 1 2>;
 	};
 };
 
@@ -255,7 +255,7 @@
 	assigned-clock-rates = <125000000>;
 	clock_in_out = "output";
 	phy-mode = "rgmii";
-	phy-supply = <&vcc3v3_ext>;
+	phy-supply = <&vcc3v3_s3>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&rgmii_pins>;
 	snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_LOW>;
