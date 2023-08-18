@@ -341,7 +341,7 @@ TARGET_DEVICES += scensmart_sv901
 define Device/eaio_eaio-sv901
 $(call Device/eaio_common)
   DEVICE_MODEL := EAIO-SV901
-  DEVICE_PACKAGES := kmod-ata-ahci-platform eaio-sv901-firmware kmod-switch-rtl8367b swconfig
+  DEVICE_PACKAGES := kmod-ata-ahci-platform eaio-sv901-firmware kmod-hwmon-pwmfan kmod-switch-rtl8367b swconfig
 endef
 TARGET_DEVICES += eaio_eaio-sv901
 
@@ -350,6 +350,6 @@ $(call Device/eaio_common)
   DEVICE_MODEL := EAIO-3399j
   UBOOT_DEVICE_NAME := eaio-3399j-rk3399
   IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r4s | pine64-bin | gzip | append-metadata
-  DEVICE_PACKAGES += kmod-ata-ahci-platform eaio-3399j-firmware kmod-switch-rtl8367b swconfig
+  DEVICE_PACKAGES += kmod-ata-ahci-platform eaio-3399j-firmware kmod-hwmon-pwmfan kmod-switch-rtl8367b swconfig
 endef
 TARGET_DEVICES += eaio_eaio-3399j
