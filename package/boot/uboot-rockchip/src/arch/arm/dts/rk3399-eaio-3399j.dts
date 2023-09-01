@@ -14,6 +14,7 @@
 		led-failsafe = &user_led2;
 		led-running = &user_led1;
 		led-upgrade = &user_led2;
+		mmc0 = &sdhci;
 		spi1 = &spi1;
 	};
 
@@ -46,7 +47,7 @@
 		compatible = "pwm-fan";
 		#cooling-cells = <2>;
 		fan-supply = <&vcc12v_dcin>;
-		pwms = <&pwm0 0 50000 0>;
+		pwms = <&pwm0 0 10000000 0>;
 		cooling-levels = <0 100 150 200 255>;
 		status = "okay";
 	};
@@ -67,7 +68,7 @@
 			wakeup-source;
 		};
 	};
-	
+
 	ir-receiver {
 		compatible = "gpio-ir-receiver";
 		gpios = <&gpio0 RK_PA6 GPIO_ACTIVE_LOW>;
@@ -197,13 +198,20 @@
 		regulator-name = "vdd_log";
 		regulator-always-on;
 		regulator-boot-on;
-		regulator-min-microvolt = <430000>;
+		regulator-min-microvolt = <800000>;
 		regulator-max-microvolt = <1400000>;
 		vin-supply = <&vcc5v0_sys>;
+
+		/* for rockchip boot on */
+		rockchip,pwm_id= <2>;
+		rockchip,pwm_voltage = <100000>;
+
 	};
 
-	wireless-wlan {
+	wireless_wlan: wireless-wlan {
 		compatible = "wlan-platdata";
+		clocks = <&rk808 1>;
+		clock-names = "ext_clock";
 		rockchip,grf = <&grf>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&wifi_host_wake_l>;
@@ -245,6 +253,34 @@
 	cpu-supply = <&vdd_cpu_l>;
 };
 
+&cpu_thermal {
+	trips {
+		cpu_warm: cpu_warm {
+			temperature = <55000>;
+			hysteresis = <2000>;
+			type = "active";
+		};
+
+		cpu_hot: cpu_hot {
+			temperature = <65000>;
+			hysteresis = <2000>;
+			type = "active";
+		};
+	};
+
+	cooling-maps {
+		map2 {
+			trip = <&cpu_warm>;
+			cooling-device = <&fan THERMAL_NO_LIMIT 2>;
+		};
+
+		map3 {
+			trip = <&cpu_hot>;
+			cooling-device = <&fan 3 THERMAL_NO_LIMIT>;
+		};
+	};
+};
+
 &emmc_phy {
 	status = "okay";
 };
@@ -260,7 +296,7 @@
 	pinctrl-0 = <&rgmii_pins>;
 	snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_LOW>;
 	snps,reset-active-low;
-	snps,reset-delays-us = <0 10000 10000>;
+	snps,reset-delays-us = <0 10000 50000>;
 	tx_delay = <0x28>;
 	rx_delay = <0x11>;
 	status = "okay";
