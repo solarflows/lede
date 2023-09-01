@@ -90,7 +90,7 @@ define U-Boot/nanopc-t4-rk3399
     friendlyarm_nanopc-t4
   DEPENDS:=+PACKAGE_u-boot-nanopc-t4-rk3399:arm-trusted-firmware-rk3399
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
-  ATF:=rk3399_bl31_v1.35.elf
+  ATF:=rk3399_bl31_v1.36.elf
   USE_RKBIN:=1
 endef
 
@@ -166,7 +166,7 @@ define U-Boot/scensmart-sv901-rk3399
     eaio_eaio-sv901
   DEPENDS:=+PACKAGE_u-boot-scensmart-sv901-rk3399:arm-trusted-firmware-rk3399
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
-  ATF:=rk3399_bl31_v1.35.elf
+  ATF:=rk3399_bl31_v1.36.elf
   USE_RKBIN:=1
 endef
 
@@ -177,7 +177,7 @@ define U-Boot/eaio-3399j-rk3399
     eaio_eaio-3399j
   DEPENDS:=+PACKAGE_u-boot-eaio-3399j-rk3399:arm-trusted-firmware-rk3399
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
-  ATF:=rk3399_bl31_v1.35.elf
+  ATF:=rk3399_bl31_v1.36.elf
   USE_RKBIN:=1
 endef
 
