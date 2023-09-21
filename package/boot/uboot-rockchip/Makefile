@@ -338,8 +338,8 @@ define U-Boot/nas-lite-rk3568
        dg_nas-lite
   DEPENDS:=+PACKAGE_u-boot-nas-lite-rk3568:arm-trusted-firmware-rk3568
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
-  ATF:=rk3568_bl31_v1.34.elf
-  DDR:=rk3568_ddr_1560MHz_v1.13.bin
+  ATF:=rk3568_bl31_v1.43.elf
+  DDR:=rk3568_ddr_1560MHz_v1.18.bin
 endef
 
 UBOOT_TARGETS := \

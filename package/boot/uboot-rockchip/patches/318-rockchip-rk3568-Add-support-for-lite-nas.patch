@@ -1,11 +1,12 @@
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
-@@ -175,6 +175,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3399) += \
- dtb-$(CONFIG_ROCKCHIP_RK3568) += \
- 	rk3568-evb.dtb \
- 	rk3568-r66s.dtb \
+
+@@ -175,6 +175,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3568) += \
+ 	rk3568-nanopi-r5s.dtb \
+ 	rk3568-photonicat.dtb \
+ 	rk3568-opc-h68k.dtb \
 	rk3568-lyt-t68m.dtb \
 +	rk3568-nas-lite.dtb \
- 	rk3568-opc-h68k.dtb \
- 	rk3568-mrkaio-m68s.dtb \
- 	rk3568-nanopi-r5s.dtb \
+ 	rk3568-evb.dtb \
+ 	rk3568-r66s.dtb \
+ 	rk3568-rock-3a.dtb \

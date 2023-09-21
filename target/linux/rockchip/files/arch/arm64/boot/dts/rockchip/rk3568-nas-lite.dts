@@ -37,17 +37,22 @@
 	leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
-		pinctrl-0 = <&led_user_1>, <&led_user_2>;
+		pinctrl-0 = <&led_user_1>, <&led_user_2>, <&led_sata_0>;
 
 		led-user1 {
 			label = "green:user1";
-			gpios = <&gpio3 RK_PB5 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio3 RK_PB5 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "heartbeat";
 		};
 
 		led-user2 {
 			label = "blue:user2";
-			gpios = <&gpio3 RK_PB1 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio3 RK_PB1 GPIO_ACTIVE_LOW>;
+		};
+
+		led-sata0 {
+			label = "green:sata0";
+			gpios = <&gpio2 RK_PA3 GPIO_ACTIVE_LOW>;
 		};
 	};
 
@@ -72,6 +77,20 @@
 		regulator-boot-on;
 		regulator-min-microvolt = <12000000>;
 		regulator-max-microvolt = <12000000>;
+	};
+
+	vcc12v_sata: vcc12v-sata {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc12v_sata";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <12000000>;
+		regulator-max-microvolt = <12000000>;
+		enable-active-high;
+		gpio = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&vcc12V_sata_enable_h>;
+		vin-supply = <&dc_12v>;
 	};
 
 	vcc5v0_sys: vcc5v0-sys {
@@ -465,6 +484,19 @@
 	};
 };
 
+&i2c3 {
+	status = "okay";
+};
+
+&i2c5 {
+	status = "okay";
+};
+
+&spi1 {
+	status = "okay";
+	pinctrl-0 = <3 RK_PC1 3 &pcfg_pull_none>;
+};
+
 &spi3 {
 	status = "okay";
 	pinctrl-names = "default";
@@ -486,16 +518,6 @@
        };
 };
 
-#ifdef DTS_NO_LEGACY
-&i2s0_8ch {
-	status = "okay";
-};
-#endif
-
-&i2s1_8ch {
-	rockchip,trcm-sync-tx-only;
-	status = "okay";
-};
 
 &mdio0 {
 	rgmii_phy0: phy@0 {
@@ -520,6 +542,10 @@
 		led_user_2: led_user_2 {
 			rockchip,pins = <3 RK_PB1 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
+
+		led_sata_0: led_sata_0 {
+			rockchip,pins = <2 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
 	};
 
 	wifi {
@@ -539,11 +565,29 @@
 			rockchip,pins = <0 RK_PA3 RK_FUNC_GPIO &pcfg_pull_up>;
 		};
 	};
+
+	sata {
+		vcc12V_sata_enable_h: vcc12V_sata_enable_h {
+			rockchip,pins = <3 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+		//asm1064_rst: asm1064_rst {
+		//	rockchip,pins = <2 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
+		//};
+	};
+
+	mcu {
+		mcu_rst_ctl: mcu_rst_ctl {
+			rockchip,pins = <4 RK_PC4 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+
 };
 
 &pcie2x1 {
 	num-lanes = <1>;
 	num-viewport = <4>;
+	//pinctrl-0 = <&asm1064_rst>;
+	reset-gpios = <&gpio3 RK_PA4 GPIO_ACTIVE_LOW>;
 	status = "okay";
 };
 
@@ -553,8 +597,8 @@
 
 &pcie3x2 {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pcie_reset_h>;
-	reset-gpios = <&gpio0 RK_PC6 GPIO_ACTIVE_HIGH>;
+	//pinctrl-0 = <&pcie_reset_h>;
+	reset-gpios = <&gpio0 RK_PC6 GPIO_ACTIVE_LOW>;
 	vpcie3v3-supply = <&vcc3v3_sys>;
 	status = "okay";
 };
@@ -599,6 +643,11 @@
 };
 
 &uart2 {
+	status = "okay";
+};
+
+&uart3 {
+	pinctrl-0 = <&uart3m1_xfer>;
 	status = "okay";
 };
 
