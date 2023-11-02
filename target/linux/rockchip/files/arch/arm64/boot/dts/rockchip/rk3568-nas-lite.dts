@@ -156,7 +156,16 @@
 		pinctrl-0 = <&wifi_enable_h>;
 		vin-supply = <&vcc3v3_sys>;
 	};
-
+	pwm0: pwm@fdd70000 {
+		compatible = "rockchip,rk3568-pwm", "rockchip,rk3328-pwm";
+		reg = <0x0 0xfdd70000 0x0 0x10>;
+		clocks = <&pmucru CLK_PWM0>, <&pmucru PCLK_PWM0>;
+		clock-names = "pwm", "pclk";
+		pinctrl-0 = <&pwm0m1_pins>;
+		pinctrl-names = "default";
+		#pwm-cells = <3>;
+		status = "okay";
+	};
 };
 
 &combphy0 {
