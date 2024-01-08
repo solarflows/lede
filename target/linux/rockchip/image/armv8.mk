@@ -337,7 +337,7 @@ define Device/eaio_common
   SOC := rk3399
   UBOOT_DEVICE_NAME := scensmart-sv901-rk3399
   IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
-  DEVICE_PACKAGES := -urngd kmod-brcmfmac wpad-openssl
+  DEVICE_PACKAGES := -urngd kmod-brcmfmac wpad-openssl kmod-drm-panfrost kmod-drm-rockchip
 endef
 
 define Device/scensmart_sv901
