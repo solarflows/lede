@@ -52,7 +52,7 @@
 
 		led-sata0 {
 			label = "green:sata0";
-			gpios = <&gpio2 RK_PA3 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio3 RK_PA2 GPIO_ACTIVE_LOW>;
 		};
 	};
 
@@ -93,6 +93,20 @@
 		vin-supply = <&dc_12v>;
 	};
 
+	sata_en: sata_en {
+		compatible = "regulator-fixed";
+		regulator-name = "sata_en";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		enable-active-high;
+		gpio = <&gpio3 RK_PA4 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&asm1064_rst>;
+		vin-supply = <&dc_12v>;
+	};
+
 	vcc5v0_sys: vcc5v0-sys {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc5v0_sys";
@@ -100,7 +114,7 @@
 		regulator-boot-on;
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
-		vin-supply = <&dc_12v>;
+		vin-supply = <&vcc3v3_sys>;
 	};
 
 	vcc3v3_sys: vcc3v3-sys {
@@ -165,6 +179,14 @@
 		pinctrl-names = "default";
 		#pwm-cells = <3>;
 		status = "okay";
+	};
+	fan: pwm-fan {
+		compatible = "pwm-fan";
+		pwms = <&pwm0 0 40000 0>;
+		fan-supply = <&dc_12v>;
+		interrupt-parent = <&gpio0>;
+		interrupts = <20 IRQ_TYPE_EDGE_FALLING>;
+		pulses-per-revolution = <2>;
 	};
 };
 
@@ -553,7 +575,7 @@
 		};
 
 		led_sata_0: led_sata_0 {
-			rockchip,pins = <2 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
+			rockchip,pins = <3 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 
@@ -579,15 +601,20 @@
 		vcc12V_sata_enable_h: vcc12V_sata_enable_h {
 			rockchip,pins = <3 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
-		//asm1064_rst: asm1064_rst {
-		//	rockchip,pins = <2 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
-		//};
+		asm1064_rst: asm1064_rst {
+			rockchip,pins = <3 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
 	};
 
 	mcu {
 		mcu_rst_ctl: mcu_rst_ctl {
 			rockchip,pins = <4 RK_PC4 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
+	};
+	fan-fg {
+        fg_pin: fg-pin {
+            rockchip,pins = <0 RK_PC4 RK_FUNC_GPIO &pcfg_pull_up>;
+        };
 	};
 
 };
@@ -596,7 +623,7 @@
 	num-lanes = <1>;
 	num-viewport = <4>;
 	//pinctrl-0 = <&asm1064_rst>;
-	reset-gpios = <&gpio3 RK_PA4 GPIO_ACTIVE_LOW>;
+	//reset-gpios = <&gpio3 RK_PA4 GPIO_ACTIVE_HIGH>;
 	status = "okay";
 };
 
