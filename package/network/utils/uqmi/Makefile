@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=uqmi
-PKG_RELEASE:=1
+PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=$(PROJECT_GIT)/project/uqmi.git
@@ -32,10 +32,17 @@ define Package/uqmi/description
   the QMI-protocol.
 endef
 
-TARGET_CFLAGS += \
-	-I$(STAGING_DIR)/usr/include \
-	-Wno-error=dangling-pointer \
-	-Wno-error=maybe-uninitialized
+TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include -ffunction-sections -fdata-sections
+
+ifeq ($(GCC_MAJOR_VERSION),12)
+	TARGET_CFLAGS += -Wno-error=dangling-pointer -Wno-error=maybe-uninitialized
+endif
+
+ifeq ($(GCC_MAJOR_VERSION),13)
+	TARGET_CFLAGS += -Wno-error=dangling-pointer -Wno-error=maybe-uninitialized
+endif
+
+TARGET_LDFLAGS += -Wl,--gc-sections
 
 CMAKE_OPTIONS += \
 	-DDEBUG=1
