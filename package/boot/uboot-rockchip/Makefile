@@ -320,6 +320,17 @@ define U-Boot/r66s-rk3568
   DDR:=rk3568_ddr_1560MHz_v1.18.bin
 endef
 
+define U-Boot/seewo-sv21-rk3568
+  BUILD_SUBTARGET:=armv8
+  NAME:=Seewo sv21-rk3568
+  BUILD_DEVICES:= \
+    seewo_sv21-rk3568
+  DEPENDS:=+PACKAGE_u-boot-seewo-sv21-rk3568:arm-trusted-firmware-rk3568
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3568_bl31_v1.43.elf
+  DDR:=rk3568_ddr_1560MHz_v1.18.bin
+endef
+
 define U-Boot/station-p2-rk3568
   BUILD_SUBTARGET:=armv8
   NAME:=StationP2
@@ -350,6 +361,7 @@ UBOOT_TARGETS := \
   radxa-e25-rk3568 \
   rock-3a-rk3568 \
   r66s-rk3568 \
+  seewo-sv21-rk3568 \
   station-p2-rk3568 \
   nas-lite-rk3568 \
   panther-x2-rk3566 \
