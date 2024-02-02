@@ -146,10 +146,10 @@ define Device/cetron_ct3003-mod
 endef
 TARGET_DEVICES += cetron_ct3003-mod
 
-define Device/cmcc_rax3000m-emmc-ubootmod
+define Device/cmcc_rax3000m-emmc
   DEVICE_VENDOR := CMCC
-  DEVICE_MODEL := RAX3000M eMMC version (U-Boot mod)
-  DEVICE_DTS := mt7981b-cmcc-rax3000m-emmc-ubootmod
+  DEVICE_MODEL := RAX3000M (eMMC version)
+  DEVICE_DTS := mt7981b-cmcc-rax3000m-emmc
   DEVICE_DTS_DIR := ../dts
   DEVICE_PACKAGES := kmod-mt7981-firmware mt7981-wo-firmware kmod-usb3 \
 	automount f2fsck mkf2fs
@@ -158,15 +158,14 @@ define Device/cmcc_rax3000m-emmc-ubootmod
 	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | pad-to 64k
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += cmcc_rax3000m-emmc-ubootmod
+TARGET_DEVICES += cmcc_rax3000m-emmc
 
-define Device/cmcc_rax3000m-nand-ubootmod
+define Device/cmcc_rax3000m-nand
   DEVICE_VENDOR := CMCC
-  DEVICE_MODEL := RAX3000M NAND version (U-Boot mod)
-  DEVICE_DTS := mt7981b-cmcc-rax3000m-nand-ubootmod
+  DEVICE_MODEL := RAX3000M (NAND version)
+  DEVICE_DTS := mt7981b-cmcc-rax3000m-nand
   DEVICE_DTS_DIR := ../dts
-  DEVICE_PACKAGES := kmod-mt7981-firmware mt7981-wo-firmware \
-	kmod-usb3 automount
+  DEVICE_PACKAGES := kmod-mt7981-firmware mt7981-wo-firmware kmod-usb3 automount
   UBINIZE_OPTS := -E 5
   BLOCKSIZE := 128k
   PAGESIZE := 2048
@@ -180,7 +179,7 @@ define Device/cmcc_rax3000m-nand-ubootmod
   KERNEL_INITRAMFS = kernel-bin | lzma | \
 	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd
 endef
-TARGET_DEVICES += cmcc_rax3000m-nand-ubootmod
+TARGET_DEVICES += cmcc_rax3000m-nand
 
 define Device/fzs_5gcpe-p3
   DEVICE_VENDOR := FZS
@@ -467,29 +466,3 @@ define Device/xiaomi_redmi-router-ax6000
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += xiaomi_redmi-router-ax6000
-
-define Device/tplink_tl-common
-  DEVICE_VENDOR := TP-Link
-  DEVICE_DTS_DIR := ../dts
-  KERNEL_LOADADDR := 0x48000000
-  UBINIZE_OPTS := -E 5
-  BLOCKSIZE := 128k
-  PAGESIZE := 2048
-  KERNEL_IN_UBI := 1
-  DEVICE_PACKAGES := kmod-usb3
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
-endef
-
-define Device/tplink_tl-xdr6086
-  $(call Device/tplink_tl-common)
-  DEVICE_MODEL := TL-XDR6086
-  DEVICE_DTS := mt7986a-tl-xdr6086
-endef
-TARGET_DEVICES += tplink_tl-xdr6086
-
-define Device/tplink_tl-xdr6088
-  $(call Device/tplink_tl-common)
-  DEVICE_MODEL := TL-XDR6088
-  DEVICE_DTS := mt7986a-tl-xdr6088
-endef
-TARGET_DEVICES += tplink_tl-xdr6088
