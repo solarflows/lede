@@ -34,7 +34,7 @@ endef
 
 TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include -ffunction-sections -fdata-sections
 
-ifneq (,$(findstring $(GCC_MAJOR_VERSION), 12 13))
+ifneq ($(filter $(GCC_MAJOR_VERSION), 12 13),)
 	TARGET_CFLAGS += -Wno-error=dangling-pointer -Wno-error=maybe-uninitialized
 endif
 
