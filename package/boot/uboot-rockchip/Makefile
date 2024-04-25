@@ -227,6 +227,17 @@ define U-Boot/panther-x2-rk3566
   DDR:=rk3566_ddr_1056MHz_v1.18.bin
 endef
 
+define U-Boot/station-m2-rk3566
+  BUILD_SUBTARGET:=armv8
+  NAME:=StationM2
+  BUILD_DEVICES:= \
+       firefly_station-m2
+  DEPENDS:=+PACKAGE_u-boot-station-m2-rk3566:arm-trusted-firmware-rk3566
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3568_bl31_v1.34.elf
+  DDR:=rk3566_ddr_1056MHz_v1.13.bin
+endef
+
 # RK3568 boards
 
 define U-Boot/lyt-t68m-rk3568
@@ -344,18 +355,19 @@ define U-Boot/station-p2-rk3568
   DDR:=rk3568_ddr_1560MHz_v1.18.bin
 endef
 
-define U-Boot/station-m2-rk3566
+define U-Boot/advantech-rsb4810-rk3568
   BUILD_SUBTARGET:=armv8
-  NAME:=StationM2
+  NAME:=Advantech RSB4810
   BUILD_DEVICES:= \
-       firefly_station-m2
-  DEPENDS:=+PACKAGE_u-boot-station-m2-rk3566:arm-trusted-firmware-rk3566
+       advantech_rsb4810
+  DEPENDS:=+PACKAGE_u-boot-advantech-rsb4810-rk3568:arm-trusted-firmware-rk3568
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
-  ATF:=rk3568_bl31_v1.34.elf
-  DDR:=rk3566_ddr_1056MHz_v1.13.bin
+  ATF:=rk3568_bl31_v1.43.elf
+  DDR:=rk3568_ddr_1560MHz_v1.18.bin
 endef
 
 UBOOT_TARGETS := \
+  advantech-rsb4810-rk3568 \
   lyt-t68m-rk3568 \
   mrkaio-m68s-rk3568 \
   opc-h68k-rk3568 \
